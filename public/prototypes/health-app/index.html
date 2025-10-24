@@ -1,0 +1,479 @@
+<!--
+╔══════════════════════════════════════════════════════════════════════════════╗
+║ HEALTH APP — PLATEFORME SANTÉ                                                ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ Description : Application de suivi patients et gestion médicale              ║
+║               • Dashboard : signes vitaux temps réel, tendances, alertes     ║
+║               • Gestion patients : liste attente, dossiers, historique       ║
+║               • Rendez-vous : agenda, prise RDV, rappels automatiques        ║
+║               • Analytics : Chart.js fréquence cardiaque, export PDF         ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ Auteur      : Patrick Junior Samba Ntadi (Intello)                           ║
+║ Date        : Janvier 2025                                                   ║
+║ Stack       : HTML5 + Vanilla JS + Chart.js                                  ║
+║ Licence     : MIT (Projet de démonstration)                                  ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ Note : Prototype non-indexable (noindex). Données fictives.                  ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+-->
+<!doctype html>
+<html lang="fr">
+<head>
+  <!-- Encodage et viewport -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <!-- SEO prototype (light) -->
+  <title>Health App — Suivi patients & Gestion médicale | Intello Prototype</title>
+  <meta name="description" content="Plateforme complète de gestion médicale : dashboard signes vitaux, suivi patients, prise RDV, téléconsultation, export PDF. Prototype Intello." />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="author" content="Patrick Junior Samba Ntadi - Intello" />
+
+  <!-- Favicon (emoji SVG) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏥</text></svg>" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Poppins:wght@600;800&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="./styles.css" />
+
+  <!-- Libs (defer pour performance) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+</head>
+<body>
+
+  <!-- Skip link -->
+  <a href="#mainContent" class="skip-link">Aller au contenu principal</a>
+
+  <!-- Header -->
+  <header class="header" id="mainHeader">
+    <div class="container">
+      <div class="header-content">
+
+        <!-- Brand -->
+        <div class="brand">
+          <div class="brand-icon" aria-hidden="true">🏥</div>
+          <div>
+            <div class="brand-name">Health App</div>
+            <div class="brand-sub">Suivi patients • Signes vitaux • Agenda</div>
+          </div>
+        </div>
+
+        <!-- Search -->
+        <div class="header-search">
+          <label for="globalSearch" class="sr-only">Rechercher patient ou médecin</label>
+          <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="2"/>
+          </svg>
+          <input 
+            type="search" 
+            id="globalSearch" 
+            name="search"
+            class="search-input" 
+            placeholder="Rechercher patient, médecin..." 
+            autocomplete="off"
+          />
+        </div>
+
+        <!-- Actions -->
+        <div class="header-actions">
+          <div class="mode-badge">Mode: Démo</div>
+          <button class="btn-primary" id="quickAddBtn" aria-label="Nouveau rendez-vous">
+            <span aria-hidden="true">➕</span> Nouveau RDV
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content (Dashboard) -->
+  <main class="main-content" id="mainContent">
+    <div class="container">
+      <div class="main-grid">
+
+        <!-- Section Dashboard -->
+        <section class="dashboard-section" aria-labelledby="dashboardTitle">
+          <h2 id="dashboardTitle" class="sr-only">Tableau de bord patient du jour</h2>
+
+          <!-- Card Patient du jour -->
+          <div class="card patient-vitals">
+            <div class="card-header">
+              <div>
+                <div class="card-label">Patient du jour</div>
+                <h3 class="card-title">Aïssata Diop — 28 ans</h3>
+              </div>
+              <div class="last-update">
+                Dernière mise à jour: <strong id="lastUpdate" aria-live="polite">—</strong>
+              </div>
+            </div>
+
+            <div class="vitals-grid">
+              <!-- Fréquence cardiaque principale -->
+              <div class="card pulse-card">
+                <div class="pulse-value" id="hrVal" aria-live="polite">78</div>
+                <div class="pulse-unit">bpm</div>
+                <div class="pulse-label">Fréquence cardiaque</div>
+                <div class="pulse-status">
+                  Rythme régulier <span class="heart-icon" aria-hidden="true">❤️</span>
+                </div>
+              </div>
+
+              <!-- Métriques secondaires -->
+              <div class="small-metrics">
+                <div class="card metric-card">
+                  <div class="metric-content">
+                    <div>
+                      <div class="metric-label">Tension artérielle</div>
+                      <div class="metric-value">118/76 <span class="metric-unit">mmHg</span></div>
+                    </div>
+                    <div class="metric-date">Jeu. 09/10</div>
+                  </div>
+                </div>
+
+                <div class="card metric-card">
+                  <div class="metric-content">
+                    <div>
+                      <div class="metric-label">SPO₂ (Saturation oxygène)</div>
+                      <div class="metric-value">97 <span class="metric-unit">%</span></div>
+                    </div>
+                    <div class="metric-status">Stable</div>
+                  </div>
+                </div>
+
+                <div class="card metric-card">
+                  <div class="metric-content">
+                    <div>
+                      <div class="metric-label">Température</div>
+                      <div class="metric-value">36.8 <span class="metric-unit">°C</span></div>
+                    </div>
+                    <div class="metric-status">Normal</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card Graphique tendance -->
+          <div class="card chart-card">
+            <div class="card-header">
+              <div>
+                <div class="card-label">Tendance fréquence cardiaque</div>
+                <h3 class="card-title">Dernières 24 heures</h3>
+              </div>
+              <div class="chart-filters">
+                <label for="periodFilter" class="sr-only">Période d'affichage</label>
+                <select id="periodFilter" name="period" class="filter-select-sm">
+                  <option value="24h">24 heures</option>
+                  <option value="7j">7 jours</option>
+                  <option value="30j">30 jours</option>
+                </select>
+              </div>
+            </div>
+            <div class="chart-container">
+              <canvas id="hrChart" role="img" aria-label="Graphique de la fréquence cardiaque sur la période sélectionnée"></canvas>
+            </div>
+            <div class="chart-stats">
+              <div class="stat">Min <strong id="hrMin">62</strong></div>
+              <div class="stat">Moy <strong id="hrAvg">76</strong></div>
+              <div class="stat">Max <strong id="hrMax">112</strong></div>
+            </div>
+          </div>
+
+          <!-- Card Notifications & Agenda -->
+          <div class="card notifications-card">
+            <div class="notifications-grid">
+              <div class="notifications-list">
+                <h3 class="card-subtitle">Rappels & Alertes</h3>
+                <ul class="alerts-list" role="list" aria-live="polite">
+                  <li class="alert-item">
+                    <span class="alert-time">09:00</span> Prise de tension
+                  </li>
+                  <li class="alert-item">
+                    <span class="alert-time">14:30</span> Consultation avec Dr. Camara
+                  </li>
+                  <li class="alert-item warning">
+                    <span class="alert-icon" aria-hidden="true">⚠️</span>
+                    Alerte: légère montée de la fréquence cardiaque (11:24)
+                  </li>
+                </ul>
+              </div>
+
+              <div class="agenda-quick">
+                <h3 class="card-subtitle">Agenda du jour</h3>
+                <div class="agenda-items" role="list">
+                  <div class="agenda-item">
+                    <div class="agenda-time">14:30</div>
+                    <div class="agenda-content">
+                      <div class="agenda-title">Consultation</div>
+                      <div class="agenda-doctor">Dr. Camara</div>
+                    </div>
+                  </div>
+                  <div class="agenda-item">
+                    <div class="agenda-time">16:00</div>
+                    <div class="agenda-content">
+                      <div class="agenda-title">Téléconsultation</div>
+                      <div class="agenda-doctor">Nutrition</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Sidebar -->
+        <aside class="sidebar" aria-labelledby="sidebarTitle">
+          <h2 id="sidebarTitle" class="sr-only">Patients et rendez-vous</h2>
+
+          <!-- Card Patients en consultation -->
+          <div class="card patients-card">
+            <div class="card-header">
+              <div>
+                <div class="card-label">Patients en consultation</div>
+                <h3 class="card-title" id="patientsCount" aria-live="polite">3 en attente</h3>
+              </div>
+              <div class="room-label">Salle A</div>
+            </div>
+
+            <div class="patients-list" role="list">
+              <article class="patient-item">
+                <div class="patient-avatar" aria-hidden="true">AD</div>
+                <div class="patient-info">
+                  <div class="patient-name">Aïssata Diop</div>
+                  <div class="patient-meta">28 ans • RDV 14:30</div>
+                </div>
+                <div class="patient-status stable">Stable</div>
+              </article>
+
+              <article class="patient-item">
+                <div class="patient-avatar" aria-hidden="true">MB</div>
+                <div class="patient-info">
+                  <div class="patient-name">Mamadou Barry</div>
+                  <div class="patient-meta">42 ans • ECG requis</div>
+                </div>
+                <div class="patient-status">Suivi</div>
+              </article>
+
+              <article class="patient-item">
+                <div class="patient-avatar" aria-hidden="true">KS</div>
+                <div class="patient-info">
+                  <div class="patient-name">Khady Sow</div>
+                  <div class="patient-meta">50 ans • Diabète</div>
+                </div>
+                <div class="patient-status priority">Prioritaire</div>
+              </article>
+            </div>
+          </div>
+
+          <!-- Card Rendez-vous aujourd'hui -->
+          <div class="card appointments-card">
+            <h3 class="card-subtitle">Rendez-vous aujourd'hui</h3>
+            <div class="appointments-list" role="list">
+              <div class="appointment-item">
+                <div class="appointment-info">
+                  <div class="appointment-title">14:30 — Aïssata Diop</div>
+                  <div class="appointment-type">Consultation générale</div>
+                </div>
+                <div class="appointment-time">14:30</div>
+              </div>
+
+              <div class="appointment-item">
+                <div class="appointment-info">
+                  <div class="appointment-title">16:00 — Khady Sow</div>
+                  <div class="appointment-type">Suivi diabète</div>
+                </div>
+                <div class="appointment-time">16:00</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card Export -->
+          <div class="card export-card">
+            <div class="card-label">Export rapport médical</div>
+            <h3 class="card-subtitle">Télécharger PDF</h3>
+            <button class="btn-primary btn-block" id="exportPdfBtn" aria-label="Exporter le rapport en PDF">
+              <span aria-hidden="true">📄</span> Exporter PDF
+            </button>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" id="contact">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-left">
+          <span class="footer-badge">Prototype</span>
+          <span class="footer-text">Données fictives • Design Intello</span>
+        </div>
+        <div class="footer-right">
+          <span class="footer-text">Conçu par <strong>Intello</strong></span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal Nouveau RDV -->
+  <div
+    id="appointmentModal"
+    class="modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="appointmentModalTitle"
+    hidden
+  >
+    <div class="modal-overlay" aria-hidden="true"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="appointmentModalTitle" class="modal-title">Nouveau rendez-vous</h3>
+        <button class="modal-close" id="closeAppointmentModal" aria-label="Fermer le formulaire">
+          <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="appointmentForm" novalidate>
+          <div class="form-grid">
+            <label class="form-label" for="patientName">
+              <span class="label-text">👤 Nom du patient</span>
+            </label>
+            <input
+              type="text"
+              id="patientName"
+              name="patient"
+              class="form-input"
+              placeholder="Ex: Amadou Diallo"
+              required
+              aria-required="true"
+              autocomplete="name"
+              minlength="2"
+              maxlength="100"
+            />
+
+            <label class="form-label" for="patientAge">
+              <span class="label-text">📅 Âge</span>
+            </label>
+            <input
+              type="number"
+              id="patientAge"
+              name="age"
+              class="form-input"
+              placeholder="28"
+              required
+              aria-required="true"
+              min="1"
+              max="150"
+            />
+
+            <label class="form-label" for="appointmentDate">
+              <span class="label-text">📅 Date</span>
+            </label>
+            <input
+              type="date"
+              id="appointmentDate"
+              name="date"
+              class="form-input"
+              required
+              aria-required="true"
+            />
+
+            <label class="form-label" for="appointmentTime">
+              <span class="label-text">🕐 Heure</span>
+            </label>
+            <select id="appointmentTime" name="time" class="form-select" required aria-required="true">
+              <option value="">Choisir l'heure</option>
+              <option value="09:00">09h00</option>
+              <option value="09:30">09h30</option>
+              <option value="10:00">10h00</option>
+              <option value="10:30">10h30</option>
+              <option value="11:00">11h00</option>
+              <option value="14:00">14h00</option>
+              <option value="14:30">14h30</option>
+              <option value="15:00">15h00</option>
+              <option value="15:30">15h30</option>
+              <option value="16:00">16h00</option>
+              <option value="16:30">16h30</option>
+              <option value="17:00">17h00</option>
+            </select>
+
+            <label class="form-label" for="doctorName">
+              <span class="label-text">👨‍⚕️ Médecin</span>
+            </label>
+            <select id="doctorName" name="doctor" class="form-select" required aria-required="true">
+              <option value="">Choisir un médecin</option>
+              <option value="Dr. Camara">Dr. Camara (Médecin généraliste)</option>
+              <option value="Dr. Diallo">Dr. Diallo (Cardiologue)</option>
+              <option value="Dr. Sow">Dr. Sow (Pédiatre)</option>
+              <option value="Dr. Ndiaye">Dr. Ndiaye (Nutritionniste)</option>
+            </select>
+
+            <label class="form-label" for="consultationType">
+              <span class="label-text">🏥 Type de consultation</span>
+            </label>
+            <select id="consultationType" name="type" class="form-select" required aria-required="true">
+              <option value="">Choisir le type</option>
+              <option value="generale">Consultation générale</option>
+              <option value="suivi">Suivi médical</option>
+              <option value="teleconsultation">Téléconsultation</option>
+              <option value="urgence">Urgence</option>
+            </select>
+
+            <label class="form-label" for="patientPhone">
+              <span class="label-text">📱 Téléphone</span>
+            </label>
+            <input
+              type="tel"
+              id="patientPhone"
+              name="phone"
+              class="form-input"
+              placeholder="+221 77 123 45 67"
+              required
+              aria-required="true"
+              autocomplete="tel"
+              pattern="^\\+?\\d[\\d\\s]{7,20}$"
+            />
+          </div>
+
+          <label class="form-label" for="appointmentNotes">
+            <span class="label-text">💬 Notes médicales (optionnel)</span>
+          </label>
+          <textarea
+            id="appointmentNotes"
+            name="notes"
+            class="form-textarea"
+            rows="3"
+            placeholder="Symptômes, allergies, raison de la consultation..."
+            maxlength="500"
+          ></textarea>
+
+          <div class="form-actions">
+            <button type="button" class="btn-outline" id="cancelAppointment">Annuler</button>
+            <button type="submit" class="btn-primary">
+              <span aria-hidden="true">✓</span> Créer le rendez-vous
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notifications -->
+  <div id="toastContainer" class="toast-container" role="region" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- FAB (Floating Action Button) -->
+  <button class="fab" id="fabQuickAdd" aria-label="Nouveau rendez-vous rapide">
+    <span aria-hidden="true">➕</span>
+  </button>
+
+  <!-- Script principal -->
+  <script src="./app.js"></script>
+</body>
+</html>

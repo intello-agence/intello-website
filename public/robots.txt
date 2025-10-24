@@ -1,0 +1,20 @@
+# Intello Agency - Robots.txt
+# https://intello.sn/robots.txt
+
+# Autoriser tous les robots (Google, Bing, etc.)
+User-agent: *
+Allow: /
+
+# Bloquer l'indexation des prototypes (démos internes)
+Disallow: /prototypes/
+
+# Bloquer l'indexation des offres en construction
+Disallow: /offres/sante/
+Disallow: /offres/immobilier/
+
+# Sitemap (important pour Google)
+Sitemap: https://intello.sn/sitemap.xml
+
+# Crawl-delay (optionnel - évite surcharge serveur)
+# User-agent: *
+# Crawl-delay: 1

@@ -1,0 +1,208 @@
+{
+  "nav": {
+    "services": "Services",
+    "projects": "Projects",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title1": "Transform",
+    "title2": "Your Ideas",
+    "title3": "Into Reality",
+    "subtitle": "Digital innovation agency and custom development solutions",
+    "cta1": "Start a project",
+    "cta2": "View our work"
+  },
+  "stats": {
+    "stat1": {
+      "number": "3+",
+      "label": "Years of Experience"
+    },
+    "stat2": {
+      "number": "10+",
+      "label": "Technologies Mastered"
+    },
+    "stat3": {
+      "number": "<24h",
+      "label": "Response Time"
+    },
+    "stat4": {
+      "number": "100%",
+      "label": "Client Satisfaction"
+    }
+  },
+  "services": {
+    "title": "Our",
+    "titleHighlight": "Services",
+    "subtitle": "Complete solutions to bring your digital vision to life",
+    "service1": {
+      "title": "Web Development",
+      "description": "Custom web applications with the latest technologies"
+    },
+    "service2": {
+      "title": "Mobile Apps",
+      "description": "High-performance native and cross-platform mobile experiences"
+    },
+    "service3": {
+      "title": "UI/UX Design",
+      "description": "Intuitive interfaces and designs that captivate your users"
+    },
+    "service4": {
+      "title": "Cloud Solutions",
+      "description": "Scalable infrastructure and optimized continuous deployment"
+    },
+    "learnMore": "Learn more"
+  },
+  "projects": {
+    "title": "Recent",
+    "titleHighlight": "Projects",
+    "subtitle": "Discover our latest creations",
+    "viewProject": "View project"
+  },
+  "about": {
+    "title": "About",
+    "titleHighlight": "Intello",
+    "subtitle": "Born from a vision: bridging Senegal's digital gap with world-class solutions",
+    "story": {
+      "title": "Our Story",
+      "p1": "Intello was born in 2025 from a frustration: seeing dynamic Senegalese companies held back by obsolete websites and outdated digital tools.",
+      "p2": "Founded by Patrick Junior Samba Ntadi, a Software Engineering graduate from ISM Digital Campus, Intello transforms this frustration into opportunity. After years of freelance experience on e-commerce and SaaS projects, one thing became clear: the digital gap between Senegal and international markets is huge, but bridgeable.",
+      "p3": "Our mission is simple: give African businesses the digital tools they deserve to compete globally. No \"good enough\" websites. No compromises on quality. Just excellence, accessible locally."
+    },
+    "values": {
+      "title": "Our",
+      "titleHighlight": "Values",
+      "value1": {
+        "title": "Innovation",
+        "desc": "Always at the forefront of modern technologies"
+      },
+      "value2": {
+        "title": "Excellence",
+        "desc": "Every project delivered with the highest quality standards"
+      },
+      "value3": {
+        "title": "Transparency",
+        "desc": "Clear communication at every stage of the project"
+      },
+      "value4": {
+        "title": "Responsiveness",
+        "desc": "Fast and dedicated support for every client"
+      }
+    },
+    "founder": {
+      "title": "Founder",
+      "name": "Patrick Junior Samba Ntadi",
+      "role": "Founder & Lead Developer",
+      "bio1": "Graduate in Software Engineering, Networks and Systems from ISM Digital Campus (2022), Patrick has several years of experience in web and mobile development.",
+      "bio2": "Specialized in e-commerce and SaaS projects, he has developed sharp expertise in the modern technologies that power today's web.",
+      "bio3": "His vision: propel the digital transformation of Senegalese businesses with international-level solutions."
+    },
+    "why": {
+      "title": "Why",
+      "titleHighlight": "Intello",
+      "reason1": {
+        "title": "Maximum Responsiveness",
+        "desc": "Agile structure enabling quick decision-making and personalized project tracking"
+      },
+      "reason2": {
+        "title": "Professional Quality",
+        "desc": "Clean code, international standards, rigorous testing. No shortcuts, only excellence"
+      },
+      "reason3": {
+        "title": "Complete Support",
+        "desc": "From idea to deployment, training included. You're never alone in the process"
+      },
+      "reason4": {
+        "title": "International Vision",
+        "desc": "Technologies and practices from global leaders, adapted to local context and needs"
+      }
+    },
+    "location": "Based in Dakar, Senegal",
+    "languages": "French · English · Wolof"
+  },
+  "process": {
+    "title": "Our",
+    "titleHighlight": "Process",
+    "step1": {
+      "title": "Strategy",
+      "desc": "In-depth analysis of your needs and goals"
+    },
+    "step2": {
+      "title": "Design",
+      "desc": "Creating exceptional visual experiences"
+    },
+    "step3": {
+      "title": "Development",
+      "desc": "Clean, performant and scalable code"
+    }
+  },
+  "cta": {
+    "title1": "Ready to transform",
+    "title2": "your vision?",
+    "subtitle": "Let's discuss your project and create something extraordinary together",
+    "button": "Get started now"
+  },
+  "footer": {
+    "tagline": "Your partner for digital innovation",
+    "services": {
+      "title": "Services",
+      "links": ["Development", "Design", "Consulting", "Support"]
+    },
+    "company": {
+      "title": "Company",
+      "links": ["About", "Team", "Careers", "Blog"]
+    },
+    "contact": {
+      "title": "Contact",
+      "links": ["Email", "Phone", "LinkedIn", "Twitter"]
+    },
+    "copyright": "© 2025 Intello. All rights reserved."
+  },
+  "contact": {
+    "title": "Contact",
+    "titleHighlight": "Us",
+    "subtitle": "Ready to start your project? Let's discuss it together",
+    "form": {
+      "name": "Full Name",
+      "namePlaceholder": "John Doe",
+      "email": "Email",
+      "emailPlaceholder": "contact@example.com",
+      "phone": "Phone",
+      "phonePlaceholder": "+221 77 553 28 04",
+      "projectType": "Project Type",
+      "projectTypePlaceholder": "Select...",
+      "projectTypes": {
+        "web": "Website",
+        "mobile": "Mobile App",
+        "ecommerce": "E-commerce",
+        "design": "UI/UX Design",
+        "other": "Other"
+      },
+      "budget": "Estimated Budget",
+      "budgetPlaceholder": "Select...",
+      "budgets": {
+        "small": "< 1M FCFA",
+        "medium": "1M - 3M FCFA",
+        "large": "3M - 5M FCFA",
+        "xlarge": "> 5M FCFA"
+      },
+      "message": "Message",
+      "messagePlaceholder": "Tell us about your project...",
+      "submit": "Send Message",
+      "sending": "Sending...",
+      "success": "Message sent successfully! We'll respond within 24h.",
+      "error": "An error occurred. Please try again."
+    },
+    "info": {
+      "title": "Contact Information",
+      "email": "Email",
+      "emailValue": "intellopjsn@gmail.com",
+      "phone": "Phone",
+      "phoneValue": "+221 77 553 28 04",
+      "location": "Location",
+      "locationValue": "Dakar, Rufisque, Zac Mbao",
+      "hours": "Business Hours",
+      "hoursValue": "Mon - Fri: 9am - 6pm"
+    }
+  }
+}

@@ -1,0 +1,404 @@
+<!--
+╔══════════════════════════════════════════════════════════════════════════════╗
+║ EVENTLY — PLATEFORME ÉVÉNEMENTIELLE                                          ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ Description : Système complet de gestion d'événements et billetterie         ║
+║               • Vue public : événements, filtres, achat billets, QR codes    ║
+║               • Vue organisateur : création événements, KPIs, export CSV     ║
+║               • Modals : achat billets, création événement, confirmation     ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ Auteur      : Patrick Junior Samba Ntadi (Intello)                           ║
+║ Date        : Janvier 2025                                                   ║
+║ Stack       : HTML5 + Vanilla JS + Chart.js + QRCode.js                      ║
+║ Licence     : MIT (Projet de démonstration)                                  ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ Note : Prototype non-indexable (noindex). Données fictives.                  ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+-->
+<!doctype html>
+<html lang="fr">
+<head>
+  <!-- Encodage et viewport -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <!-- SEO prototype (light) -->
+  <title>Evently — Plateforme événementielle | Intello Prototype</title>
+  <meta name="description" content="Plateforme complète de gestion d'événements : création, billetterie, QR codes, dashboard organisateur avec KPIs et export CSV. Prototype Intello." />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="author" content="Patrick Junior Samba Ntadi - Intello" />
+
+  <!-- Favicon (emoji SVG) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎉</text></svg>" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="./styles.css" />
+
+  <!-- Libs (defer pour performance) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+
+  <!-- Skip link -->
+  <a href="#mainContent" class="skip-link">Aller au contenu principal</a>
+
+  <!-- Header -->
+  <header class="header" id="mainHeader">
+    <div class="container">
+      <div class="header-content">
+
+        <!-- Brand -->
+        <div class="brand">
+          <div class="brand-icon" aria-hidden="true">🎉</div>
+          <div>
+            <div class="brand-name">Evently</div>
+            <div class="brand-sub">Organiser • Billetterie • Analytics</div>
+          </div>
+        </div>
+
+        <!-- Search -->
+        <div class="header-search">
+          <label for="globalSearch" class="sr-only">Rechercher événements</label>
+          <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="2"/>
+          </svg>
+          <input 
+            type="search" 
+            id="globalSearch" 
+            name="search"
+            class="search-input" 
+            placeholder="Rechercher événements, lieux..." 
+            autocomplete="off"
+          />
+        </div>
+
+        <!-- Actions -->
+        <div class="header-actions">
+          <button class="btn-outline" id="btnCreate" aria-label="Créer un événement">
+            <span aria-hidden="true">➕</span> Créer
+          </button>
+          <button class="btn-primary" id="btnMyEvents" aria-pressed="false">
+            <span aria-hidden="true">📊</span> Dashboard
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content (Vue Public) -->
+  <main class="main-content" id="mainContent">
+    <div class="container">
+      <div class="main-grid">
+
+        <!-- Section Événements -->
+        <section class="events-section" aria-labelledby="eventsTitle">
+          <div class="section-header">
+            <div>
+              <div class="section-label">Prochains événements</div>
+              <h2 id="eventsTitle" class="section-title">Découvre & réserve</h2>
+            </div>
+            <div class="filters-group" role="group" aria-label="Filtres catégorie">
+              <button class="filter-chip active" data-filter="tous" aria-pressed="true">Tous</button>
+              <button class="filter-chip" data-filter="concerts" aria-pressed="false">🎵 Concerts</button>
+              <button class="filter-chip" data-filter="conferences" aria-pressed="false">💼 Conférences</button>
+              <button class="filter-chip" data-filter="sports" aria-pressed="false">🏃 Sports</button>
+              <button class="filter-chip" data-filter="culture" aria-pressed="false">🎭 Culture</button>
+            </div>
+          </div>
+
+          <div class="events-grid" id="eventsList" role="region" aria-live="polite">
+            <!-- Rempli par JS -->
+          </div>
+        </section>
+
+        <!-- Sidebar Dashboard Organisateur -->
+        <aside class="sidebar" aria-labelledby="organizerTitle">
+          <h2 id="organizerTitle" class="sr-only">Statistiques organisateur</h2>
+
+          <!-- KPIs Card -->
+          <div class="panel">
+            <div class="panel-header">
+              <div class="panel-label">Vue organisateur</div>
+              <div class="panel-value">Evently Admin</div>
+            </div>
+            <div class="kpis-list" role="region" aria-live="polite">
+              <div class="kpi-row">
+                <div class="kpi-label">Ventes ce mois</div>
+                <div class="kpi-value" id="ventesTotal">0 €</div>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" id="progressVentes" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" role="progressbar"></div>
+              </div>
+              <div class="kpi-row">
+                <div class="kpi-label">Événements actifs</div>
+                <div class="kpi-value" id="nbEvents">0</div>
+              </div>
+              <div class="kpi-row">
+                <div class="kpi-label">Participants</div>
+                <div class="kpi-value" id="nbParticipants">0</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Reporting Card -->
+          <div class="panel">
+            <div class="panel-label">Reporting rapide</div>
+            <div class="table-wrapper">
+              <table class="report-table">
+                <thead>
+                  <tr>
+                    <th>Événement</th>
+                    <th>Vendus</th>
+                    <th>Revenu</th>
+                  </tr>
+                </thead>
+                <tbody id="reportRows">
+                  <!-- Rempli par JS -->
+                </tbody>
+              </table>
+            </div>
+            <div class="panel-actions">
+              <button class="btn-text" id="exportCsv" aria-label="Exporter les données en CSV">
+                <span aria-hidden="true">📊</span> Exporter CSV
+              </button>
+            </div>
+          </div>
+
+          <!-- Testimonial Card -->
+          <div class="panel testimonial">
+            <div class="panel-label">Témoignage</div>
+            <blockquote class="testimonial-text">
+              "La plateforme est devenue un outil indispensable pour nos événements. Système robuste, flexible et suivi analytics précis."
+            </blockquote>
+            <cite class="testimonial-author">— Sarah Diop, Co-founder Evently</cite>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" id="contact">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-left">
+          <span class="footer-badge">Prototype</span>
+          <span class="footer-text">Données fictives • Design Intello</span>
+        </div>
+        <div class="footer-right">
+          <span class="footer-text">Conçu par <strong>Intello</strong></span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal Achat Billet -->
+  <div
+    id="ticketModal"
+    class="modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="ticketModalTitle"
+    hidden
+  >
+    <div class="modal-overlay" aria-hidden="true"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="ticketModalTitle" class="modal-title">Acheter un billet</h3>
+        <button class="modal-close" id="closeTicketModal" aria-label="Fermer la fenêtre d'achat">
+          <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body" id="ticketModalBody">
+        <!-- Rempli par JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Création Événement -->
+  <div
+    id="createModal"
+    class="modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="createModalTitle"
+    hidden
+  >
+    <div class="modal-overlay" aria-hidden="true"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="createModalTitle" class="modal-title">Créer un événement</h3>
+        <button class="modal-close" id="closeCreateModal" aria-label="Fermer le formulaire de création">
+          <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="createForm" novalidate>
+          <div class="form-grid">
+            <label class="form-label" for="eventTitle">
+              <span class="label-text">🎯 Titre de l'événement</span>
+            </label>
+            <input
+              type="text"
+              id="eventTitle"
+              name="title"
+              class="form-input"
+              placeholder="Ex: Festival Jazz 2025"
+              required
+              aria-required="true"
+              autocomplete="off"
+              minlength="3"
+              maxlength="100"
+            />
+
+            <label class="form-label" for="eventCategory">
+              <span class="label-text">📂 Catégorie</span>
+            </label>
+            <select id="eventCategory" name="category" class="form-select" required aria-required="true">
+              <option value="">Choisir une catégorie</option>
+              <option value="concerts">🎵 Concerts</option>
+              <option value="conferences">💼 Conférences</option>
+              <option value="sports">🏃 Sports</option>
+              <option value="culture">🎭 Culture</option>
+              <option value="food">🍷 Food & Nightlife</option>
+            </select>
+
+            <label class="form-label" for="eventDate">
+              <span class="label-text">📅 Date</span>
+            </label>
+            <input
+              type="date"
+              id="eventDate"
+              name="date"
+              class="form-input"
+              required
+              aria-required="true"
+            />
+
+            <label class="form-label" for="eventTime">
+              <span class="label-text">🕐 Heure</span>
+            </label>
+            <input
+              type="time"
+              id="eventTime"
+              name="time"
+              class="form-input"
+              required
+              aria-required="true"
+            />
+
+            <label class="form-label" for="eventVenue">
+              <span class="label-text">📍 Lieu</span>
+            </label>
+            <input
+              type="text"
+              id="eventVenue"
+              name="venue"
+              class="form-input"
+              placeholder="Ex: Corniche Ouest, Dakar"
+              required
+              aria-required="true"
+              autocomplete="off"
+              maxlength="200"
+            />
+
+            <label class="form-label" for="eventCapacity">
+              <span class="label-text">👥 Capacité totale</span>
+            </label>
+            <input
+              type="number"
+              id="eventCapacity"
+              name="capacity"
+              class="form-input"
+              placeholder="300"
+              required
+              aria-required="true"
+              min="1"
+              max="100000"
+            />
+
+            <label class="form-label" for="eventPrice">
+              <span class="label-text">💰 Prix billet (FCFA)</span>
+            </label>
+            <input
+              type="number"
+              id="eventPrice"
+              name="price"
+              class="form-input"
+              placeholder="5000"
+              required
+              aria-required="true"
+              min="0"
+              max="10000000"
+            />
+          </div>
+
+          <label class="form-label" for="eventDescription">
+            <span class="label-text">📝 Description</span>
+          </label>
+          <textarea
+            id="eventDescription"
+            name="description"
+            class="form-textarea"
+            rows="4"
+            placeholder="Décrivez votre événement..."
+            required
+            aria-required="true"
+            maxlength="1000"
+          ></textarea>
+
+          <div class="form-actions">
+            <button type="button" class="btn-outline" id="cancelCreate">Annuler</button>
+            <button type="submit" class="btn-primary">
+              <span aria-hidden="true">✓</span> Publier l'événement
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Confirmation Achat -->
+  <div
+    id="confirmationModal"
+    class="modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="confirmationModalTitle"
+    hidden
+  >
+    <div class="modal-overlay" aria-hidden="true"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="confirmationModalTitle" class="modal-title">✅ Achat confirmé</h3>
+        <button class="modal-close" id="closeConfirmationModal" aria-label="Fermer la confirmation">
+          <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body" id="confirmationModalBody">
+        <!-- Rempli par JS avec QR code -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notifications -->
+  <div id="toastContainer" class="toast-container" role="region" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Script principal -->
+  <script src="./app.js"></script>
+</body>
+</html>

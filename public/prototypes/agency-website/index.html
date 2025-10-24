@@ -1,0 +1,416 @@
+<!--
+╔══════════════════════════════════════════════════════════════════════════════╗
+║ INTELLO AGENCY — SITE VITRINE AGENCE CRÉATIVE                                ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ Description : Site vitrine agence créative avec portfolio et contact         ║
+║               • Hero : présentation services, CTA, projet vedette            ║
+║               • Portfolio : 3 projets récents avec vignettes                 ║
+║               • Études de cas : métriques clients                            ║
+║               • Team : présentation équipe                                   ║
+║               • Contact : formulaire validation stricte                      ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ Auteur      : Patrick Junior Samba Ntadi (Intello)                           ║
+║ Date        : Janvier 2025                                                   ║
+║ Stack       : HTML5 + Vanilla JS                                             ║
+║ Licence     : MIT (Projet de démonstration)                                  ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ Note : Prototype non-indexable (noindex). Données fictives.                  ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+-->
+<!doctype html>
+<html lang="fr">
+<head>
+  <!-- Encodage et viewport -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <!-- SEO prototype (light) -->
+  <title>Intello Agency — Agence créative digitale | Intello Prototype</title>
+  <meta name="description" content="Agence créative spécialisée en design UX, développement web moderne et prototypes interactifs. Portfolio, études de cas et contact. Prototype Intello." />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="author" content="Patrick Junior Samba Ntadi - Intello" />
+
+  <!-- Favicon (emoji SVG) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎨</text></svg>" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+
+  <!-- Skip link -->
+  <a href="#mainContent" class="skip-link">Aller au contenu principal</a>
+
+  <!-- Header -->
+  <header class="header" id="mainHeader">
+    <div class="container">
+      <div class="header-content">
+
+        <!-- Brand -->
+        <div class="brand">
+          <div class="brand-icon" aria-hidden="true">🎨</div>
+          <div>
+            <div class="brand-name">Intello Agency</div>
+            <div class="brand-sub">Design • Web • Prototypes</div>
+          </div>
+        </div>
+
+        <!-- Nav -->
+        <nav class="nav-links" aria-label="Navigation principale">
+          <a href="#services" class="nav-link">Services</a>
+          <a href="#portfolio" class="nav-link">Portfolio</a>
+          <a href="#cases" class="nav-link">Études de cas</a>
+          <a href="#contact" class="nav-link cta-nav">Contact</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content" id="mainContent">
+    <div class="container">
+
+      <!-- Hero Section -->
+      <section class="hero-section" aria-labelledby="heroTitle">
+        <div class="hero-grid">
+          
+          <div class="hero-card">
+            <div class="eyebrow">Agence créative</div>
+            <h1 id="heroTitle" class="hero-title">
+              Nous concevons des expériences numériques mémorables.
+            </h1>
+            <p class="hero-lead">
+              Studio full‑stack — design produit, interfaces web rapides et prototypes interactifs prêts à tester en production.
+            </p>
+
+            <div class="hero-ctas">
+              <button class="btn-primary" id="btnWork" aria-label="Discuter d'un projet">
+                <span aria-hidden="true">💬</span> Discuter d'un projet
+              </button>
+              <button class="btn-outline" id="btnPortfolio" aria-label="Voir le portfolio">
+                <span aria-hidden="true">📂</span> Voir le portfolio
+              </button>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="features-grid" id="services" role="region" aria-labelledby="servicesTitle">
+              <h2 id="servicesTitle" class="sr-only">Nos services</h2>
+
+              <div class="feature-item">
+                <div class="feature-icon" aria-hidden="true">UX</div>
+                <div class="feature-content">
+                  <div class="feature-title">Design centré utilisateur</div>
+                  <div class="feature-desc">Ateliers, wireframes, prototypes</div>
+                </div>
+              </div>
+
+              <div class="feature-item">
+                <div class="feature-icon" aria-hidden="true">DEV</div>
+                <div class="feature-content">
+                  <div class="feature-title">Front-end moderne</div>
+                  <div class="feature-desc">React, Vite, performance</div>
+                </div>
+              </div>
+
+              <div class="feature-item">
+                <div class="feature-icon" aria-hidden="true">BR</div>
+                <div class="feature-content">
+                  <div class="feature-title">Branding & contenu</div>
+                  <div class="feature-desc">Identité, copy, assets</div>
+                </div>
+              </div>
+
+              <div class="feature-item">
+                <div class="feature-icon" aria-hidden="true">QA</div>
+                <div class="feature-content">
+                  <div class="feature-title">Tests & déploiement</div>
+                  <div class="feature-desc">CI, monitoring, analytics</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Preview Card -->
+          <aside class="preview-card" aria-labelledby="previewTitle">
+            <div class="preview-header">
+              <div class="preview-label">Projet en vedette</div>
+              <h3 id="previewTitle" class="preview-title">Fintech Dashboard</h3>
+            </div>
+
+            <div class="preview-mock">
+              <div class="mock-stat">
+                <div class="mock-label">Utilisateurs</div>
+                <div class="mock-value">18.4k</div>
+              </div>
+              <div class="mock-stat">
+                <div class="mock-label">Taux conversion</div>
+                <div class="mock-value">4.2%</div>
+              </div>
+
+              <div class="preview-footer">
+                Prototype interactif disponible • 
+                <a href="/prototypes/fintech-dashboard/index.html" class="preview-link">Ouvrir</a>
+              </div>
+            </div>
+          </aside>
+
+        </div>
+      </section>
+
+      <!-- Portfolio Section -->
+      <section class="portfolio-section" id="portfolio" aria-labelledby="portfolioTitle">
+        <div class="section-header">
+          <h2 id="portfolioTitle" class="section-title">Portfolio récent</h2>
+        </div>
+
+        <div class="portfolio-grid">
+          <article class="portfolio-card">
+            <div class="portfolio-thumb" style="background-image:url('https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=1200&q=60')" role="img" aria-label="Capture Fintech Dashboard"></div>
+            <div class="portfolio-meta">
+              <div class="portfolio-header">
+                <h3 class="portfolio-name">Fintech Dashboard</h3>
+                <span class="portfolio-tag">Prototype</span>
+              </div>
+              <p class="portfolio-desc">Tableau de bord analytique pour institutions financières.</p>
+            </div>
+          </article>
+
+          <article class="portfolio-card">
+            <div class="portfolio-thumb" style="background-image:url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=60')" role="img" aria-label="Capture E-commerce UX"></div>
+            <div class="portfolio-meta">
+              <div class="portfolio-header">
+                <h3 class="portfolio-name">E‑commerce UX</h3>
+                <span class="portfolio-tag">Design</span>
+              </div>
+              <p class="portfolio-desc">Refonte parcours client & fiche produit optimisée.</p>
+            </div>
+          </article>
+
+          <article class="portfolio-card">
+            <div class="portfolio-thumb" style="background-image:url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=60')" role="img" aria-label="Capture Health App"></div>
+            <div class="portfolio-meta">
+              <div class="portfolio-header">
+                <h3 class="portfolio-name">Plateforme santé</h3>
+                <span class="portfolio-tag">Prototype</span>
+              </div>
+              <p class="portfolio-desc">Application patient & dashboard clinicien.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Case Studies Section -->
+      <section class="cases-section" id="cases" aria-labelledby="casesTitle">
+        <div class="section-header">
+          <h2 id="casesTitle" class="section-title">Études de cas</h2>
+        </div>
+
+        <div class="cases-list">
+          <article class="case-item">
+            <div class="case-content">
+              <h3 class="case-name">ShopBoost — e‑commerce</h3>
+              <p class="case-result">+32% CA après refonte UX</p>
+            </div>
+            <div class="case-tag">Design • Dev</div>
+          </article>
+
+          <article class="case-item">
+            <div class="case-content">
+              <h3 class="case-name">MediCare — Health App</h3>
+              <p class="case-result">Prototype de monitoring temps réel</p>
+            </div>
+            <div class="case-tag">Prototype</div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Team & Contact Section -->
+      <section class="contact-section" id="contact" aria-labelledby="contactTitle">
+        <div class="contact-grid">
+
+          <!-- Left: Team & Why Us -->
+          <div class="team-column">
+            <h2 id="teamTitle" class="subsection-title">Notre équipe</h2>
+            <div class="team-grid">
+              <div class="team-member">
+                <div class="team-avatar" aria-hidden="true">AL</div>
+                <div class="team-name">Alice</div>
+                <div class="team-role">Lead Design</div>
+              </div>
+
+              <div class="team-member">
+                <div class="team-avatar" aria-hidden="true">BM</div>
+                <div class="team-name">Boubacar</div>
+                <div class="team-role">Dev Front</div>
+              </div>
+
+              <div class="team-member">
+                <div class="team-avatar" aria-hidden="true">CT</div>
+                <div class="team-name">Chloé</div>
+                <div class="team-role">Product</div>
+              </div>
+            </div>
+
+            <h3 class="subsection-title">Pourquoi nous ?</h3>
+            <p class="why-text">
+              Nous combinons stratégie produit, interfaces pixel‑perfect et livrables prêts à tester. 
+              Du prototype click‑through au déploiement production.
+            </p>
+          </div>
+
+          <!-- Right: Contact Form -->
+          <aside class="form-column" aria-labelledby="contactTitle">
+            <h2 id="contactTitle" class="subsection-title">Contactez‑nous</h2>
+
+            <form id="contactForm" class="contact-form" novalidate>
+              <label class="form-label" for="contactName">
+                <span class="label-text">👤 Votre nom</span>
+              </label>
+              <input
+                type="text"
+                id="contactName"
+                name="name"
+                class="form-input"
+                placeholder="Ex: Amadou Diallo"
+                required
+                aria-required="true"
+                autocomplete="name"
+                minlength="2"
+                maxlength="100"
+              />
+
+              <label class="form-label" for="contactEmail">
+                <span class="label-text">📧 Email</span>
+              </label>
+              <input
+                type="email"
+                id="contactEmail"
+                name="email"
+                class="form-input"
+                placeholder="email@exemple.com"
+                required
+                aria-required="true"
+                autocomplete="email"
+              />
+
+              <label class="form-label" for="contactProject">
+                <span class="label-text">🎯 Type de projet</span>
+              </label>
+              <input
+                type="text"
+                id="contactProject"
+                name="project"
+                class="form-input"
+                placeholder="Ex: Prototype, Site vitrine, E-commerce"
+                autocomplete="off"
+                maxlength="100"
+              />
+
+              <label class="form-label" for="contactMessage">
+                <span class="label-text">💬 Décrivez votre projet</span>
+              </label>
+              <textarea
+                id="contactMessage"
+                name="message"
+                class="form-textarea"
+                rows="4"
+                placeholder="Parlez-nous de vos besoins, objectifs et timeline..."
+                required
+                aria-required="true"
+                maxlength="1000"
+              ></textarea>
+
+              <div class="form-actions">
+                <button type="submit" class="btn-primary">
+                  <span aria-hidden="true">📨</span> Demander un devis
+                </button>
+                <button type="button" class="btn-outline" id="btnDemo">
+                  <span aria-hidden="true">👁️</span> Voir démo
+                </button>
+              </div>
+            </form>
+          </aside>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-left">
+          <span class="footer-badge">Prototype</span>
+          <span class="footer-text">Données fictives • Design Intello</span>
+        </div>
+        <div class="footer-right">
+          <span class="footer-text">Conçu par <strong>Intello</strong></span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal Démo -->
+  <div
+    id="demoModal"
+    class="modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="demoModalTitle"
+    hidden
+  >
+    <div class="modal-overlay" aria-hidden="true"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="demoModalTitle" class="modal-title">🎬 Démo interactive</h3>
+        <button class="modal-close" id="closeDemoModal" aria-label="Fermer la démo">
+          <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p style="margin-bottom: 16px; color: var(--muted);">
+          Explorez nos prototypes interactifs complets :
+        </p>
+        <div class="demo-links">
+          <a href="/prototypes/fintech-dashboard/index.html" class="demo-link" target="_blank">
+            <span class="demo-icon">💰</span>
+            <div>
+              <div class="demo-name">Fintech Dashboard</div>
+              <div class="demo-desc">Analytics financières temps réel</div>
+            </div>
+          </a>
+          <a href="/prototypes/ecommerce-platform/index.html" class="demo-link" target="_blank">
+            <span class="demo-icon">🛒</span>
+            <div>
+              <div class="demo-name">E-Commerce Platform</div>
+              <div class="demo-desc">Boutique en ligne complète</div>
+            </div>
+          </a>
+          <a href="/prototypes/health-app/index.html" class="demo-link" target="_blank">
+            <span class="demo-icon">🏥</span>
+            <div>
+              <div class="demo-name">Health App</div>
+              <div class="demo-desc">Suivi patient et gestion médicale</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notifications -->
+  <div id="toastContainer" class="toast-container" role="region" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Script principal -->
+  <script src="./app.js"></script>
+</body>
+</html>

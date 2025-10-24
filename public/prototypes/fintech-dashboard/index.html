@@ -1,0 +1,386 @@
+<!--
+╔══════════════════════════════════════════════════════════════════════════════╗
+║ FINTECH DASHBOARD PRO — PROTOTYPE INTELLO                                    ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ Description : Dashboard financier SaaS avec KPIs temps réel                 ║
+║               • KPIs : MRR, ARR, CAC, Churn (animations CountUp)             ║
+║               • Graphique Chart.js multi-datasets (réel, objectif, forecast) ║
+║               • Sparklines par KPI                                           ║
+║               • Table clients triable/recherchable                           ║
+║               • Export CSV des données                                       ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ Auteur      : Patrick Junior Samba Ntadi (Intello)                           ║
+║ Date        : Janvier 2025                                                   ║
+║ Stack       : HTML5 + Vanilla JS + Chart.js 4.4.0 + CountUp.js 2.8.0        ║
+║ Licence     : MIT (Projet de démonstration)                                  ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ Librairies externes :                                                        ║
+║  - Chart.js 4.4.0 : graphiques et sparklines                                 ║
+║  - CountUp.js 2.8.0 : animations numériques KPIs                             ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ Note : Prototype non-indexable (noindex). Données fictives auto-générées.    ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+-->
+<!doctype html>
+<html lang="fr">
+<head>
+  <!-- Encodage et viewport -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  
+  <!-- SEO Prototype (version light, non-indexé) -->
+  <title>FinTech Dashboard Pro — Prototype SaaS Analytics | Intello</title>
+  <meta name="description" content="Dashboard financier SaaS avec KPIs temps réel (MRR, ARR, CAC, Churn), graphiques Chart.js multi-datasets, sparklines, table clients triable et export CSV. Prototype Intello." />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="author" content="Patrick Junior Samba Ntadi - Intello" />
+  
+  <!-- Favicon (emoji SVG placeholder) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>" />
+  
+  <!-- Styles principaux -->
+  <link rel="stylesheet" href="./styles.css" />
+  
+  <!-- Scripts (defer = téléchargement parallèle, exécution après DOM ready) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.8.0/countUp.umd.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       SKIP LINK (Accessibilité clavier)
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <a href="#mainContent" class="skip-link">Aller au contenu principal</a>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       HEADER : Navigation principale
+       • Brand + logo
+       • Actions : Rafraîchir, Export CSV
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <header class="header" id="mainHeader">
+    <div class="container">
+      <div class="header-content">
+        <!-- Brand -->
+        <div class="brand">
+          <div class="brand-icon" aria-hidden="true">💎</div>
+          <div>
+            <div class="brand-name">FinTech Pro</div>
+            <div class="brand-sub">Intello Prototype</div>
+          </div>
+        </div>
+        
+        <!-- Actions utilisateur -->
+        <div class="header-actions">
+          <!-- Bouton rafraîchir données -->
+          <button class="btn-icon" id="refreshBtn" aria-label="Rafraîchir les données du dashboard">
+            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+            </svg>
+          </button>
+
+          <!-- Bouton export CSV -->
+          <button class="btn-primary" id="exportBtn">
+            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+            <span>Exporter CSV</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       MAIN : Contenu principal du dashboard
+       • Filtres (période, produit, client)
+       • KPIs (MRR, ARR, CAC, Churn) + sparklines
+       • Graphique Chart.js principal
+       • Table clients triable/recherchable
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <main class="container main-content" id="mainContent">
+    
+    <!-- ─────────────────────────────────────────────────────────────────
+         FILTRES : Période, Produit, Client
+         ───────────────────────────────────────────────────────────────── -->
+    <section class="filters-bar" aria-labelledby="filtersTitle">
+      <h2 id="filtersTitle" class="sr-only">Filtres du dashboard</h2>
+
+      <!-- Filtre Période -->
+      <div class="filter-group">
+        <label class="filter-label">
+          <svg class="icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+          </svg>
+          Période
+        </label>
+        <div class="btn-group" role="group" aria-label="Sélection de période">
+          <button class="btn-filter active" data-period="7" aria-pressed="true">7j</button>
+          <button class="btn-filter" data-period="30" aria-pressed="false">30j</button>
+          <button class="btn-filter" data-period="90" aria-pressed="false">90j</button>
+          <button class="btn-filter" data-period="365" aria-pressed="false">1 an</button>
+        </div>
+      </div>
+
+      <!-- Filtre Produit -->
+      <div class="filter-group">
+        <label for="productFilter" class="filter-label">
+          <svg class="icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+          </svg>
+          Produit
+        </label>
+        <select class="select" id="productFilter" name="product">
+          <option value="all">Tous les produits</option>
+          <option value="premium">Premium Plan</option>
+          <option value="business">Business Plan</option>
+          <option value="enterprise">Enterprise</option>
+        </select>
+      </div>
+
+      <!-- Filtre Client -->
+      <div class="filter-group">
+        <label for="clientFilter" class="filter-label">
+          <svg class="icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+          </svg>
+          Client
+        </label>
+        <select class="select" id="clientFilter" name="client">
+          <option value="all">Tous les clients</option>
+          <option value="alpha">Alpha Corp</option>
+          <option value="beta">Beta SARL</option>
+          <option value="gamma">Gamma Inc</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- ─────────────────────────────────────────────────────────────────
+         KPIs GRID : 4 indicateurs principaux
+         MRR, ARR, CAC, Churn (avec sparklines Chart.js)
+         ───────────────────────────────────────────────────────────────── -->
+    <section class="kpis-grid" role="region" aria-labelledby="kpisTitle">
+      <h2 id="kpisTitle" class="sr-only">Indicateurs clés de performance</h2>
+
+      <!-- KPI 1: MRR (Monthly Recurring Revenue) -->
+      <article class="kpi-card">
+        <div class="kpi-header">
+          <div class="kpi-icon" style="background: linear-gradient(135deg, #06b6d4, #0891b2)" aria-hidden="true">
+            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <h3 class="kpi-title">MRR</h3>
+        </div>
+        <div class="kpi-value" id="mrr-value" aria-live="polite">0</div>
+        <div class="kpi-change positive" id="mrr-change" aria-live="polite">
+          <svg class="icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+          </svg>
+          <span>+0%</span>
+        </div>
+        <div class="kpi-label">Revenu mensuel récurrent</div>
+        <canvas id="sparkline-mrr" class="sparkline" role="img" aria-label="Sparkline évolution MRR"></canvas>
+      </article>
+
+      <!-- KPI 2: ARR (Annual Recurring Revenue) -->
+      <article class="kpi-card">
+        <div class="kpi-header">
+          <div class="kpi-icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed)" aria-hidden="true">
+            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+            </svg>
+          </div>
+          <h3 class="kpi-title">ARR</h3>
+        </div>
+        <div class="kpi-value" id="arr-value" aria-live="polite">0</div>
+        <div class="kpi-change positive" id="arr-change" aria-live="polite">
+          <svg class="icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+          </svg>
+          <span>+0%</span>
+        </div>
+        <div class="kpi-label">Revenu annuel récurrent</div>
+        <canvas id="sparkline-arr" class="sparkline" role="img" aria-label="Sparkline évolution ARR"></canvas>
+      </article>
+
+      <!-- KPI 3: CAC (Customer Acquisition Cost) -->
+      <article class="kpi-card">
+        <div class="kpi-header">
+          <div class="kpi-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706)" aria-hidden="true">
+            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+            </svg>
+          </div>
+          <h3 class="kpi-title">CAC</h3>
+        </div>
+        <div class="kpi-value" id="cac-value" aria-live="polite">0</div>
+        <div class="kpi-change negative" id="cac-change" aria-live="polite">
+          <svg class="icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+          </svg>
+          <span>-0%</span>
+        </div>
+        <div class="kpi-label">Coût acquisition client</div>
+        <canvas id="sparkline-cac" class="sparkline" role="img" aria-label="Sparkline évolution CAC"></canvas>
+      </article>
+
+      <!-- KPI 4: Churn (Taux d'attrition) -->
+      <article class="kpi-card">
+        <div class="kpi-header">
+          <div class="kpi-icon" style="background: linear-gradient(135deg, #ef4444, #dc2626)" aria-hidden="true">
+            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+            </svg>
+          </div>
+          <h3 class="kpi-title">Churn</h3>
+        </div>
+        <div class="kpi-value" id="churn-value" aria-live="polite">0%</div>
+        <div class="kpi-change positive" id="churn-change" aria-live="polite">
+          <svg class="icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+          </svg>
+          <span>-0%</span>
+        </div>
+        <div class="kpi-label">Taux d'attrition mensuel</div>
+        <canvas id="sparkline-churn" class="sparkline" role="img" aria-label="Sparkline évolution Churn"></canvas>
+      </article>
+    </section>
+
+    <!-- ─────────────────────────────────────────────────────────────────
+         GRAPHIQUE PRINCIPAL : Évolution MRR
+         Chart.js multi-datasets (réel, objectif, prévision)
+         ───────────────────────────────────────────────────────────────── -->
+    <section class="chart-section" aria-labelledby="chartTitle">
+      <div class="chart-card">
+        <div class="chart-header">
+          <div>
+            <h2 id="chartTitle" class="chart-title">Évolution du MRR</h2>
+            <p class="chart-subtitle">Tendance sur la période sélectionnée</p>
+          </div>
+
+          <!-- Légende graphique -->
+          <div class="chart-legend" role="list">
+            <div class="legend-item" role="listitem">
+              <div class="legend-dot" style="background: #06b6d4" aria-hidden="true"></div>
+              <span>MRR Réel</span>
+            </div>
+            <div class="legend-item" role="listitem">
+              <div class="legend-dot" style="background: #8b5cf6" aria-hidden="true"></div>
+              <span>Objectif</span>
+            </div>
+            <div class="legend-item" role="listitem">
+              <div class="legend-dot" style="background: #f59e0b; opacity: 0.5" aria-hidden="true"></div>
+              <span>Prévision</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="chart-container">
+          <canvas id="mainChart" role="img" aria-label="Graphique linéaire de l'évolution du MRR avec objectif et prévisions"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────────────────────────────────────────────────────
+         TABLE CLIENTS : Triable, recherchable, top clients
+         ───────────────────────────────────────────────────────────────── -->
+    <section class="table-section" aria-labelledby="tableTitle">
+      <div class="table-card">
+        <div class="table-header">
+          <h2 id="tableTitle" class="table-title">Top Clients</h2>
+
+          <!-- Actions table (recherche + tri) -->
+          <div class="table-actions">
+            <label for="searchInput" class="sr-only">Rechercher un client</label>
+            <input 
+              type="text" 
+              id="searchInput" 
+              name="search"
+              placeholder="Rechercher..." 
+              class="search-input"
+              autocomplete="off"
+              aria-label="Rechercher dans la table des clients"
+            />
+
+            <label for="sortSelect" class="sr-only">Trier les clients</label>
+            <select class="select-sm" id="sortSelect" name="sort">
+              <option value="revenue">Trier par CA</option>
+              <option value="name">Trier par nom</option>
+              <option value="plan">Trier par plan</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Table responsive -->
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th scope="col">Client</th>
+                <th scope="col">Plan</th>
+                <th scope="col">CA Mensuel</th>
+                <th scope="col">Statut</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody">
+              <!-- Rempli dynamiquement par app.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-left">
+          <span class="footer-badge">Prototype</span>
+          <span class="footer-text">Données fictives générées automatiquement</span>
+        </div>
+        <div class="footer-right">
+          <span class="footer-text">Conçu par <strong>Intello</strong></span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       MODAL : Export CSV
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <div id="exportModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="exportModalTitle" hidden>
+    <div class="modal-overlay" aria-hidden="true"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="exportModalTitle" class="modal-title">Export des données</h3>
+        <button class="modal-close" id="closeModal" aria-label="Fermer la fenêtre d'export">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-text">Le fichier CSV contient :</p>
+        <ul class="modal-list">
+          <li>Données MRR de la période sélectionnée</li>
+          <li>Liste complète des clients et revenus</li>
+          <li>Statistiques globales (CAC, Churn, ARR)</li>
+        </ul>
+        <button class="btn-success" id="confirmExport">
+          <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+          </svg>
+          Télécharger le CSV
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       SCRIPT PRINCIPAL (chargé en dernier = non bloquant)
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <script src="./app.js"></script>
+</body>
+</html>

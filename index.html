@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+
+    <!-- Google tag (gtag.js) -->
+    <script>
+      window.addEventListener('load', function() {
+        const script = document.createElement('script');
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-EY97R0YLGP';
+        script.async = true;
+        document.head.appendChild(script);
+        
+        script.onload = function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          window.gtag = gtag;
+          gtag('js', new Date());
+          gtag('config', 'G-EY97R0YLGP');
+        };
+      });
+    </script>
+
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/logo_intello.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Title par défaut (sera écrasé par SEO component sur chaque page) -->
+    <title>Intello - Agence Développement Web & Mobile au Sénégal | React, Node.js</title>
+    
+    <!-- Meta description par défaut -->
+    <meta name="description" content="Agence digitale sénégalaise experte en développement web, mobile et e-commerce. Création de sites React, applications Node.js, design UI/UX moderne. +50 projets réussis à Dakar." />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

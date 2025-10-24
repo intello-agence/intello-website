@@ -1,0 +1,1162 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  
+  <!-- SEO Meta Tags -->
+  <title>Intello School Manager - Gestion Scolaire Digitale au Sénégal | Essai Gratuit 1 Mois</title>
+  <meta name="description" content="Logiciel de gestion scolaire pour écoles sénégalaises. Élèves, bulletins, paiements Mobile Money, emplois du temps. Dès 9 900 FCFA/mois. Essai gratuit 1 mois sans engagement." />
+  <meta name="keywords" content="logiciel gestion école sénégal, gestion scolaire dakar, bulletins automatiques, mobile money école, logiciel école senegal" />
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Intello School Manager - Gestion Scolaire Simple & Moderne" />
+  <meta property="og:description" content="Digitalisez votre école : inscriptions, notes, bulletins, paiements Mobile Money. Essai gratuit 1 mois. Installation locale ou cloud." />
+  <meta property="og:image" content="https://intello.sn/logo_intello.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://intello.sn/offres/ecoles/" />
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Intello School Manager - Gestion Scolaire Sénégal" />
+  <meta name="twitter:description" content="Logiciel de gestion scolaire moderne. Essai gratuit 1 mois." />
+  <meta name="twitter:image" content="https://intello.sn/logo_intello.png" />
+  
+  <!-- Canonical -->
+  <link rel="canonical" href="https://intello.sn/offres/ecoles/" />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="../../logo_intello.png" />
+
+  <!-- Google Analytics GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EY97R0YLGP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-EY97R0YLGP');
+  </script>
+
+  <!-- Tailwind CSS (CDN temporaire - à compiler en production) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* Variables & Dark Theme */
+    :root {
+      --bg-start: #030417;
+      --bg-end: #071029;
+      --accent: #06b6d4;
+      --primary: #1a73e8;
+    }
+
+    body {
+      background: linear-gradient(180deg, var(--bg-start) 0%, var(--bg-end) 100%);
+      color: #e6eef6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .fade-up { 
+      opacity: 0; 
+      transform: translateY(12px); 
+      transition: opacity .6s ease, transform .6s ease; 
+    }
+    .fade-up.visible { 
+      opacity: 1; 
+      transform: none; 
+    }
+
+    .animate-float {
+      animation: float 3s ease-in-out infinite;
+    }
+
+    /* Panel backgrounds */
+    .panel-bg {
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border: 1px solid rgba(255,255,255,0.04);
+    }
+
+    /* Ribbon */
+    .ribbon {
+      position: absolute;
+      right: -8px;
+      top: 12px;
+      padding: .4rem 1rem;
+      border-radius: 4px 0 0 4px;
+      font-weight: 800;
+      font-size: .85rem;
+      color: #061025;
+      background: linear-gradient(90deg, #fbbf24, #f59e0b);
+      box-shadow: 0 4px 12px rgba(251,191,36,0.3);
+    }
+
+    /* Sticky CTA */
+    .sticky-cta {
+      transform: translateY(100px);
+      opacity: 0;
+      transition: transform .4s cubic-bezier(.2,.9,.3,1), opacity .3s ease;
+    }
+    .sticky-cta.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* Focus rings */
+    :focus {
+      outline: 3px solid rgba(26,115,232,0.3);
+      outline-offset: 3px;
+    }
+
+    /* Select dropdown dark mode fix */
+    select option {
+      background-color: #0a1628;
+      color: #e6eef6;
+    }
+
+    /* Pulse animation for trust badges */
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(6,182,212,0.4); }
+      50% { box-shadow: 0 0 0 8px rgba(6,182,212,0); }
+    }
+
+    .trust-badge {
+      animation: pulse-glow 2s infinite;
+    }
+
+    /* Smooth scroll */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Honeypot (anti-spam) */
+    .hp-field {
+      position: absolute;
+      left: -5000px;
+      opacity: 0;
+      pointer-events: none;
+    }
+  </style>
+</head>
+
+<body class="antialiased">
+
+  <!-- Schema.org Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Intello School Manager",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "Web, Windows, macOS, Linux",
+    "offers": {
+      "@type": "Offer",
+      "price": "9900",
+      "priceCurrency": "XOF",
+      "availability": "https://schema.org/InStock",
+      "priceValidUntil": "2025-12-31"
+    },
+    "description": "Logiciel de gestion scolaire pour écoles sénégalaises avec gestion élèves, bulletins, paiements Mobile Money.",
+    "provider": {
+      "@type": "Organization",
+      "name": "Intello",
+      "url": "https://intello.sn",
+      "logo": "https://intello.sn/logo_intello.png"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "12"
+    }
+  }
+  </script>
+
+  <!-- HEADER -->
+  <header class="sticky top-0 z-50 backdrop-blur-md bg-[rgba(2,6,23,0.85)] border-b border-[rgba(255,255,255,0.06)] shadow-lg">
+    <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-3">
+      <!-- Brand -->
+      <a href="../../" class="flex items-center gap-3 group">
+        <img src="../../logo_intello.png" alt="Logo Intello" class="w-12 h-12 rounded-full border-2 border-blue-500 object-cover bg-white group-hover:scale-105 transition-transform" />
+        <div class="hidden sm:block">
+          <div class="text-lg font-extrabold text-white leading-tight">Intello</div>
+          <div class="text-xs text-cyan-400">School Manager</div>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+        <a href="#solution" class="text-slate-300 hover:text-white transition">Solution</a>
+        <a href="#pricing" class="text-slate-300 hover:text-white transition">Tarifs</a>
+        <a href="#temoignages" class="text-slate-300 hover:text-white transition">Témoignages</a>
+        <a href="#faq" class="text-slate-300 hover:text-white transition">FAQ</a>
+        <a href="#contact" class="ml-2 px-5 py-2.5 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold shadow-lg hover:shadow-cyan-500/50 hover:scale-105 transition-all">
+          Essai Gratuit
+        </a>
+      </nav>
+
+      <!-- Mobile Menu Button -->
+      <button id="btnMenu" aria-label="Ouvrir le menu" class="md:hidden p-2 rounded-md border border-[rgba(255,255,255,0.1)] hover:bg-white/5 transition">
+        <svg class="w-5 h-5 text-slate-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- MOBILE MENU OFFCANVAS -->
+  <div id="mobileMenu" class="fixed inset-0 z-40 hidden">
+    <div id="mobileMenuOverlay" class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+    <aside class="absolute right-0 top-0 h-full w-[88%] max-w-sm bg-[rgba(6,10,18,0.98)] border-l border-white/10 p-6 shadow-2xl">
+      <div class="flex items-center justify-between mb-8">
+        <div class="flex items-center gap-3">
+          <img src="../../logo_intello.png" alt="" class="w-10 h-10 rounded-full border-2 border-cyan-500 object-cover bg-white" />
+          <div class="text-white font-bold">Intello School</div>
+        </div>
+        <button id="closeMenu" class="text-slate-300 p-2 hover:bg-white/10 rounded transition" aria-label="Fermer menu">✕</button>
+      </div>
+      <nav class="flex flex-col gap-2 text-slate-200">
+        <a href="#hero" class="py-3 px-4 rounded-lg hover:bg-white/5 transition">Accueil</a>
+        <a href="#solution" class="py-3 px-4 rounded-lg hover:bg-white/5 transition">Solution</a>
+        <a href="#pricing" class="py-3 px-4 rounded-lg hover:bg-white/5 transition">Tarifs</a>
+        <a href="#temoignages" class="py-3 px-4 rounded-lg hover:bg-white/5 transition">Témoignages</a>
+        <a href="#faq" class="py-3 px-4 rounded-lg hover:bg-white/5 transition">FAQ</a>
+        <a href="#contact" class="py-3 px-4 rounded-lg hover:bg-white/5 transition">Contact</a>
+      </nav>
+      <div class="mt-8">
+        <a href="#contact" class="block text-center px-5 py-3 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold shadow-lg">
+          Essai Gratuit 1 Mois
+        </a>
+      </div>
+    </aside>
+  </div>
+
+  <main class="max-w-7xl mx-auto px-6">
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="pt-12 md:pt-20 pb-16 md:pb-24">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <!-- Left: Copy -->
+        <div class="fade-up">
+          <!-- Trust Badge -->
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-amber-500 to-orange-500 shadow-lg mb-6 trust-badge">
+            <span>🎁</span>
+            <span>Essai gratuit 1 mois • Sans carte bancaire</span>
+          </div>
+
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
+            Digitalisez la gestion de <span class="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">votre école</span>
+          </h1>
+
+          <p class="text-slate-300 text-lg md:text-xl max-w-xl mb-8 leading-relaxed">
+            Inscriptions, notes, bulletins, emplois du temps et paiements Mobile Money — tout centralisé dans une plateforme pensée pour les écoles sénégalaises.
+          </p>
+
+          <!-- CTAs -->
+          <div class="flex flex-col sm:flex-row gap-4 mb-8">
+            <a href="#contact" class="inline-flex items-center justify-center px-6 py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold shadow-xl hover:shadow-cyan-500/50 hover:scale-105 transition-all">
+              🚀 Commencer l'essai gratuit
+            </a>
+            <a href="#solution" class="inline-flex items-center justify-center px-6 py-4 rounded-xl border-2 border-cyan-500/30 text-slate-200 hover:bg-cyan-500/10 hover:border-cyan-500 transition-all">
+              📖 Découvrir la solution
+            </a>
+          </div>
+
+          <!-- Trust Indicators -->
+          <div class="flex flex-wrap gap-6 text-sm text-slate-400">
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Sans engagement
+            </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Support WhatsApp
+            </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Formation incluse
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Dashboard Mockup -->
+        <div class="fade-up hidden md:block animate-float">
+          <div class="panel-bg rounded-3xl p-6 shadow-2xl shadow-cyan-500/20">
+            <div class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-6 border border-cyan-500/20">
+              <div class="flex items-center justify-between mb-6">
+                <div class="text-sm font-semibold text-cyan-400">Tableau d'administration</div>
+                <div class="px-3 py-1 rounded-full bg-green-500/20 text-green-400 text-xs font-bold">En ligne</div>
+              </div>
+
+              <div class="grid grid-cols-3 gap-4 mb-6">
+                <div class="bg-gradient-to-b from-blue-900/30 to-blue-900/10 rounded-xl p-4 text-center border border-blue-500/20">
+                  <div class="text-sm text-slate-400 mb-1">Élèves</div>
+                  <div class="text-3xl font-bold text-white">248</div>
+                </div>
+                <div class="bg-gradient-to-b from-amber-900/30 to-amber-900/10 rounded-xl p-4 text-center border border-amber-500/20">
+                  <div class="text-sm text-slate-400 mb-1">Absences</div>
+                  <div class="text-3xl font-bold text-white">6</div>
+                </div>
+                <div class="bg-gradient-to-b from-green-900/30 to-green-900/10 rounded-xl p-4 text-center border border-green-500/20">
+                  <div class="text-sm text-slate-400 mb-1">Paiements</div>
+                  <div class="text-2xl font-bold text-white">3</div>
+                  <div class="text-xs text-green-400">en attente</div>
+                </div>
+              </div>
+
+              <div class="rounded-xl bg-gradient-to-r from-cyan-900/20 to-blue-900/20 border border-cyan-500/20 p-4">
+                <div class="text-slate-300 text-sm space-y-2">
+                  <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+                    Import CSV élèves
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+                    Bulletins automatiques
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+                    Paiements Mobile Money
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Social Proof Numbers -->
+      <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 fade-up">
+        <div class="text-center">
+          <div class="text-4xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-2">12+</div>
+          <div class="text-slate-400 text-sm">Écoles partenaires</div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-2">3 500+</div>
+          <div class="text-slate-400 text-sm">Élèves gérés</div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-2">95%</div>
+          <div class="text-slate-400 text-sm">Satisfaction</div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-2">-80%</div>
+          <div class="text-slate-400 text-sm">Temps bulletin</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROBLÈMES / COMPARAISON -->
+    <section id="problemes" class="py-16">
+      <div class="text-center mb-12 fade-up">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">
+          Pourquoi les <span class="bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">méthodes manuelles</span> ne suffisent plus
+        </h2>
+        <p class="text-slate-400 text-lg max-w-3xl mx-auto">
+          Gestion sur papier, fichiers Excel éparpillés et communication difficile — découvrez combien de temps vous perdez réellement.
+        </p>
+      </div>
+
+      <!-- Comparison Table -->
+      <div class="panel-bg rounded-3xl p-8 md:p-12 mb-12 fade-up overflow-x-auto">
+        <table class="w-full text-left">
+          <thead>
+            <tr class="border-b border-white/10">
+              <th class="pb-4 text-slate-400 font-semibold">Critère</th>
+              <th class="pb-4 text-slate-400 font-semibold text-center">📋 Excel + Papier</th>
+              <th class="pb-4 text-cyan-400 font-semibold text-center">✨ Intello School</th>
+            </tr>
+          </thead>
+          <tbody class="text-slate-300">
+            <tr class="border-b border-white/5">
+              <td class="py-4">Temps bulletin (30 élèves)</td>
+              <td class="py-4 text-center text-red-400 font-semibold">8 heures</td>
+              <td class="py-4 text-center text-green-400 font-bold">45 minutes</td>
+            </tr>
+            <tr class="border-b border-white/5">
+              <td class="py-4">Erreurs de calcul</td>
+              <td class="py-4 text-center text-red-400">Fréquentes</td>
+              <td class="py-4 text-center text-green-400 font-bold">0 (automatique)</td>
+            </tr>
+            <tr class="border-b border-white/5">
+              <td class="py-4">Suivi paiements</td>
+              <td class="py-4 text-center text-red-400">Manuel, confus</td>
+              <td class="py-4 text-center text-green-400 font-bold">Temps réel + rappels SMS</td>
+            </tr>
+            <tr class="border-b border-white/5">
+              <td class="py-4">Communication parents</td>
+              <td class="py-4 text-center text-red-400">Téléphone individuel</td>
+              <td class="py-4 text-center text-green-400 font-bold">SMS groupés automatiques</td>
+            </tr>
+            <tr class="border-b border-white/5">
+              <td class="py-4">Backup données</td>
+              <td class="py-4 text-center text-red-400">Risque perte totale</td>
+              <td class="py-4 text-center text-green-400 font-bold">Sauvegarde cloud quotidienne</td>
+            </tr>
+            <tr>
+              <td class="py-4 font-bold">Coût annuel (temps valorisé)</td>
+              <td class="py-4 text-center text-red-400 font-bold">~600 000 FCFA</td>
+              <td class="py-4 text-center text-green-400 font-bold">119 000 FCFA</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SOLUTION / FONCTIONNALITÉS -->
+    <section id="solution" class="py-16">
+      <div class="text-center mb-12 fade-up">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">
+          Une solution <span class="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">tout-en-un</span>
+        </h2>
+        <p class="text-slate-400 text-lg max-w-3xl mx-auto">
+          Centralisez toutes vos opérations scolaires dans une plateforme simple et moderne.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Feature 1 -->
+        <div class="panel-bg p-6 rounded-2xl fade-up hover:shadow-lg hover:shadow-cyan-500/10 transition-all group">
+          <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+            👥
+          </div>
+          <h3 class="text-xl font-bold mb-3">Registre élèves</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Fiches complètes, contacts parents, historique académique et exports CSV.
+          </p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="panel-bg p-6 rounded-2xl fade-up hover:shadow-lg hover:shadow-blue-500/10 transition-all group">
+          <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+            📊
+          </div>
+          <h3 class="text-xl font-bold mb-3">Notes & Bulletins</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Saisie rapide, calculs automatiques (moyennes, classements) et PDF prêts à imprimer.
+          </p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="panel-bg p-6 rounded-2xl fade-up hover:shadow-lg hover:shadow-purple-500/10 transition-all group">
+          <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+            💰
+          </div>
+          <h3 class="text-xl font-bold mb-3">Paiements Mobile Money</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Intégration Wave, Orange Money, Free Money + rappels automatiques par SMS.
+          </p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="panel-bg p-6 rounded-2xl fade-up hover:shadow-lg hover:shadow-pink-500/10 transition-all group">
+          <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-pink-500 to-red-600 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+            📅
+          </div>
+          <h3 class="text-xl font-bold mb-3">Emploi du temps</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Planning automatique, gestion remplacements et suivi absences professeurs.
+          </p>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="panel-bg p-6 rounded-2xl fade-up hover:shadow-lg hover:shadow-green-500/10 transition-all group">
+          <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+            📨
+          </div>
+          <h3 class="text-xl font-bold mb-3">Communication</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            SMS groupés, alertes automatiques et portail parents pour consulter notes.
+          </p>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="panel-bg p-6 rounded-2xl fade-up hover:shadow-lg hover:shadow-amber-500/10 transition-all group">
+          <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+            📈
+          </div>
+          <h3 class="text-xl font-bold mb-3">Statistiques & Rapports</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Tableaux de bord temps réel, évolution élèves et rapports imprimables.
+          </p>
+        </div>
+
+        <!-- Feature 7 -->
+        <div class="panel-bg p-6 rounded-2xl fade-up hover:shadow-lg hover:shadow-indigo-500/10 transition-all group">
+          <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-indigo-500 to-blue-600 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+            💾
+          </div>
+          <h3 class="text-xl font-bold mb-3">Backups Automatiques</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Sauvegarde cloud quotidienne + exports Excel pour sécurité maximale.
+          </p>
+        </div>
+
+        <!-- Feature 8 -->
+        <div class="panel-bg p-6 rounded-2xl fade-up hover:shadow-lg hover:shadow-rose-500/10 transition-all group">
+          <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+            🖥️
+          </div>
+          <h3 class="text-xl font-bold mb-3">Hors ligne / Local</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">
+            Fonctionne sans Internet avec installation locale (serveur sur site).
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing" class="py-16">
+      <div class="text-center mb-12 fade-up">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">
+          Tarifs <span class="bg-gradient-to-r from-green-400 to-teal-500 bg-clip-text text-transparent">transparents</span>
+        </h2>
+        <p class="text-slate-400 text-lg max-w-3xl mx-auto">
+          Commencez gratuitement pendant 1 mois complet. Zéro engagement, zéro carte bancaire.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <!-- Free Trial -->
+        <div class="panel-bg rounded-3xl p-8 fade-up hover:shadow-xl transition-all">
+          <div class="text-center mb-6">
+            <div class="inline-block px-4 py-1 rounded-full bg-green-500/20 text-green-400 text-sm font-bold mb-4">
+              ⭐ Recommandé pour commencer
+            </div>
+            <div class="text-2xl font-bold text-white mb-2">Essai Gratuit</div>
+            <div class="text-slate-400 text-sm mb-4">1 mois complet</div>
+            <div class="text-4xl font-extrabold text-white mb-2">0 FCFA</div>
+            <div class="text-xs text-slate-500">Sans carte bancaire</div>
+          </div>
+          <ul class="text-slate-300 text-sm space-y-3 mb-8">
+            <li class="flex items-start gap-2">
+              <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Accès complet 30 jours
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Toutes fonctionnalités incluses
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Import CSV & bulletins
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Support WhatsApp
+            </li>
+          </ul>
+          <a href="#contact" class="block text-center px-6 py-3 rounded-xl bg-white text-slate-900 font-bold hover:bg-slate-100 transition">
+            Commencer gratuitement
+          </a>
+        </div>
+
+        <!-- Basique -->
+        <div class="panel-bg rounded-3xl p-8 fade-up hover:shadow-xl transition-all">
+          <div class="text-center mb-6">
+            <div class="text-2xl font-bold text-white mb-2">Basique</div>
+            <div class="text-slate-400 text-sm mb-4">Petites écoles</div>
+            <div class="text-4xl font-extrabold text-white mb-2">
+              9 900<span class="text-lg text-slate-400"> FCFA</span>
+            </div>
+            <div class="text-xs text-slate-500">par mois</div>
+          </div>
+          <ul class="text-slate-300 text-sm space-y-3 mb-8">
+            <li class="flex items-start gap-2">
+              <svg class="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Jusqu'à 150 élèves
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Gestion notes & bulletins
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Emploi du temps
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Support email (24-48h)
+            </li>
+          </ul>
+          <a href="#contact" class="block text-center px-6 py-3 rounded-xl border-2 border-cyan-500/30 text-slate-200 font-bold hover:bg-cyan-500/10 hover:border-cyan-500 transition">
+            Choisir ce forfait
+          </a>
+        </div>
+
+        <!-- Standard (FEATURED) -->
+        <div class="panel-bg rounded-3xl p-8 border-2 border-cyan-500/40 shadow-2xl shadow-cyan-500/20 transform md:-translate-y-2 fade-up">
+          <div class="ribbon">🔥 Populaire</div>
+          <div class="text-center mb-6">
+            <div class="text-2xl font-bold text-white mb-2">Standard</div>
+            <div class="text-slate-400 text-sm mb-4">Moyennes écoles</div>
+            <div class="text-4xl font-extrabold text-white mb-2">
+              24 900<span class="text-lg text-slate-400"> FCFA</span>
+            </div>
+            <div class="text-xs text-slate-500">par mois</div>
+          </div>
+          <ul class="text-slate-300 text-sm space-y-3 mb-8">
+            <li class="flex items-start gap-2">
+              <svg class="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Jusqu'à 500 élèves
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Intégration Mobile Money
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              SMS automatiques
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Rapports & statistiques
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Support prioritaire (2h)
+            </li>
+          </ul>
+          <a href="#contact" class="block text-center px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold shadow-lg hover:shadow-cyan-500/50 hover:scale-105 transition-all">
+            Choisir Standard
+          </a>
+        </div>
+
+        <!-- Installation Locale -->
+        <div class="panel-bg rounded-3xl p-8 fade-up hover:shadow-xl transition-all">
+          <div class="text-center mb-6">
+            <div class="text-2xl font-bold text-white mb-2">Installation Locale</div>
+            <div class="text-slate-400 text-sm mb-4">Serveur sur site</div>
+            <div class="text-4xl font-extrabold text-white mb-2">
+              120 000<span class="text-lg text-slate-400"> FCFA</span>
+            </div>
+            <div class="text-xs text-slate-500">paiement unique</div>
+          </div>
+          <ul class="text-slate-300 text-sm space-y-3 mb-8">
+            <li class="flex items-start gap-2">
+              <svg class="w-5 h-5 text-purple-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Installation complète sur site
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="w-5 h-5 text-purple-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Formation équipe (2h)
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="w-5 h-5 text-purple-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Sans limite d'élèves
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="w-5 h-5 text-purple-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Fonctionne hors ligne
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="w-5 h-5 text-purple-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Support 6 mois inclus
+            </li>
+          </ul>
+          <a href="#contact" class="block text-center px-6 py-3 rounded-xl border-2 border-purple-500/30 text-slate-200 font-bold hover:bg-purple-500/10 hover:border-purple-500 transition">
+            Demander un devis
+          </a>
+        </div>
+      </div>
+
+      <!-- Garanties -->
+      <div class="panel-bg rounded-2xl p-8 md:p-12 fade-up">
+        <h3 class="text-2xl font-bold text-center mb-8">
+          🛡️ Nos garanties
+        </h3>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="text-center">
+            <div class="w-16 h-16 mx-auto rounded-full bg-green-500/20 flex items-center justify-center text-3xl mb-4">✅</div>
+            <div class="font-bold text-lg mb-2">Satisfait ou remboursé</div>
+            <div class="text-slate-400 text-sm">30 jours pour tester sans risque</div>
+          </div>
+          <div class="text-center">
+            <div class="w-16 h-16 mx-auto rounded-full bg-blue-500/20 flex items-center justify-center text-3xl mb-4">📞</div>
+            <div class="font-bold text-lg mb-2">Support WhatsApp</div>
+            <div class="text-slate-400 text-sm">Réponse sous 2h (heures bureau)</div>
+          </div>
+          <div class="text-center">
+            <div class="w-16 h-16 mx-auto rounded-full bg-purple-500/20 flex items-center justify-center text-3xl mb-4">💾</div>
+            <div class="font-bold text-lg mb-2">Vos données exportables</div>
+            <div class="text-slate-400 text-sm">Pas de lock-in, Excel à tout moment</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TÉMOIGNAGES -->
+    <section id="temoignages" class="py-16">
+      <div class="text-center mb-12 fade-up">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">
+          Ce que disent <span class="bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">nos clients</span>
+        </h2>
+        <p class="text-slate-400 text-lg max-w-3xl mx-auto">
+          12 écoles nous font déjà confiance au Sénégal.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- Témoignage 1 -->
+        <div class="panel-bg rounded-2xl p-6 fade-up">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white font-bold text-lg">
+              AM
+            </div>
+            <div>
+              <div class="font-bold">Amadou Mbaye</div>
+              <div class="text-sm text-slate-400">Directeur - École Sainte-Marie, Dakar</div>
+            </div>
+          </div>
+          <div class="flex gap-1 mb-3">
+            <span class="text-amber-400">⭐⭐⭐⭐⭐</span>
+          </div>
+          <p class="text-slate-300 italic leading-relaxed text-sm">
+            "Avant Intello, nos bulletins prenaient 3 jours. Maintenant, c'est fait en 2 heures. Les parents apprécient les SMS automatiques de rappel de paiement. Un vrai gain de temps !"
+          </p>
+        </div>
+
+        <!-- Témoignage 2 -->
+        <div class="panel-bg rounded-2xl p-6 fade-up">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center text-white font-bold text-lg">
+              FS
+            </div>
+            <div>
+              <div class="font-bold">Fatou Sow</div>
+              <div class="text-sm text-slate-400">Comptable - Groupe Scolaire Al Iman, Thiès</div>
+            </div>
+          </div>
+          <div class="flex gap-1 mb-3">
+            <span class="text-amber-400">⭐⭐⭐⭐⭐</span>
+          </div>
+          <p class="text-slate-300 italic leading-relaxed text-sm">
+            "L'intégration Wave Money a changé notre quotidien. Plus besoin de vérifier manuellement chaque paiement. Le système détecte tout automatiquement. Impressionnant !"
+          </p>
+        </div>
+
+        <!-- Témoignage 3 -->
+        <div class="panel-bg rounded-2xl p-6 fade-up">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center text-white font-bold text-lg">
+              ID
+            </div>
+            <div>
+              <div class="font-bold">Ibrahima Diop</div>
+              <div class="text-sm text-slate-400">Proviseur - Lycée Technique, Saint-Louis</div>
+            </div>
+          </div>
+          <div class="flex gap-1 mb-3">
+            <span class="text-amber-400">⭐⭐⭐⭐⭐</span>
+          </div>
+          <p class="text-slate-300 italic leading-relaxed text-sm">
+            "Nous avons choisi l'installation locale car notre connexion Internet est instable. Le système fonctionne parfaitement hors ligne. Support technique très réactif sur WhatsApp."
+          </p>
+        </div>
+      </div>
+
+      <!-- Logos écoles (placeholder) -->
+      <div class="mt-12 fade-up">
+        <div class="text-center text-slate-400 text-sm mb-6">Ils nous font confiance :</div>
+        <div class="flex flex-wrap justify-center items-center gap-8 opacity-50">
+          <div class="px-6 py-3 border border-white/10 rounded-lg text-slate-300 font-semibold">École Sainte-Marie</div>
+          <div class="px-6 py-3 border border-white/10 rounded-lg text-slate-300 font-semibold">Groupe Al Iman</div>
+          <div class="px-6 py-3 border border-white/10 rounded-lg text-slate-300 font-semibold">Lycée Technique SL</div>
+          <div class="px-6 py-3 border border-white/10 rounded-lg text-slate-300 font-semibold">École Les Lauriers</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-16">
+      <div class="text-center mb-12 fade-up">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">
+          Questions <span class="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">fréquentes</span>
+        </h2>
+      </div>
+
+      <div class="max-w-4xl mx-auto space-y-4">
+        <!-- Q1 -->
+        <details class="panel-bg rounded-2xl p-6 fade-up group">
+          <summary class="font-bold text-lg cursor-pointer list-none flex items-center justify-between">
+            <span>L'essai gratuit est-il vraiment sans engagement ?</span>
+            <svg class="w-5 h-5 text-cyan-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <p class="text-slate-400 mt-4 leading-relaxed">
+            Oui, 100%. Aucune carte bancaire demandée. Vous testez toutes les fonctionnalités pendant 1 mois. Si vous ne souhaitez pas continuer, vos données restent exportables en Excel.
+          </p>
+        </details>
+
+        <!-- Q2 -->
+        <details class="panel-bg rounded-2xl p-6 fade-up group">
+          <summary class="font-bold text-lg cursor-pointer list-none flex items-center justify-between">
+            <span>Mes professeurs ne sont pas très techniques, est-ce compliqué ?</span>
+            <svg class="w-5 h-5 text-cyan-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <p class="text-slate-400 mt-4 leading-relaxed">
+            L'interface est conçue pour être intuitive (3 clics max pour chaque action). Formation de 2h incluse avec démonstration. Vidéos tutoriels intégrées. Support WhatsApp réactif si besoin.
+          </p>
+        </details>
+
+        <!-- Q3 -->
+        <details class="panel-bg rounded-2xl p-6 fade-up group">
+          <summary class="font-bold text-lg cursor-pointer list-none flex items-center justify-between">
+            <span>Et si Intello ferme dans 6 mois ?</span>
+            <svg class="w-5 h-5 text-cyan-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <p class="text-slate-400 mt-4 leading-relaxed">
+            Vos données sont exportables en 1 clic (Excel complet). L'installation locale vous donne la propriété totale du code et des données. Vous n'êtes jamais bloqué.
+          </p>
+        </details>
+
+        <!-- Q4 -->
+        <details class="panel-bg rounded-2xl p-6 fade-up group">
+          <summary class="font-bold text-lg cursor-pointer list-none flex items-center justify-between">
+            <span>Notre connexion Internet est mauvaise, ça marchera ?</span>
+            <svg class="w-5 h-5 text-cyan-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <p class="text-slate-400 mt-4 leading-relaxed">
+            Oui ! L'installation locale fonctionne 100% hors ligne. Les données se synchronisent quand la connexion revient. Idéal pour zones rurales.
+          </p>
+        </details>
+
+        <!-- Q5 -->
+        <details class="panel-bg rounded-2xl p-6 fade-up group">
+          <summary class="font-bold text-lg cursor-pointer list-none flex items-center justify-between">
+            <span>Peut-on payer en plusieurs fois ?</span>
+            <svg class="w-5 h-5 text-cyan-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <p class="text-slate-400 mt-4 leading-relaxed">
+            Oui, paiement trimestriel possible (3 mois d'avance). Pour installation locale, facilités en 3 fois sans frais (40 000 FCFA/mois pendant 3 mois).
+          </p>
+        </details>
+
+        <!-- Q6 -->
+        <details class="panel-bg rounded-2xl p-6 fade-up group">
+          <summary class="font-bold text-lg cursor-pointer list-none flex items-center justify-between">
+            <span>Quels opérateurs Mobile Money sont supportés ?</span>
+            <svg class="w-5 h-5 text-cyan-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <p class="text-slate-400 mt-4 leading-relaxed">
+            Wave, Orange Money et Free Money sont intégrés nativement. Détection automatique des paiements et attribution aux élèves. Virement bancaire et espèces également trackables.
+          </p>
+        </details>
+
+        <!-- Q7 -->
+        <details class="panel-bg rounded-2xl p-6 fade-up group">
+          <summary class="font-bold text-lg cursor-pointer list-none flex items-center justify-between">
+            <span>Combien de temps prend l'installation ?</span>
+            <svg class="w-5 h-5 text-cyan-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <p class="text-slate-400 mt-4 leading-relaxed">
+            Cloud : 5 minutes (création compte + import CSV élèves). Installation locale : 2-3h sur site (installation serveur + formation équipe).
+          </p>
+        </details>
+
+        <!-- Q8 -->
+        <details class="panel-bg rounded-2xl p-6 fade-up group">
+          <summary class="font-bold text-lg cursor-pointer list-none flex items-center justify-between">
+            <span>Y a-t-il une limite de stockage ?</span>
+            <svg class="w-5 h-5 text-cyan-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <p class="text-slate-400 mt-4 leading-relaxed">
+            Non, données illimitées. Historique conservé sur 5 ans minimum. Backups automatiques quotidiens inclus.
+          </p>
+        </details>
+      </div>
+    </section>
+
+    <!-- CONTACT FORM -->
+    <section id="contact" class="py-16">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12 fade-up">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">
+            Prêt à <span class="bg-gradient-to-r from-green-400 to-teal-500 bg-clip-text text-transparent">digitaliser</span> votre école ?
+          </h2>
+          <p class="text-slate-400 text-lg max-w-3xl mx-auto">
+            Remplissez le formulaire ci-dessous. Nous vous recontactons sous 24h pour organiser une démonstration personnalisée.
+          </p>
+        </div>
+
+        <form id="schoolForm" class="panel-bg rounded-3xl p-8 md:p-12 fade-up" aria-label="Formulaire demande démonstration">
+          <!-- Honeypot anti-spam -->
+          <input type="text" name="_honeypot" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          
+          <!-- Hidden source -->
+          <input type="hidden" name="source" value="landing_offres_ecoles_v2" />
+
+          <div class="grid grid-cols-1 gap-6">
+            <!-- Nom école -->
+            <label class="block">
+              <span class="text-sm font-semibold text-slate-300 mb-2 block">Nom de l'école *</span>
+              <input 
+                class="w-full rounded-xl bg-slate-900/50 border border-white/10 px-4 py-3 text-white placeholder-slate-500 focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition" 
+                name="ecole" 
+                id="ecole" 
+                type="text" 
+                placeholder="Ex: École Sainte-Marie"
+                required 
+              />
+            </label>
+
+            <!-- Nom responsable -->
+            <label class="block">
+              <span class="text-sm font-semibold text-slate-300 mb-2 block">Nom du responsable</span>
+              <input 
+                class="w-full rounded-xl bg-slate-900/50 border border-white/10 px-4 py-3 text-white placeholder-slate-500 focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition" 
+                name="nom" 
+                id="nom" 
+                type="text" 
+                placeholder="Ex: Amadou Mbaye"
+              />
+            </label>
+
+            <div class="grid md:grid-cols-2 gap-6">
+              <!-- Email -->
+              <label>
+                <span class="text-sm font-semibold text-slate-300 mb-2 block">Adresse e-mail *</span>
+                <input 
+                  class="w-full rounded-xl bg-slate-900/50 border border-white/10 px-4 py-3 text-white placeholder-slate-500 focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition" 
+                  name="email" 
+                  id="email" 
+                  type="email" 
+                  placeholder="ecole@example.com"
+                  required 
+                />
+              </label>
+
+              <!-- Téléphone -->
+              <label>
+                <span class="text-sm font-semibold text-slate-300 mb-2 block">Téléphone (WhatsApp) *</span>
+                <input 
+                  class="w-full rounded-xl bg-slate-900/50 border border-white/10 px-4 py-3 text-white placeholder-slate-500 focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition" 
+                  name="tel" 
+                  id="tel" 
+                  type="tel" 
+                  placeholder="+221 77 123 45 67"
+                  required 
+                />
+              </label>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+              <!-- Effectif -->
+              <label>
+                <span class="text-sm font-semibold text-slate-300 mb-2 block">Nombre d'élèves *</span>
+                <select 
+                  class="w-full rounded-xl bg-slate-900/50 border border-white/10 px-4 py-3 text-white focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition" 
+                  name="effectif" 
+                  id="effectif" 
+                  required
+                >
+                  <option value="">Sélectionnez</option>
+                  <option value="moins de 100">Moins de 100</option>
+                  <option value="100-300">100 - 300</option>
+                  <option value="300-600">300 - 600</option>
+                  <option value="plus de 600">Plus de 600</option>
+                </select>
+              </label>
+
+              <!-- Ville -->
+              <label>
+                <span class="text-sm font-semibold text-slate-300 mb-2 block">Ville / Région</span>
+                <input 
+                  class="w-full rounded-xl bg-slate-900/50 border border-white/10 px-4 py-3 text-white placeholder-slate-500 focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition" 
+                  name="city" 
+                  id="city" 
+                  type="text" 
+                  placeholder="Ex: Dakar"
+                />
+              </label>
+
+              <!-- Paiement préféré -->
+              <label>
+                <span class="text-sm font-semibold text-slate-300 mb-2 block">Paiement préféré</span>
+                <select 
+                  class="w-full rounded-xl bg-slate-900/50 border border-white/10 px-4 py-3 text-white focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition" 
+                  name="payment_method" 
+                  id="payment_method"
+                >
+                  <option value="mobile_money">Mobile Money (Wave, Orange, Free)</option>
+                  <option value="bank_transfer">Virement bancaire</option>
+                  <option value="cash">Espèces</option>
+                  <option value="installment">Paiement échelonné</option>
+                </select>
+              </label>
+            </div>
+
+            <!-- Message -->
+            <label>
+              <span class="text-sm font-semibold text-slate-300 mb-2 block">Message (optionnel)</span>
+              <textarea 
+                class="w-full rounded-xl bg-slate-900/50 border border-white/10 px-4 py-3 text-white placeholder-slate-500 focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition min-h-[120px]" 
+                name="message" 
+                id="message"
+                placeholder="Parlez-nous de vos besoins spécifiques..."
+              ></textarea>
+            </label>
+
+            <!-- Installation locale -->
+            <label class="flex items-center gap-3 text-sm text-slate-300 cursor-pointer">
+              <input 
+                type="checkbox" 
+                name="local_install" 
+                id="local_install" 
+                value="yes" 
+                class="w-5 h-5 rounded border-white/20 bg-slate-900/50 text-cyan-500 focus:ring-2 focus:ring-cyan-500" 
+              />
+              <span>Je souhaite une installation locale (devis + démonstration sur site)</span>
+            </label>
+
+            <!-- Submit -->
+            <div class="flex flex-col sm:flex-row items-center gap-4">
+              <button 
+                id="sendBtn" 
+                type="button" 
+                class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold shadow-xl hover:shadow-cyan-500/50 hover:scale-105 transition-all"
+              >
+                🚀 Demander ma démonstration gratuite
+              </button>
+
+              <div class="text-sm text-slate-500">
+                <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                Vos données sont sécurisées
+              </div>
+            </div>
+
+            <!-- Status message -->
+            <div id="formStatus" class="text-sm text-center" aria-live="polite"></div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- URGENCE / SCARCITY -->
+    <section class="py-12">
+      <div class="panel-bg rounded-3xl p-8 md:p-12 text-center fade-up border-2 border-amber-500/30">
+        <div class="inline-block px-4 py-2 rounded-full bg-amber-500/20 text-amber-400 font-bold text-sm mb-6">
+          🔥 Offre de lancement limitée
+        </div>
+        <h3 class="text-2xl md:text-3xl font-bold mb-4">
+          2 mois gratuits pour les 15 premières écoles inscrites
+        </h3>
+        <p class="text-slate-400 mb-6 max-w-2xl mx-auto">
+          Profitez de notre offre de lancement : essai gratuit + 2 mois offerts si vous vous inscrivez avant le 31 décembre 2024. Formation sur site incluse (valeur 50 000 FCFA).
+        </p>
+        <div class="flex items-center justify-center gap-3 text-lg font-bold text-amber-400">
+          <span>Reste</span>
+          <span class="px-4 py-2 rounded-lg bg-amber-500/20 text-3xl">8</span>
+          <span>places disponibles</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- STICKY CTA (Mobile) -->
+  <div id="stickyCta" class="sticky-cta fixed bottom-6 left-6 right-6 z-40 md:hidden">
+    <a href="#contact" class="block px-6 py-4 rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold text-center shadow-2xl shadow-cyan-500/50">
+      🚀 Essai Gratuit 1 Mois
+    </a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="mt-20 pb-10 border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6 py-8">
+        <!-- Brand -->
+        <div class="flex items-center gap-3">
+          <img src="../../logo_intello.png" alt="Logo Intello" class="w-10 h-10 rounded-full border-2 border-cyan-500 object-cover bg-white" />
+          <div>
+            <div class="font-bold text-white">Intello</div>
+            <div class="text-xs text-slate-400">School Manager</div>
+          </div>
+        </div>
+
+        <!-- Links -->
+        <div class="flex flex-wrap items-center gap-6 text-sm text-slate-400">
+          <a href="../../" class="hover:text-white transition">Retour Intello.sn</a>
+          <span>•</span>
+          <a href="../../privacy" class="hover:text-white transition">Confidentialité</a>
+          <span>•</span>
+          <a href="mailto:contact@intello.sn" class="hover:text-white transition">contact@intello.sn</a>
+          <span>•</span>
+          <a href="tel:+221775532804" class="hover:text-white transition">+221 77 553 28 04</a>
+        </div>
+
+        <!-- Copyright -->
+        <div class="text-sm text-slate-500">
+          © <span id="year"></span> Intello. Tous droits réservés.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Year injection
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile menu
+    (function(){
+      const btn = document.getElementById('btnMenu');
+      const menu = document.getElementById('mobileMenu');
+      const overlay = document.getElementById('mobileMenuOverlay');
+      const close = document.getElementById('closeMenu');
+
+      function open() { menu?.classList.remove('hidden'); }
+      function closeMenu() { menu?.classList.add('hidden'); }
+
+      btn?.addEventListener('click', open);
+      close?.addEventListener('click', closeMenu);
+      overlay?.addEventListener('click', closeMenu);
+      menu?.querySelectorAll('nav a').forEach(a => a.addEventListener('click', closeMenu));
+    })();
+
+    // Fade-up on scroll
+    (function(){
+      const els = document.querySelectorAll('.fade-up');
+      if (!els.length) return;
+      const obs = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      els.forEach(e => obs.observe(e));
+    })();
+
+    // Sticky CTA (mobile)
+    (function(){
+      const sticky = document.getElementById('stickyCta');
+      if (!sticky) return;
+      const showAfter = 400;
+      function check() {
+        const w = window.innerWidth || document.documentElement.clientWidth;
+        if (w >= 768) { sticky.classList.remove('show'); return; }
+        if (window.scrollY > showAfter) sticky.classList.add('show'); 
+        else sticky.classList.remove('show');
+      }
+      window.addEventListener('scroll', check);
+      window.addEventListener('resize', check);
+      check();
+    })();
+  </script>
+
+  <!-- EmailJS + Form logic -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="app.js" defer></script>
+
+</body>
+</html>

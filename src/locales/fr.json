@@ -1,0 +1,208 @@
+{
+  "nav": {
+    "services": "Services",
+    "projects": "Projets",
+    "about": "À propos",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title1": "Transformez",
+    "title2": "Vos Idées",
+    "title3": "En Réalité",
+    "subtitle": "Agence de création de solutions numériques innovantes et développement sur-mesure",
+    "cta1": "Démarrer un projet",
+    "cta2": "Voir nos réalisations"
+  },
+  "stats": {
+    "stat1": {
+      "number": "3+",
+      "label": "Années d'Expérience"
+    },
+    "stat2": {
+      "number": "10+",
+      "label": "Technologies Maîtrisées"
+    },
+    "stat3": {
+      "number": "<24h",
+      "label": "Délai de Réponse"
+    },
+    "stat4": {
+      "number": "100%",
+      "label": "Satisfaction Client"
+    }
+  },
+  "services": {
+    "title": "Nos",
+    "titleHighlight": "Services",
+    "subtitle": "Des solutions complètes pour donner vie à votre vision digitale",
+    "service1": {
+      "title": "Développement Web",
+      "description": "Applications web sur-mesure avec les technologies les plus récentes"
+    },
+    "service2": {
+      "title": "Applications Mobile",
+      "description": "Expériences mobiles natives et cross-platform performantes"
+    },
+    "service3": {
+      "title": "Design UI/UX",
+      "description": "Interfaces intuitives et designs qui captivent vos utilisateurs"
+    },
+    "service4": {
+      "title": "Solutions Cloud",
+      "description": "Infrastructure scalable et déploiement continu optimisé"
+    },
+    "learnMore": "En savoir plus"
+  },
+  "projects": {
+    "title": "Projets",
+    "titleHighlight": "Récents",
+    "subtitle": "Découvrez nos dernières créations",
+    "viewProject": "Voir le projet"
+  },
+  "about": {
+    "title": "À Propos",
+    "titleHighlight": "d'Intello",
+    "subtitle": "Née d'une vision : combler le retard digital du Sénégal avec des solutions de classe mondiale",
+    "story": {
+      "title": "Notre Histoire",
+      "p1": "Intello est née en 2025 d'une frustration : voir des entreprises sénégalaises dynamiques freinées par des sites web obsolètes et des outils digitaux dépassés.",
+      "p2": "Fondée par Patrick Junior Samba Ntadi, diplômé en Génie Logiciel de l'ISM Digital Campus, Intello transforme cette frustration en opportunité. Après des années d'expérience en freelance sur des projets e-commerce et SaaS, une évidence s'est imposée : le gap digital entre le Sénégal et les marchés internationaux est immense, mais combattable.",
+      "p3": "Notre mission est simple : donner aux entreprises africaines les outils numériques qu'elles méritent pour rivaliser à l'échelle mondiale. Pas de sites \"suffisants\". Pas de compromis sur la qualité. Juste de l'excellence, accessible localement."
+    },
+    "values": {
+      "title": "Nos",
+      "titleHighlight": "Valeurs",
+      "value1": {
+        "title": "Innovation",
+        "desc": "Toujours à la pointe des technologies modernes"
+      },
+      "value2": {
+        "title": "Excellence",
+        "desc": "Chaque projet livré avec le plus haut niveau de qualité"
+      },
+      "value3": {
+        "title": "Transparence",
+        "desc": "Communication claire à chaque étape du projet"
+      },
+      "value4": {
+        "title": "Réactivité",
+        "desc": "Support rapide et dédié pour chaque client"
+      }
+    },
+    "founder": {
+      "title": "Fondateur",
+      "name": "Patrick Junior Samba Ntadi",
+      "role": "Fondateur & Lead Developer",
+      "bio1": "Diplômé en Génie Logiciel, Réseaux et Systèmes de l'ISM Digital Campus (2022), Patrick cumule plusieurs années d'expérience en développement web et mobile.",
+      "bio2": "Spécialisé dans les projets e-commerce et SaaS, il a développé une expertise pointue sur les technologies modernes qui font le web d'aujourd'hui.",
+      "bio3": "Sa vision : propulser la transformation digitale des entreprises sénégalaises avec des solutions de niveau international."
+    },
+    "why": {
+      "title": "Pourquoi",
+      "titleHighlight": "Intello",
+      "reason1": {
+        "title": "Réactivité Maximale",
+        "desc": "Structure agile qui permet une prise de décision rapide et un suivi personnalisé de chaque projet"
+      },
+      "reason2": {
+        "title": "Qualité Professionnelle",
+        "desc": "Code propre, standards internationaux, tests rigoureux. Pas de shortcuts, que de l'excellence"
+      },
+      "reason3": {
+        "title": "Accompagnement Complet",
+        "desc": "De l'idée au déploiement, formation incluse. Vous n'êtes jamais seul dans le processus"
+      },
+      "reason4": {
+        "title": "Vision Internationale",
+        "desc": "Technologies et pratiques des leaders mondiaux, adaptées au contexte et aux besoins locaux"
+      }
+    },
+    "location": "Basé à Dakar, Sénégal",
+    "languages": "Français · Anglais · Wolof"
+  },
+  "process": {
+    "title": "Notre",
+    "titleHighlight": "Processus",
+    "step1": {
+      "title": "Stratégie",
+      "desc": "Analyse approfondie de vos besoins et objectifs"
+    },
+    "step2": {
+      "title": "Design",
+      "desc": "Création d'expériences visuelles exceptionnelles"
+    },
+    "step3": {
+      "title": "Développement",
+      "desc": "Code propre, performant et scalable"
+    }
+  },
+  "cta": {
+    "title1": "Prêt à transformer",
+    "title2": "votre vision ?",
+    "subtitle": "Discutons de votre projet et créons ensemble quelque chose d'extraordinaire",
+    "button": "Démarrer maintenant"
+  },
+  "footer": {
+    "tagline": "Votre partenaire pour l'innovation digitale",
+    "services": {
+      "title": "Services",
+      "links": ["Développement", "Design", "Consulting", "Support"]
+    },
+    "company": {
+      "title": "Entreprise",
+      "links": ["À propos", "Équipe", "Carrières", "Blog"]
+    },
+    "contact": {
+      "title": "Contact",
+      "links": ["Email", "Téléphone", "LinkedIn", "Twitter"]
+    },
+    "copyright": "© 2025 Intello. Tous droits réservés."
+  },
+  "contact": {
+    "title": "Contactez",
+    "titleHighlight": "Nous",
+    "subtitle": "Prêt à démarrer votre projet ? Discutons-en ensemble",
+    "form": {
+      "name": "Nom complet",
+      "namePlaceholder": "Patrick Junior Samba",
+      "email": "Email",
+      "emailPlaceholder": "contact@exemple.com",
+      "phone": "Téléphone",
+      "phonePlaceholder": "+221 77 553 28 04",
+      "projectType": "Type de projet",
+      "projectTypePlaceholder": "Sélectionnez...",
+      "projectTypes": {
+        "web": "Site Web",
+        "mobile": "Application Mobile",
+        "ecommerce": "E-commerce",
+        "design": "Design UI/UX",
+        "other": "Autre"
+      },
+      "budget": "Budget estimé",
+      "budgetPlaceholder": "Sélectionnez...",
+      "budgets": {
+        "small": "< 1M FCFA",
+        "medium": "1M - 3M FCFA",
+        "large": "3M - 5M FCFA",
+        "xlarge": "> 5M FCFA"
+      },
+      "message": "Message",
+      "messagePlaceholder": "Parlez-nous de votre projet...",
+      "submit": "Envoyer le message",
+      "sending": "Envoi en cours...",
+      "success": "Message envoyé avec succès ! Nous vous répondrons sous 24h.",
+      "error": "Une erreur est survenue. Veuillez réessayer."
+    },
+    "info": {
+      "title": "Informations de Contact",
+      "email": "Email",
+      "emailValue": "intellopjsn@gmail.com",
+      "phone": "Téléphone",
+      "phoneValue": "+221 77 553 28 04",
+      "location": "Localisation",
+      "locationValue": "Dakar, Rufisque, Zac Mbao",
+      "hours": "Horaires",
+      "hoursValue": "Lun - Ven : 9h - 18h"
+    }
+  }
+}

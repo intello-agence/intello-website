@@ -1,0 +1,513 @@
+<!--
+╔══════════════════════════════════════════════════════════════════════════════╗
+║ CHEZ FATOU — PROTOTYPE RESTAURANT BOOKING                                   ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ Description : Réservation en ligne + menu + avis + dashboard restaurateur   ║
+║               • Vue client : menu filtrable, formulaire de réservation       ║
+║               • Vue pro : KPIs, graphique réservations, planning du jour     ║
+║               • Modals : confirmation réservation, détail plat               ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ Auteur      : Patrick Junior Samba Ntadi (Intello)                           ║
+║ Date        : Janvier 2025                                                   ║
+║ Stack       : HTML5 + Vanilla JS + Flatpickr + Chart.js                      ║
+║ Licence     : MIT (Projet de démonstration)                                  ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ Note : Prototype non-indexable (noindex). Données fictives.                  ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+-->
+<!doctype html>
+<html lang="fr">
+<head>
+  <!-- Encodage et viewport -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <!-- SEO prototype (light) -->
+  <title>Chez Fatou — Réservation en ligne | Intello Prototype</title>
+  <meta name="description" content="Réservez en ligne chez Fatou : cuisine sénégalaise. Menu filtrable, formulaire de réservation (confirmation SMS), avis clients, et dashboard restaurateur. Prototype Intello." />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="author" content="Patrick Junior Samba Ntadi - Intello" />
+
+  <!-- Favicon (emoji SVG) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍽️</text></svg>" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="./styles.css" />
+
+  <!-- Libs (defer pour performance) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+</head>
+<body>
+
+  <!-- Skip link -->
+  <a href="#clientView" class="skip-link">Aller au contenu principal</a>
+
+  <!-- Header -->
+  <header class="header" id="mainHeader">
+    <div class="container">
+      <div class="header-content">
+
+        <!-- Brand -->
+        <div class="brand">
+          <div class="brand-icon" aria-hidden="true">🍽️</div>
+          <div>
+            <div class="brand-name">Chez Fatou</div>
+            <div class="brand-sub">Cuisine sénégalaise authentique</div>
+          </div>
+        </div>
+
+        <!-- Nav -->
+        <nav class="nav-links" aria-label="Navigation principale">
+          <a href="#menu" class="nav-link">Menu</a>
+          <a href="#reservations" class="nav-link">Réserver</a>
+          <a href="#avis" class="nav-link">Avis</a>
+          <a href="#contact" class="nav-link">Contact</a>
+        </nav>
+
+        <!-- Actions -->
+        <div class="header-actions">
+          <button class="btn-icon" id="toggleDashboardBtn" aria-label="Basculer en mode restaurateur" aria-pressed="false">
+            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+            </svg>
+          </button>
+
+          <button class="btn-primary" id="reserverBtn">
+            <span aria-hidden="true">📅</span> Réserver une table
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content (Vue Client) -->
+  <main class="main-content" id="clientView">
+    <div class="container">
+
+      <!-- Hero -->
+      <section class="hero" aria-labelledby="heroTitle">
+        <div class="hero-content fade-up">
+          <h1 id="heroTitle" class="hero-title">
+            Savourez l'authenticité <span class="gradient-text">sénégalaise</span>
+          </h1>
+          <p class="hero-subtitle">
+            Thiéboudienne, Mafé, Yassa Poulet • Ambiance chaleureuse • Terrasse vue océan
+          </p>
+          <div class="hero-ctas">
+            <button class="btn-primary" id="reserverHeroBtn">
+              <span aria-hidden="true">🍽️</span> Réserver maintenant
+            </button>
+            <button class="btn-outline" id="voirMenuBtn">
+              <span aria-hidden="true">📖</span> Découvrir le menu
+            </button>
+          </div>
+
+          <!-- Quick Stats -->
+          <div class="hero-stats" role="region" aria-label="Indicateurs de satisfaction et horaires">
+            <div class="stat-item">
+              <div class="stat-icon" aria-hidden="true">⭐</div>
+              <div class="stat-value">4.8/5</div>
+              <div class="stat-label">328 avis Google</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon" aria-hidden="true">👥</div>
+              <div class="stat-value">2 500+</div>
+              <div class="stat-label">Clients satisfaits</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon" aria-hidden="true">🕐</div>
+              <div class="stat-value">12h-23h</div>
+              <div class="stat-label">Ouvert 7j/7</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Menu Section -->
+      <section class="menu-section" id="menu" aria-labelledby="menuTitle">
+        <div class="section-header">
+          <h2 id="menuTitle" class="section-title">Notre Menu</h2>
+          <p class="section-subtitle">Plats traditionnels préparés avec amour par Chef Fatou</p>
+        </div>
+
+        <!-- Filtres Menu -->
+        <div class="menu-filters" role="group" aria-label="Filtres catégorie">
+          <button class="filter-chip active" data-category="tous" aria-pressed="true">Tous</button>
+          <button class="filter-chip" data-category="entrees" aria-pressed="false">Entrées</button>
+          <button class="filter-chip" data-category="plats" aria-pressed="false">Plats principaux</button>
+          <button class="filter-chip" data-category="desserts" aria-pressed="false">Desserts</button>
+          <button class="filter-chip" data-category="boissons" aria-pressed="false">Boissons</button>
+        </div>
+
+        <!-- Grille Menu -->
+        <div class="menu-grid" id="menuGrid" role="region" aria-live="polite" aria-atomic="false">
+          <!-- Rempli par JS -->
+        </div>
+      </section>
+
+      <!-- Réservation Section -->
+      <section class="reservation-section" id="reservations" aria-labelledby="reservationTitle">
+        <div class="section-header">
+          <h2 id="reservationTitle" class="section-title">Réserver votre table</h2>
+          <p class="section-subtitle">Confirmation immédiate par SMS</p>
+        </div>
+
+        <div class="reservation-form-wrapper">
+          <form class="reservation-form" id="reservationForm" novalidate>
+            <div class="form-grid">
+              <!-- Date -->
+              <label class="form-label" for="dateReservation">
+                <span class="label-text">📅 Date</span>
+              </label>
+              <input 
+                type="text"
+                id="dateReservation"
+                name="date"
+                class="form-input"
+                placeholder="Sélectionnez une date"
+                required
+                readonly
+                aria-required="true"
+                inputmode="none"
+                autocomplete="off"
+              />
+
+              <!-- Heure -->
+              <label class="form-label" for="heureReservation">
+                <span class="label-text">🕐 Heure</span>
+              </label>
+              <select id="heureReservation" name="heure" class="form-select" required aria-required="true">
+                <option value="">Choisir l'heure</option>
+                <option value="12:00">12h00 - Déjeuner</option>
+                <option value="12:30">12h30</option>
+                <option value="13:00">13h00</option>
+                <option value="13:30">13h30</option>
+                <option value="19:00">19h00 - Dîner</option>
+                <option value="19:30">19h30</option>
+                <option value="20:00">20h00</option>
+                <option value="20:30">20h30</option>
+                <option value="21:00">21h00</option>
+                <option value="21:30">21h30</option>
+              </select>
+
+              <!-- Nombre de personnes -->
+              <label class="form-label" for="nbPersonnes">
+                <span class="label-text">👥 Nombre de personnes</span>
+              </label>
+              <select id="nbPersonnes" name="personnes" class="form-select" required aria-required="true">
+                <option value="">Combien de convives ?</option>
+                <option value="1">1 personne</option>
+                <option value="2">2 personnes</option>
+                <option value="3">3 personnes</option>
+                <option value="4">4 personnes</option>
+                <option value="5">5 personnes</option>
+                <option value="6">6 personnes</option>
+                <option value="7">7 personnes</option>
+                <option value="8">8 personnes</option>
+                <option value="9+">9+ personnes (nous appeler)</option>
+              </select>
+
+              <!-- Préférence table -->
+              <label class="form-label" for="preferenceTable">
+                <span class="label-text">🪑 Préférence</span>
+              </label>
+              <select id="preferenceTable" name="preference" class="form-select">
+                <option value="">Pas de préférence</option>
+                <option value="terrasse">Terrasse (vue océan)</option>
+                <option value="interieur">Intérieur climatisé</option>
+                <option value="coin-tranquille">Coin tranquille</option>
+              </select>
+            </div>
+
+            <!-- Coordonnées -->
+            <div class="form-grid">
+              <label class="form-label" for="nomClient">
+                <span class="label-text">👤 Nom complet</span>
+              </label>
+              <input
+                type="text"
+                id="nomClient"
+                name="nom"
+                class="form-input"
+                placeholder="Ex: Amadou Diallo"
+                required
+                aria-required="true"
+                autocomplete="name"
+                minlength="2"
+                maxlength="100"
+              />
+
+              <label class="form-label" for="telClient">
+                <span class="label-text">📱 Téléphone (WhatsApp)</span>
+              </label>
+              <input
+                type="tel"
+                id="telClient"
+                name="telephone"
+                class="form-input"
+                placeholder="+221 77 123 45 67"
+                required
+                aria-required="true"
+                autocomplete="tel"
+                pattern="^\\+?\\d[\\d\\s]{7,20}$"
+              />
+            </div>
+
+            <!-- Notes spéciales -->
+            <label class="form-label" for="notesSpeciales">
+              <span class="label-text">💬 Notes spéciales (optionnel)</span>
+            </label>
+            <textarea 
+              id="notesSpeciales"
+              name="notes"
+              class="form-textarea"
+              placeholder="Allergies, anniversaire, demandes particulières..."
+              rows="3"
+              maxlength="500"
+            ></textarea>
+
+            <!-- Bouton Submit -->
+            <button type="submit" class="btn-primary btn-block" id="confirmerReservationBtn">
+              <span aria-hidden="true">✓</span> Confirmer la réservation
+            </button>
+          </form>
+
+          <!-- Info Side Panel -->
+          <aside class="reservation-info" aria-labelledby="infoTitle">
+            <h3 id="infoTitle" class="sr-only">Informations pratiques</h3>
+
+            <div class="info-card">
+              <div class="info-icon" aria-hidden="true">📍</div>
+              <h3 class="info-title">Adresse</h3>
+              <p class="info-text">
+                Avenue Léopold Sédar Senghor<br />
+                Dakar, Sénégal
+              </p>
+            </div>
+
+            <div class="info-card">
+              <div class="info-icon" aria-hidden="true">📞</div>
+              <h3 class="info-title">Téléphone</h3>
+              <p class="info-text">+221 33 123 45 67</p>
+            </div>
+
+            <div class="info-card">
+              <div class="info-icon" aria-hidden="true">⏰</div>
+              <h3 class="info-title">Horaires</h3>
+              <p class="info-text">
+                Lun-Dim : 12h-15h, 19h-23h<br />
+                Fermé les mardis
+              </p>
+            </div>
+
+            <div class="info-card highlight">
+              <div class="info-icon" aria-hidden="true">✨</div>
+              <h3 class="info-title">Avantages réservation</h3>
+              <ul class="info-list">
+                <li>✓ Table garantie</li>
+                <li>✓ Confirmation SMS</li>
+                <li>✓ Annulation gratuite (2h avant)</li>
+                <li>✓ Réduction -10% si groupe 6+</li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- Avis Section -->
+      <section class="avis-section" id="avis" aria-labelledby="avisTitle">
+        <div class="section-header">
+          <h2 id="avisTitle" class="section-title">Ce que disent nos clients</h2>
+          <div class="rating-summary" aria-label="Note moyenne 4.8 sur 5 basée sur 328 avis">
+            <div class="rating-stars" aria-hidden="true">⭐⭐⭐⭐⭐</div>
+            <div class="rating-text">4.8/5 • 328 avis Google</div>
+          </div>
+        </div>
+
+        <div class="avis-grid" id="avisGrid" role="region" aria-live="polite">
+          <!-- Rempli par JS -->
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Dashboard Restaurateur (caché par défaut) -->
+  <main class="dashboard-content hidden" id="dashboardView">
+    <div class="container">
+
+      <!-- Dashboard Header -->
+      <div class="dashboard-header">
+        <div>
+          <h1 class="dashboard-title">Dashboard Restaurateur</h1>
+          <p class="dashboard-subtitle">Chez Fatou • Vue d'ensemble temps réel</p>
+        </div>
+        <button class="btn-outline" id="retourClientBtn" aria-label="Retourner à la vue client">
+          ← Retour vue client
+        </button>
+      </div>
+
+      <!-- KPIs Grid -->
+      <section class="kpis-grid" role="region" aria-labelledby="kpiTitle">
+        <h2 id="kpiTitle" class="sr-only">Indicateurs de performance du restaurant</h2>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon" style="background: linear-gradient(135deg, #06b6d4, #0891b2)" aria-hidden="true">
+              <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+            </div>
+            <div class="kpi-title">Réservations aujourd'hui</div>
+          </div>
+          <div class="kpi-value" id="reservationsJour" aria-live="polite">0</div>
+          <div class="kpi-label">Capacité : <span id="tauxRemplissage" aria-live="polite">0%</span></div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon" style="background: linear-gradient(135deg, #22c55e, #16a34a)" aria-hidden="true">
+              <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+              </svg>
+            </div>
+            <div class="kpi-title">Couverts confirmés</div>
+          </div>
+          <div class="kpi-value" id="couvertsJour" aria-live="polite">0</div>
+          <div class="kpi-label">Moyenne 2,8 pers/table</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706)" aria-hidden="true">
+              <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+              </svg>
+            </div>
+            <div class="kpi-title">Taux confirmation</div>
+          </div>
+          <div class="kpi-value" id="tauxConfirmation" aria-live="polite">0%</div>
+          <div class="kpi-label">vs mois dernier</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-header">
+            <div class="kpi-icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed)" aria-hidden="true">
+              <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
+              </svg>
+            </div>
+            <div class="kpi-title">Note moyenne</div>
+          </div>
+          <div class="kpi-value" id="noteMoyenne" aria-live="polite">0</div>
+          <div class="kpi-label">sur 5 étoiles</div>
+        </div>
+      </section>
+
+      <!-- Chart + Table Section -->
+      <section class="dashboard-grid">
+        <!-- Chart Réservations -->
+        <div class="chart-card">
+          <div class="chart-header">
+            <h3 class="chart-title">Réservations sur 7 jours</h3>
+            <label for="periodeFilter" class="sr-only">Période des réservations</label>
+            <select class="filter-select-sm" id="periodeFilter" name="periode">
+              <option value="7j">7 derniers jours</option>
+              <option value="30j">30 derniers jours</option>
+              <option value="90j">3 derniers mois</option>
+            </select>
+          </div>
+          <div class="chart-container">
+            <canvas id="reservationsChart" role="img" aria-label="Graphique des réservations sur la période sélectionnée"></canvas>
+          </div>
+        </div>
+
+        <!-- Liste réservations aujourd'hui -->
+        <div class="data-card">
+          <div class="data-header">
+            <h3 class="data-title">Planning aujourd'hui</h3>
+            <button class="btn-text" id="exportBtn" aria-label="Exporter le planning du jour">
+              <span aria-hidden="true">📊</span> Exporter
+            </button>
+          </div>
+          <div class="reservations-list" id="reservationsList" role="region" aria-live="polite">
+            <!-- Rempli par JS -->
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" id="contact">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-left">
+          <span class="footer-badge">Prototype</span>
+          <span class="footer-text">Données fictives • Design Intello</span>
+        </div>
+        <div class="footer-right">
+          <span class="footer-text">Conçu par <strong>Intello</strong></span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal Confirmation Réservation -->
+  <div
+    id="confirmationModal"
+    class="modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="confirmationModalTitle"
+    hidden
+  >
+    <div class="modal-overlay" aria-hidden="true"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="confirmationModalTitle">✓ Réservation confirmée</h3>
+        <button class="modal-close" id="closeConfirmationModal" aria-label="Fermer la confirmation">
+          <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body" id="confirmationBody">
+        <!-- Rempli par JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Détail Plat -->
+  <div
+    id="platModal"
+    class="modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="platModalTitle"
+    hidden
+  >
+    <div class="modal-overlay" aria-hidden="true"></div>
+    <div class="modal-content">
+      <button class="modal-close" id="closePlatModal" aria-label="Fermer le détail du plat">
+        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+      <div class="modal-body" id="platModalBody">
+        <!-- Rempli par JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notifications -->
+  <div id="toastContainer" class="toast-container" role="region" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Script principal -->
+  <script src="./app.js"></script>
+</body>
+</html>
