@@ -1,3 +1,4 @@
+// src/components/ui/OptimizedImage.jsx
 import React from 'react';
 
 export default function OptimizedImage({ 
@@ -6,14 +7,28 @@ export default function OptimizedImage({
   className = '', 
   width, 
   height,
-  priority = false
+  priority = false,
+  sizes = "(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw" // ✅ NOUVEAU : Défaut responsive
 }) {
-  const base = src.match(/\/images\/(.+?)(-1400)?\.webp$/)?.[1];
+  // Extraire le nom de base (ex: fintech-1400.webp → fintech)
+  const base = src.match(/\/images\/(.+?)(-1400|-1280|-640|-320)?\.webp$/)?.[1];
 
+  // Fallback : Si regex échoue, retourner image simple
   if (!base) {
-    return <img src={src} alt={alt} className={className} loading={priority ? 'eager' : 'lazy'} />;
+    return (
+      <img 
+        src={src} 
+        alt={alt} 
+        className={className} 
+        width={width}
+        height={height}
+        loading={priority ? 'eager' : 'lazy'} 
+        decoding={priority ? 'sync' : 'async'}
+      />
+    );
   }
 
+  // Générer srcset avec toutes les variantes
   const srcset = `
     /images/${base}-320.webp 320w,
     /images/${base}-640.webp 640w,
@@ -25,7 +40,7 @@ export default function OptimizedImage({
     <img
       src={src}
       srcSet={srcset}
-      sizes="(max-width: 640px) 320px, (max-width: 1280px) 640px, 1280px"
+      sizes={sizes}
       alt={alt}
       className={className}
       width={width}

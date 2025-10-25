@@ -2,19 +2,21 @@
 import React, { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import SEO from "../components/ui/SEO";
+import HeaderMini from "../components/layout/HeaderMini";
+import FooterLight from "../components/layout/FooterLight";
 import { projects } from "../data/projects";
 import { motion } from "framer-motion";
 import OptimizedImage from "../components/ui/OptimizedImage";
 
 export default function Portfolio() {
-  const [filter, setFilter] = useState('Tous'); // ✅ Changé : 'all' → 'Tous'
+  const [filter, setFilter] = useState('Tous');
 
   // Catégories uniques
   const categories = useMemo(() => {
     return ['Tous', ...new Set(projects.map(p => p.category))];
   }, []);
 
-  // Projets filtrés - LOGIQUE SIMPLIFIÉE
+  // Projets filtrés
   const filteredProjects = useMemo(() => {
     if (filter === 'Tous') {
       return projects;
@@ -36,11 +38,14 @@ export default function Portfolio() {
         keywords="portfolio agence web, projets web sénégal, développement mobile dakar, e-commerce afrique"
       />
 
+      {/* Header Mini */}
+      <HeaderMini />
+
       <motion.div
         initial={{ opacity: 0, scale: 0.98 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="min-h-screen bg-black text-white py-20 px-6"
+        className="min-h-screen bg-black text-white pt-24 pb-12 px-6"
       >
         <div className="max-w-7xl mx-auto">
           {/* Breadcrumb */}
@@ -78,7 +83,7 @@ export default function Portfolio() {
             </p>
           </motion.header>
 
-          {/* Filtres - CORRIGÉ */}
+          {/* Filtres */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -105,9 +110,9 @@ export default function Portfolio() {
             ))}
           </motion.div>
 
-          {/* Grille projets - Ajout key unique pour forcer re-render */}
+          {/* Grille projets */}
           <motion.div
-            key={filter} // ✅ AJOUTÉ : Force re-render quand filtre change
+            key={filter}
             initial="hidden"
             animate="visible"
             transition={{ staggerChildren: 0.1 }}
@@ -129,7 +134,7 @@ export default function Portfolio() {
                 {/* Image */}
                 <div className="h-48 overflow-hidden bg-gray-800">
                   <OptimizedImage
-                    src={p.image.replace('../images/', '/images/')}
+                    src={p.image}
                     alt={`Aperçu du projet ${p.title} - Solution ${p.category} développée par Intello`}
                     className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
                     width={400}
@@ -193,7 +198,7 @@ export default function Portfolio() {
             </motion.div>
           )}
 
-          {/* CTA de conversion - CORRIGÉ */}
+          {/* CTA de conversion */}
           <motion.section
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -296,6 +301,9 @@ export default function Portfolio() {
           </motion.section>
         </div>
       </motion.div>
+
+      {/* Footer Light */}
+      <FooterLight />
     </>
   );
 }

@@ -7,7 +7,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://intello.sn/</loc>
-    <lastmod>2024-10-17</lastmod>
+    <lastmod>2025-01-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -15,7 +15,7 @@
   <!-- Portfolio -->
   <url>
     <loc>https://intello.sn/portfolio</loc>
-    <lastmod>2024-10-17</lastmod>
+    <lastmod>2025-01-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -23,7 +23,7 @@
   <!-- Contact -->
   <url>
     <loc>https://intello.sn/contact</loc>
-    <lastmod>2024-10-17</lastmod>
+    <lastmod>2025-01-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -37,29 +37,8 @@
   </url>
 
   <url>
-    <loc>https://intello.sn/portfolio/ecommerce-platform</loc>
-    <lastmod>2023-12-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
     <loc>https://intello.sn/portfolio/health-app</loc>
     <lastmod>2024-03-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://intello.sn/portfolio/agency-website</loc>
-    <lastmod>2022-10-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://intello.sn/portfolio/restaurant-booking</loc>
-    <lastmod>2023-06-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -72,8 +51,29 @@
   </url>
 
   <url>
+    <loc>https://intello.sn/portfolio/ecommerce-platform</loc>
+    <lastmod>2023-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://intello.sn/portfolio/restaurant-booking</loc>
+    <lastmod>2023-06-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
     <loc>https://intello.sn/portfolio/realestate-app</loc>
     <lastmod>2023-04-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://intello.sn/portfolio/agency-website</loc>
+    <lastmod>2022-10-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -87,8 +87,8 @@
 
   <!-- Offre Écoles -->
   <url>
-    <loc>https://intello.sn/offres/ecoles/index.html</loc>
-    <lastmod>2024-10-01</lastmod>
+    <loc>https://intello.sn/offres/ecoles/</loc>
+    <lastmod>2025-01-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

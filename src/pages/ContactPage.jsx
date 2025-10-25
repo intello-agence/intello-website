@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { useTranslation } from "../hooks/useTranslation";
 import SEO from "../components/ui/SEO";
 import ContactForm from "../components/ContactForm";
+import HeaderMini from "../components/layout/HeaderMini";
 
 export default function ContactPage() {
   const location = useLocation();
@@ -33,7 +34,10 @@ export default function ContactPage() {
         keywords="contact agence web dakar, devis site internet sénégal, développement web contact, agence digitale dakar"
       />
 
-      <div className="min-h-screen bg-black text-white py-20 px-6">
+      {/* Header Mini */}
+      <HeaderMini />
+
+      <div className="min-h-screen bg-black text-white pt-24 pb-16 px-6">
         <div className="max-w-6xl mx-auto">
           {/* Breadcrumb */}
           <nav aria-label="Fil d'Ariane" className="mb-8 text-sm">
@@ -177,6 +181,8 @@ export default function ContactPage() {
           </motion.div>
         </div>
       </div>
+
+      {/* PAS DE FOOTER - Focus sur formulaire (comme convenu) */}
     </>
   );
 }

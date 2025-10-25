@@ -10,6 +10,8 @@ import { projects } from "../data/projects";
 import useProtoManifest from "../hooks/useProtoManifest";
 import SEO from "../components/ui/SEO";
 import OptimizedImage from "../components/ui/OptimizedImage";
+import HeaderMini from "../components/layout/HeaderMini";
+import FooterLight from "../components/layout/FooterLight";
 
 export default function ProjectDetail() {
   const { id } = useParams();
@@ -36,15 +38,19 @@ export default function ProjectDetail() {
   // 404
   if (!project) {
     return (
-      <div className="min-h-screen bg-black text-white flex items-center justify-center">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold mb-4">Projet introuvable</h2>
-          <p className="text-gray-400 mb-6">Le projet demandé n'existe pas.</p>
-          <Link to="/portfolio" className="text-blue-400 hover:underline">
-            ← Retour au portfolio
-          </Link>
+      <>
+        <HeaderMini />
+        <div className="min-h-screen bg-black text-white flex items-center justify-center pt-24">
+          <div className="text-center">
+            <h2 className="text-2xl font-bold mb-4">Projet introuvable</h2>
+            <p className="text-gray-400 mb-6">Le projet demandé n'existe pas.</p>
+            <Link to="/portfolio" className="text-blue-400 hover:underline">
+              ← Retour au portfolio
+            </Link>
+          </div>
         </div>
-      </div>
+        <FooterLight />
+      </>
     );
   }
 
@@ -56,31 +62,32 @@ export default function ProjectDetail() {
         description={`${project.short} • Client: ${project.client} • Technologies: ${project.stack?.join(', ')} • ${project.results}`}
         ogTitle={`${project.title} - Projet ${project.category}`}
         ogDescription={project.short}
-        ogImage={project.image.replace('../images/', '/images/')}
+        ogImage={project.image}
         ogType="article"
         canonical={`https://intello.sn/portfolio/${id}`}
         keywords={`${project.category}, ${project.stack?.join(', ')}, case study, portfolio intello`}
-      />
-
-      {/* Schema.org JSON-LD */}
-      <script type="application/ld+json">
-        {JSON.stringify({
+        schema={{
           "@context": "https://schema.org",
           "@type": "CreativeWork",
           "name": project.title,
           "description": project.short,
-          "image": project.image.replace('../images/', '/images/'),
+          "image": `https://intello.sn${project.image}`,
           "author": {
             "@type": "Organization",
             "name": "Intello",
             "url": "https://intello.sn"
           },
           "datePublished": project.date,
-          "keywords": project.stack?.join(', ')
-        })}
-      </script>
+          "keywords": project.stack?.join(', '),
+          "url": `https://intello.sn/portfolio/${id}`
+        }}
+      />
 
-      <div className="min-h-screen bg-gradient-to-b from-[#050505] via-[#0a0a0a] to-[#101010] text-white py-16 px-6">
+
+      {/* Header Mini */}
+      <HeaderMini />
+
+      <div className="min-h-screen bg-gradient-to-b from-[#050505] via-[#0a0a0a] to-[#101010] text-white pt-24 pb-12 px-6">
         <div className="max-w-5xl mx-auto space-y-10">
           {/* Breadcrumb */}
           <nav aria-label="Fil d'Ariane" className="text-sm">
@@ -109,7 +116,7 @@ export default function ProjectDetail() {
           >
             <div className="w-full h-72 md:h-96 overflow-hidden rounded-xl mb-8 shadow-2xl ring-1 ring-gray-800/50">
               <OptimizedImage
-                src={project.image.replace('../images/', '/images/')}
+                src={project.image}
                 alt={`Capture d'écran du projet ${project.title} - Solution ${project.category} développée par Intello pour ${project.client}`}
                 className="w-full h-full object-cover"
                 width={1200}
@@ -320,7 +327,7 @@ export default function ProjectDetail() {
                     onClick={() => setLightboxIndex(i)}
                   >
                     <OptimizedImage
-                      src={img.replace('../images/', '/images/')}
+                      src={img}
                       alt={`${project.title} - Aperçu fonctionnalité ${i + 1}`}
                       className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                       width={400}
@@ -333,7 +340,7 @@ export default function ProjectDetail() {
                 open={lightboxIndex >= 0}
                 index={lightboxIndex}
                 close={() => setLightboxIndex(-1)}
-                slides={project.gallery.map((img) => ({ src: img.replace('../images/', '/images/') }))}
+                slides={project.gallery.map((img) => ({ src: img }))}
               />
             </motion.section>
           )}
@@ -360,7 +367,7 @@ export default function ProjectDetail() {
               </a>
             ) : null}
 
-            {/* GitHub - NOUVEAU */}
+            {/* GitHub */}
             {project.githubUrl ? (
               <a
                 href={project.githubUrl}
@@ -428,7 +435,7 @@ export default function ProjectDetail() {
                   >
                     <div className="h-40 overflow-hidden bg-gray-800">
                       <OptimizedImage
-                        src={p.image.replace('../images/', '/images/')}
+                        src={p.image}
                         alt={`Aperçu du projet ${p.title}`}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         width={400}
@@ -453,6 +460,9 @@ export default function ProjectDetail() {
           )}
         </div>
       </div>
+
+      {/* Footer Light */}
+      <FooterLight />
     </>
   );
 }

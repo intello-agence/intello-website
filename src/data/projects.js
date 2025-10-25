@@ -1,21 +1,5 @@
 // src/data/projects.js
 
-/**
- * PORTFOLIO INTELLO - PROJETS
- * 
- * Champs obligatoires :
- * - id, title, category, image, short, client, date, role, duration, team
- * - problem, solution, results, stack, responsibilities, testimonial
- * 
- * Champs optionnels :
- * - metrics (array pour affichage visuel des résultats)
- * - gallery (array d'images, ou null)
- * - githubUrl (lien repo GitHub public)
- * - liveUrl (site en ligne si public)
- * - featured (boolean - projet mis en avant)
- * - budgetRange (indicatif pour projets similaires)
- */
-
 export const projects = [
   {
     id: 'fintech-dashboard',
@@ -48,8 +32,8 @@ export const projects = [
       author: 'Mamadou Diallo, CTO - FinCo', 
       text: "Le tableau de bord est devenu un outil indispensable pour notre équipe. La visibilité en temps réel nous permet de prendre des décisions beaucoup plus rapidement. L'interface est intuitive et nos managers l'ont adopté sans formation." 
     },
-    githubUrl: "https://github.com/intello-agence/fintech-dashboard-prototype", // Disponible sur demande
-    liveUrl: null,   // Intranet client
+    githubUrl: "https://github.com/intello-agence/fintech-dashboard-prototype",
+    liveUrl: null,
     featured: true,
     budgetRange: '8-12M FCFA'
   },
@@ -59,7 +43,7 @@ export const projects = [
     title: 'E-Commerce Platform',
     category: 'E-commerce',
     image: '/images/commerce-1400.webp',
-    gallery: null, // Pas d'autres captures pour l'instant
+    gallery: null,
     short: 'Boutique en ligne performante avec checkout optimisé.',
     client: 'BoutiqueX',
     date: '2023-12',
@@ -132,7 +116,7 @@ export const projects = [
     id: 'agency-website',
     title: "Site vitrine d'agence créative",
     category: 'Web Design',
-    image: '/images/agence_creative.webp',
+    image: '/images/agence_creative-1400.webp',
     gallery: null,
     short: 'Un site moderne et élégant pour une agence de communication.',
     client: 'CreativePulse',
@@ -169,7 +153,7 @@ export const projects = [
     id: 'restaurant-booking',
     title: 'Plateforme de réservation pour restaurants',
     category: 'Hospitalité',
-    image: '/images/reservation_restaurant.webp',
+    image: '/images/reservation_restaurant-1400.webp',
     gallery: null,
     short: 'Plateforme web + mobile pour gérer réservations et menus.',
     client: 'SavoryGroup',
@@ -206,7 +190,7 @@ export const projects = [
     id: 'education-platform',
     title: "Plateforme d'apprentissage en ligne",
     category: 'Éducation',
-    image: '/images/education.webp',
+    image: '/images/education-1400.webp',
     gallery: null,
     short: 'LMS complet: cours vidéos, quiz et suivi étudiant.',
     client: 'EduConnect',
@@ -280,7 +264,7 @@ export const projects = [
     id: 'event-platform',
     title: "Plateforme de gestion d'événements",
     category: 'Événementiel',
-    image: '/images/evenementiel.webp',
+    image: '/images/evenementiel-1400.webp',
     gallery: null,
     short: 'Webapp pour organiser, vendre des billets et gérer participants.',
     client: 'Evently',

@@ -1,3 +1,4 @@
+// src/components/layout/Header.jsx
 import React, { useEffect, useRef } from 'react';
 import { Menu, X, Globe } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -5,17 +6,14 @@ import { Link } from 'react-router-dom';
 const Header = ({ scrollY, isMenuOpen, setIsMenuOpen, language, setLanguage, t }) => {
   const menuRef = useRef(null);
 
-  // Fermer menu avec Escape + Focus trap
   useEffect(() => {
     if (!isMenuOpen) return;
 
     const handleKeyDown = (e) => {
-      // Escape ferme le menu
       if (e.key === 'Escape') {
         setIsMenuOpen(false);
       }
 
-      // Tab: garder le focus dans le menu
       if (e.key === 'Tab') {
         if (!menuRef.current) return;
         
@@ -26,13 +24,11 @@ const Header = ({ scrollY, isMenuOpen, setIsMenuOpen, language, setLanguage, t }
         const lastElement = focusableElements[focusableElements.length - 1];
 
         if (e.shiftKey) {
-          // Shift+Tab sur premier élément → revenir au dernier
           if (document.activeElement === firstElement) {
             e.preventDefault();
             lastElement.focus();
           }
         } else {
-          // Tab sur dernier élément → revenir au premier
           if (document.activeElement === lastElement) {
             e.preventDefault();
             firstElement.focus();
@@ -45,7 +41,6 @@ const Header = ({ scrollY, isMenuOpen, setIsMenuOpen, language, setLanguage, t }
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [isMenuOpen, setIsMenuOpen]);
 
-  // Focus sur premier élément à l'ouverture
   useEffect(() => {
     if (isMenuOpen && menuRef.current) {
       const firstLink = menuRef.current.querySelector('a, button');
@@ -57,11 +52,16 @@ const Header = ({ scrollY, isMenuOpen, setIsMenuOpen, language, setLanguage, t }
     <>
       <nav className="fixed top-0 w-full z-40 transition-all duration-300" style={{ backgroundColor: scrollY > 50 ? 'rgba(0,0,0,0.9)' : 'transparent', backdropFilter: scrollY > 50 ? 'blur(10px)' : 'none' }}>
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <a href="#" className="text-2xl font-bold tracking-tight group">
-            <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent group-hover:from-blue-400 group-hover:to-purple-400 transition-all duration-200">
-              Intello
-            </span>
-          </a>
+          <Link to="/" className="flex items-center gap-3 group">
+            <img 
+              src="/logo_intello.png" 
+              alt="Logo Intello" 
+              className="w-12 h-12 rounded-full border-2 border-blue-500 object-cover bg-white group-hover:scale-105 transition-transform" 
+            />
+            <div className="hidden sm:block">
+              <div className="text-lg font-extrabold text-white leading-tight">Intello</div>
+            </div>
+          </Link>
           
           <div className="hidden md:flex items-center space-x-8 text-sm">
             {Object.entries(t.nav).map(([key, item]) => (
@@ -72,12 +72,12 @@ const Header = ({ scrollY, isMenuOpen, setIsMenuOpen, language, setLanguage, t }
             
             <button 
               onClick={() => setLanguage(language === 'fr' ? 'en' : 'fr')} 
-              className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-gray-700 hover:border-blue-500 transition-all duration-200 group"
+              className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-gray-700 hover:border-blue-500 transition-all duration-200 group text-white"
               aria-label={language === 'fr' ? 'Changer la langue en anglais' : 'Switch language to French'}
             >
-              <Globe className="w-4 h-4 group-hover:text-blue-400 transition-colors" />
+              <Globe className="w-4 h-4 text-gray-300 group-hover:text-blue-400 transition-colors" />
               <span className="text-xl">{language === 'fr' ? '🇫🇷' : '🇬🇧'}</span>
-              <span className="font-semibold">{language.toUpperCase()}</span>
+              <span className="font-semibold text-xs text-gray-300 group-hover:text-white">{language.toUpperCase()}</span>
             </button>
           </div>
 
