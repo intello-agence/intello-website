@@ -1,127 +1,218 @@
-// src/components/sections/Hero.jsx
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { ArrowRight, Code2, Terminal } from 'lucide-react';
 
 const Hero = ({ t }) => {
+  // ✅ OPTIMISATION CRITIQUE #1 : Lazy Initialization
+  // On vérifie la taille de l'écran AVANT le premier rendu.
+  // Cela évite que le mobile charge d'abord la version Desktop (lourde) pour ensuite changer.
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth < 768;
+    }
+    return false;
+  });
+
+  useEffect(() => {
+    // Debounce simple pour éviter de spammer le resize
+    let timeoutId;
+    const handleResize = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        setIsMobile(window.innerWidth < 768);
+      }, 150);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      clearTimeout(timeoutId);
+    };
+  }, []);
+
+  // Composants conditionnels : Sur mobile, on utilise des balises HTML natives instantanées
+  const MotionDiv = isMobile ? 'div' : motion.div;
+  const MotionP = isMobile ? 'p' : motion.p;
+  const MotionSpan = isMobile ? 'span' : motion.span;
+
+  // Variantes Desktop uniquement
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { 
+      opacity: 1,
+      transition: { 
+        staggerChildren: 0.05,
+        delayChildren: 0.1
+      } 
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: { 
+      y: 0, 
+      opacity: 1,
+      transition: { type: "spring", stiffness: 100, damping: 15 } // Plus doux
+    }
+  };
+
   return (
     <section 
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      aria-label="Section d'accueil"
+      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-20"
+      aria-label="Interface d'accueil"
     >
-      {/* Background effects */}
-      <div className="absolute inset-0" aria-hidden="true">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-black" />
+      {/* --- DÉCOR TECHNIQUE (HUD) --- */}
+      {/* Optimisation : pointer-events-none et structure simplifiée */}
+      <div className="absolute inset-0 pointer-events-none select-none overflow-hidden">
+        {/* CSS pur pour cacher sur mobile (hidden md:block) = 0 JS calculation */}
+        <div className="absolute left-6 top-0 bottom-0 w-px bg-white/5 hidden md:block"></div>
+        <div className="absolute right-6 top-0 bottom-0 w-px bg-white/5 hidden md:block"></div>
         
-        {/* Animated blobs */}
-        <div 
-          className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full filter blur-3xl animate-pulse" 
-          style={{ animationDuration: '8s' }} 
-        />
-        <div 
-          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full filter blur-3xl animate-pulse" 
-          style={{ animationDuration: '10s', animationDelay: '2s' }} 
-        />
+        <div className="absolute top-32 left-10 font-mono text-[10px] text-white/20 tracking-widest hidden md:block">
+          SYS.VER.2025.1
+        </div>
+        <div className="absolute bottom-10 right-10 font-mono text-[10px] text-white/20 tracking-widest hidden md:flex items-center gap-2">
+          <div className="w-2 h-2 bg-green-500/50 rounded-full animate-pulse"></div>
+          <span>SYSTEM_READY</span>
+        </div>
         
-        {/* Grid pattern */}
-        <svg className="absolute inset-0 w-full h-full opacity-20">
-          <defs>
-            <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
-              <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="0.5"/>
-            </pattern>
-            <linearGradient id="fadeGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" style={{ stopColor: 'white', stopOpacity: 0 }} />
-              <stop offset="50%" style={{ stopColor: 'white', stopOpacity: 0.3 }} />
-              <stop offset="100%" style={{ stopColor: 'white', stopOpacity: 0 }} />
-            </linearGradient>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#grid)" />
-          <rect width="100%" height="100%" fill="url(#fadeGradient)" />
-        </svg>
-
-        {/* Floating particles */}
-        {[...Array(15)].map((_, i) => (
-          <div 
-            key={i} 
-            className="absolute rounded-full bg-white motion-reduce:hidden" 
-            style={{ 
-              width: Math.random() * 4 + 2, 
-              height: Math.random() * 4 + 2, 
-              left: `${Math.random() * 100}%`, 
-              top: `${Math.random() * 100}%`, 
-              opacity: Math.random() * 0.3 + 0.1, 
-              animation: `gentleFloat ${Math.random() * 20 + 15}s ease-in-out infinite`, 
-              animationDelay: `${Math.random() * 5}s` 
-            }} 
-          />
-        ))}
-      </div>
-
-      {/* Content */}
-      <div className="relative z-10 text-center px-6 max-w-5xl">
-        <h1 className="text-6xl md:text-8xl font-bold mb-6 leading-tight">
-          <span 
-            className="inline-block motion-reduce:opacity-100" 
-            style={{ animation: 'slideUp 1s ease-out forwards', opacity: 0 }}
-          >
-            {t.hero.title1}
-          </span>
-          <br />
-          <span 
-            className="inline-block bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent motion-reduce:opacity-100" 
-            style={{ animation: 'slideUp 1s ease-out 0.2s forwards', opacity: 0 }}
-          >
-            {t.hero.title2}
-          </span>
-          <br />
-          <span 
-            className="inline-block motion-reduce:opacity-100" 
-            style={{ animation: 'slideUp 1s ease-out 0.4s forwards', opacity: 0 }}
-          >
-            {t.hero.title3}
-          </span>
-        </h1>
-
-        <p 
-          className="text-xl md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto motion-reduce:opacity-100" 
-          style={{ animation: 'fadeIn 1s ease-out 0.6s forwards', opacity: 0 }}
-        >
-          {t.hero.subtitle}
-        </p>
-
-        {/* CTAs */}
-        <div 
-          className="flex flex-col sm:flex-row gap-4 justify-center motion-reduce:opacity-100" 
-          style={{ animation: 'fadeIn 1s ease-out 0.8s forwards', opacity: 0 }}
-        >
-          {/* CTA 1 : Contact (Link vers page dédiée) */}
-          <Link
-            to="/contact"
-            className="group px-8 py-4 bg-white text-black rounded-full font-semibold hover:bg-blue-500 hover:text-white transition-all duration-300 flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-blue-500/50 hover:scale-105"
-            aria-label="Démarrer un projet - aller à la page contact"
-          >
-            {t.hero.cta1}
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" aria-hidden="true" />
-          </Link>
-
-          {/* CTA 2 : Projets récents (ancre vers section) */}
-          <a 
-            href="#projets"
-            className="px-8 py-4 border-2 border-white rounded-full font-semibold hover:bg-white hover:text-black transition-all duration-300 hover:scale-105"
-            aria-label="Voir nos projets récents"
-          >
-            {t.hero.cta2}
-          </a>
+        {/* Croix simplifiées : SVG est souvent plus léger que 4 divs séparées pour le layout engine */}
+        <div className="hidden md:block">
+            <div className="absolute top-24 left-6 w-4 h-px bg-white/20"></div>
+            <div className="absolute top-24 right-6 w-4 h-px bg-white/20"></div>
+            <div className="absolute bottom-6 left-6 w-4 h-px bg-white/20"></div>
+            <div className="absolute bottom-6 right-6 w-4 h-px bg-white/20"></div>
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div 
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce motion-reduce:animate-none" 
-        aria-hidden="true"
-      >
-        <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center p-2">
-          <div className="w-1 h-3 bg-white rounded-full" />
+      {/* --- CONTENU PRINCIPAL --- */}
+      {/* will-change-transform aide le navigateur à préparer le rendu */}
+      <div className="relative z-10 w-full max-w-6xl px-6 md:px-12 will-change-transform">
+        
+        {/* Badge "Disponible" */}
+        <MotionDiv 
+          {...(!isMobile && {
+            initial: { opacity: 0, y: -10 },
+            animate: { opacity: 1, y: 0 },
+            transition: { delay: 0.1 }
+          })}
+          className="flex justify-center mb-8"
+        >
+          {/* Optimisation : Suppression du backdrop-blur sur mobile (très coûteux) */}
+          <div className="px-4 py-1.5 rounded-full border border-white/10 bg-white/5 md:backdrop-blur-sm flex items-center gap-3">
+            <span className="relative flex h-2 w-2">
+              <span className="hidden md:inline-flex animate-ping absolute h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+            </span>
+            <span className="text-xs font-mono text-cyan-300 tracking-wider uppercase">
+              {t.hero.status || "Available for new projects"}
+            </span>
+          </div>
+        </MotionDiv>
+
+        {/* Gros Titre */}
+        <MotionDiv 
+          {...(!isMobile && {
+            variants: containerVariants,
+            initial: "hidden",
+            animate: "visible"
+          })}
+          className="text-center"
+        >
+          <MotionP 
+            {...(!isMobile && { variants: itemVariants })} 
+            className="font-mono text-sm md:text-base text-white/40 mb-4 tracking-[0.2em] uppercase"
+          >
+            {t.hero.subtitle_prefix || "Architecting the Future"}
+          </MotionP>
+
+          {/* ✅ OPTIMISATION LCP : Titre prioritaire */}
+          {/* Sur mobile, on évite les gradients text-transparent complexes qui retardent le rendu du texte */}
+          <h1 className="font-extrabold text-5xl md:text-7xl lg:text-9xl tracking-tighter leading-[0.9] mb-6 text-white">
+            <MotionSpan 
+              {...(!isMobile && { variants: itemVariants })} 
+              className="block"
+            >
+              {t.hero.title1 || "CODE."}
+            </MotionSpan>
+            
+            <MotionSpan 
+              {...(!isMobile && { variants: itemVariants })} 
+              // Sur mobile : Blanc pur (plus rapide à peindre). Desktop : Gradient.
+              className="block text-white md:text-transparent md:bg-clip-text md:bg-gradient-to-b md:from-white md:via-white md:to-white/40"
+            >
+              {t.hero.title2 || "CRAFT."}
+            </MotionSpan>
+            
+            <MotionSpan 
+              {...(!isMobile && { variants: itemVariants })} 
+              // Sur mobile : Cyan simple. Desktop : Gradient complexe.
+              className="block text-cyan-300 md:text-transparent md:bg-clip-text md:bg-gradient-to-r md:from-cyan-200 md:to-blue-500"
+            >
+              {t.hero.title3 || "SCALE."}
+            </MotionSpan>
+          </h1>
+
+          <MotionP 
+            {...(!isMobile && { variants: itemVariants })} 
+            className="max-w-2xl mx-auto text-lg md:text-xl text-gray-400 font-light leading-relaxed mb-10"
+          >
+            {t.hero.subtitle}
+          </MotionP>
+
+          {/* Boutons d'action */}
+          <MotionDiv 
+            {...(!isMobile && { variants: itemVariants })}
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+          >
+            <Link
+              to="/contact"
+              className="group relative px-8 py-4 bg-white text-black rounded-lg font-bold overflow-hidden hover:scale-[1.02] transition-transform duration-200 w-full sm:w-auto flex justify-center"
+            >
+              {/* Gradient désactivé sur mobile pour perf ou simplifié */}
+              <div className="hidden md:block absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-500 opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
+              <span className="relative flex items-center gap-2">
+                <Terminal className="w-4 h-4" />
+                <span>{t.hero.cta1}</span>
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </span>
+            </Link>
+
+            <a 
+              href="#projets"
+              className="group px-8 py-4 border border-white/10 bg-white/5 text-white rounded-lg font-medium hover:bg-white/10 transition-colors md:backdrop-blur-sm flex items-center justify-center gap-2 w-full sm:w-auto"
+            >
+              <Code2 className="w-4 h-4 text-gray-400 group-hover:text-white transition-colors" />
+              <span>{t.hero.cta2}</span>
+            </a>
+          </MotionDiv>
+        </MotionDiv>
+      </div>
+
+      {/* --- BANDEAU DE CODE DÉFILANT (Desktop only) --- */}
+      {/* Strictement caché sur mobile via CSS pour éviter tout calcul de layout */}
+      <div className="hidden md:flex absolute bottom-0 w-full border-t border-white/5 bg-black/50 backdrop-blur-md py-3 overflow-hidden pointer-events-none">
+        <div className="animate-marquee whitespace-nowrap flex gap-8 font-mono text-xs text-white/20">
+          <span>REACT_VERSION: 19.0.0</span>
+          <span>•</span>
+          <span>NEXT_GEN_UI</span>
+          <span>•</span>
+          <span>PERFORMANCE_OPTIMIZED</span>
+          <span>•</span>
+          <span>SECURE_CONNECTION</span>
+          <span>•</span>
+          <span>NODE_ENV: PRODUCTION</span>
+          <span>•</span>
+          <span>SERVER_REGION: DAKAR_EDGE</span>
+          {/* Duplication pour loop */}
+          <span>REACT_VERSION: 19.0.0</span>
+          <span>•</span>
+          <span>NEXT_GEN_UI</span>
+          <span>•</span>
+          <span>PERFORMANCE_OPTIMIZED</span>
+          <span>•</span>
+          <span>SECURE_CONNECTION</span>
         </div>
       </div>
     </section>
