@@ -50,6 +50,29 @@ Historique des modifications du projet (format : Date - Type - Description)
   - Schema JSON-LD (Organization + ProfessionalService)
 - **Déploiement** : Vercel (auto-deploy sur push)
 
+## [2025-11-24] — Migration v1.0 & Performance Breakthrough
+### 🚀 Major
+- **Migration Domaine** : Bascule complète de `intello.sn` vers `https://intello.dev`.
+  - Mise à jour Canonicals, OpenGraph, Schema.org (Organization + CreativeWork) et Sitemap.
+- **Performance Mobile** : Score Lighthouse passé de **59 à 88/100** (+29 pts).
+- **Performance Desktop** : Score atteint **98/100**.
+
+### ⚡ Optimisations Techniques (Core Web Vitals)
+- **LCP (Largest Contentful Paint)** : Réduit de 4.5s à ~3.0s.
+  - Désactivation du filtre SVG Grain sur mobile (`hidden md:block`).
+  - Migration des polices : Suppression de `@fontsource` (JS bloqueur) vers Google Fonts CDN (HTML parallèle).
+- **TBT (Total Blocking Time)** : Réduit à < 50ms.
+  - **Analytics Hack** : Chargement différé de GA4 (`setTimeout` 3500ms).
+  - **Spotlight** : Remplacement du `useState` (re-renders) par manipulation DOM directe via CSS Variables (`--x`, `--y`).
+  - **Lenis Scroll** : Désactivé conditionnellement sur mobile.
+  - **Framer Motion** : Remplacé par des `<div>` natifs sur mobile (Lazy Init).
+- **Images** : Ajout de `max-image-preview:large` pour Google Discover.
+
+### 🛠 Codebase
+- Nettoyage `main.jsx` (plus d'imports de fonts).
+- Optimisation `Hero.jsx` (Logique isMobile stricte, Debounce resize).
+- Mise à jour `sitemap.xml` (Lastmod 2025-11-24).
+
 ---
 
 ## 🔜 À venir (voir SESSION.md)
