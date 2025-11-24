@@ -18,13 +18,11 @@ const CTA = lazy(() => import('./components/sections/CTA'));
 const Contact = lazy(() => import('./components/sections/Contact'));
 
 // --- COMPOSANT DE FOND "MATRIX / TECH" OPTIMISÉ ---
-// Modification : Plus de props mouseX/mouseY. Il gère sa propre logique via Refs pour éviter les re-renders.
 const TechBackground = () => {
   const containerRef = useRef(null);
   const spotlightRef = useRef(null);
 
   useEffect(() => {
-    // ✅ Détection mobile stricte : Pas d'écouteur JS sur mobile
     const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.innerWidth < 1024;
     if (isTouchDevice) return;
 
@@ -43,7 +41,7 @@ const TechBackground = () => {
       {/* Grille */}
       <div className="absolute h-full w-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
       
-      {/* Spotlight : JS désactivé sur mobile, mais on le cache aussi via CSS pour être sûr */}
+      {/* Spotlight Desktop */}
       <div 
         ref={spotlightRef}
         className="pointer-events-none absolute -inset-px transition-opacity duration-300 hidden lg:block"
@@ -55,8 +53,7 @@ const TechBackground = () => {
       {/* Vignette */}
       <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-[#050505/80]"></div>
       
-      {/* 🚨 LA CLÉ DU LCP : Le grain SVG est désactivé sur mobile (hidden md:block)
-          Le GPU n'a plus besoin de calculer ce calque lourd avant d'afficher le texte. */}
+      {/* Grain Desktop Only (Optimisation LCP) */}
       <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay pointer-events-none select-none hidden md:block" 
            style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}>
       </div>
@@ -68,25 +65,19 @@ const IntelloAgency = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const scrollY = useScrollPosition();
   const { t, language, setLanguage } = useTranslation();
-  
-  // ✅ OPTIMISATION : Suppression complète du State "mouse" ici.
-  // Cela empêche l'application entière de se redessiner à chaque pixel de mouvement de souris.
 
   // --- INIT LENIS (SMOOTH SCROLL) OPTIMISÉ ---
   useEffect(() => {
-    // ✅ OPTIMISATION : Désactivation de Lenis sur mobile (< 768px).
-    // Le scroll natif mobile est plus performant et économise la batterie/CPU.
     const isMobile = window.innerWidth < 768;
-    
     if (isMobile) return;
 
     const lenis = new Lenis({
-      duration: 0.9, // Plus réactif
+      duration: 0.9,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       direction: 'vertical',
       gestureDirection: 'vertical',
       smooth: true,
-      smoothTouch: false, // Important: false pour éviter les conflits tactiles
+      smoothTouch: false,
       touchMultiplier: 2,
     });
 
@@ -110,17 +101,17 @@ const IntelloAgency = () => {
     </div>
   );
 
-  // ✅ JSON-LD COMPLET CONSERVÉ
+  // ✅ SCHEMA URLS MIS À JOUR (intello.dev)
   const schemaData = {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "Organization",
-        "@id": "https://intello.sn/#organization",
+        "@id": "https://intello.dev/#organization",
         "name": "Intello",
         "alternateName": "Intello Agence Digitale",
-        "url": "https://intello.sn",
-        "logo": "https://intello.sn/logo_intello.png",
+        "url": "https://intello.dev",
+        "logo": "https://intello.dev/logo_intello.png",
         "description": "Agence de développement web et mobile au Sénégal spécialisée en React, Node.js, design UI/UX et solutions cloud.",
         "address": {
           "@type": "PostalAddress",
@@ -147,9 +138,9 @@ const IntelloAgency = () => {
       },
       {
         "@type": "ProfessionalService",
-        "@id": "https://intello.sn/#business",
+        "@id": "https://intello.dev/#business",
         "name": "Intello - Agence Digitale",
-        "image": "https://intello.sn/logo_intello.png",
+        "image": "https://intello.dev/logo_intello.png",
         "priceRange": "$$",
         "address": {
           "@type": "PostalAddress",
@@ -161,17 +152,11 @@ const IntelloAgency = () => {
           "latitude": 14.6937,
           "longitude": -17.4441
         },
-        "url": "https://intello.sn",
+        "url": "https://intello.dev",
         "telephone": "+221775532804",
         "openingHoursSpecification": {
           "@type": "OpeningHoursSpecification",
-          "dayOfWeek": [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday"
-          ],
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
           "opens": "09:00",
           "closes": "18:00"
         },
@@ -194,19 +179,14 @@ const IntelloAgency = () => {
         ogDescription="Transformez vos idées en solutions digitales performantes. Développement web, mobile, e-commerce. Expertise React, Node.js, cloud. Basés à Dakar, Sénégal."
         ogImage="/logo_intello.png"
         ogType="website"
-        canonical="https://intello.sn"
+        canonical="https://intello.dev" // ✅ URL Mise à jour
         schema={schemaData}
       />
 
-      {/* Background Tech séparé - ne reçoit plus de props */}
       <TechBackground />
 
       <div className="relative text-white min-h-screen overflow-x-hidden font-sans selection:bg-white/20 selection:text-cyan-300">
-        
-        <a 
-          href="#main-content" 
-          className="sr-only focus:not-sr-only focus:absolute focus:top-6 focus:left-6 focus:z-[9999] focus:bg-white focus:text-black focus:px-6 focus:py-3 focus:text-sm focus:font-mono focus:tracking-tighter focus:uppercase"
-        >
+        <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-6 focus:left-6 focus:z-[9999] focus:bg-white focus:text-black focus:px-6 focus:py-3 focus:text-sm focus:font-mono focus:tracking-tighter focus:uppercase">
           Skip to content_
         </a>
 

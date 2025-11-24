@@ -64,22 +64,22 @@ export default function ProjectDetail() {
         ogDescription={project.short}
         ogImage={project.image}
         ogType="article"
-        canonical={`https://intello.sn/portfolio/${id}`}
+        canonical={`https://intello.dev/portfolio/${id}`} // ✅ URL Mise à jour
         keywords={`${project.category}, ${project.stack?.join(', ')}, case study, portfolio intello`}
         schema={{
           "@context": "https://schema.org",
           "@type": "CreativeWork",
           "name": project.title,
           "description": project.short,
-          "image": `https://intello.sn${project.image}`,
+          "image": `https://intello.dev${project.image}`, // ✅ URL Mise à jour
           "author": {
             "@type": "Organization",
             "name": "Intello",
-            "url": "https://intello.sn"
+            "url": "https://intello.dev" // ✅ URL Mise à jour
           },
           "datePublished": project.date,
           "keywords": project.stack?.join(', '),
-          "url": `https://intello.sn/portfolio/${id}`
+          "url": `https://intello.dev/portfolio/${id}` // ✅ URL Mise à jour
         }}
       />
 
