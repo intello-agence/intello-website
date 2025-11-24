@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="fr">
   <head>
+  <!-- ✅ 1. Script Analytics (Optimisé, on ne touche pas) -->
   <script>
     window.addEventListener('load', function() {
       const script = document.createElement('script');
@@ -23,13 +24,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Intello - Agence Développement Web & Mobile au Sénégal | React, Node.js</title>
-  
   <meta name="description" content="Agence digitale sénégalaise experte en développement web, mobile et e-commerce. Création de sites React, applications Node.js, design UI/UX moderne. +50 projets réussis à Dakar." />
 
-  <!-- NOUVELLES LIGNES -->
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-  <!-- FIN NOUVELLES LIGNES -->
+
+  <!-- ✅ 2. CHARGEMENT RAPIDE DES FONTS (Le Secret du LCP) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- On charge Inter Tight (400, 600, 800) et JetBrains Mono (400) avec display=swap pour affichage immédiat -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;600;800&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+
 </head>
   <body>
     <div id="root"></div>

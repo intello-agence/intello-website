@@ -24,24 +24,17 @@ const TechBackground = () => {
   const spotlightRef = useRef(null);
 
   useEffect(() => {
-    // ✅ OPTIMISATION CRITIQUE : Détection stricte du mobile/tactile
-    // Si on est sur mobile, on n'attache même pas l'écouteur d'événement.
+    // ✅ Détection mobile stricte : Pas d'écouteur JS sur mobile
     const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.innerWidth < 1024;
-    
     if (isTouchDevice) return;
 
     const handleMouseMove = (e) => {
       if (!spotlightRef.current) return;
-      
-      // ✅ PERFORMANCE : Manipulation directe du DOM via CSS Variables.
-      // Cela ne déclenche AUCUN re-render React (le composant ne se recharge pas).
-      // C'est le GPU qui gère le visuel, le CPU reste au repos.
       spotlightRef.current.style.setProperty('--x', `${e.clientX}px`);
       spotlightRef.current.style.setProperty('--y', `${e.clientY}px`);
     };
 
     window.addEventListener('mousemove', handleMouseMove);
-    
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
@@ -50,8 +43,7 @@ const TechBackground = () => {
       {/* Grille */}
       <div className="absolute h-full w-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
       
-      {/* Spotlight : Caché sur mobile (hidden) et affiché sur Desktop (lg:block)
-          Utilise les variables CSS --x et --y injectées par le JS sans re-render */}
+      {/* Spotlight : JS désactivé sur mobile, mais on le cache aussi via CSS pour être sûr */}
       <div 
         ref={spotlightRef}
         className="pointer-events-none absolute -inset-px transition-opacity duration-300 hidden lg:block"
@@ -63,8 +55,9 @@ const TechBackground = () => {
       {/* Vignette */}
       <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-[#050505/80]"></div>
       
-      {/* Grain (Texture) */}
-      <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay pointer-events-none select-none" 
+      {/* 🚨 LA CLÉ DU LCP : Le grain SVG est désactivé sur mobile (hidden md:block)
+          Le GPU n'a plus besoin de calculer ce calque lourd avant d'afficher le texte. */}
+      <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay pointer-events-none select-none hidden md:block" 
            style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}>
       </div>
     </div>

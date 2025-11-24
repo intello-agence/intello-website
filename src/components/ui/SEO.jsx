@@ -11,11 +11,13 @@ export default function SEO({
   ogImage = '/logo_intello.png',
   ogType = 'website',
   canonical,
-  schema // ✅ NOUVEAU : Accepte JSON-LD
+  schema // ✅ Accepte JSON-LD
 }) {
   const location = useLocation();
-  const fullCanonical = canonical || `https://intello.sn${location.pathname}`;
-  const fullOgImage = ogImage.startsWith('http') ? ogImage : `https://intello.sn${ogImage}`;
+  
+  // ✅ MIGRATION intello.dev
+  const fullCanonical = canonical || `https://intello.dev${location.pathname}`;
+  const fullOgImage = ogImage.startsWith('http') ? ogImage : `https://intello.dev${ogImage}`;
 
   useEffect(() => {
     // Title
@@ -95,7 +97,7 @@ export default function SEO({
       }
     });
 
-    // ✅ NOUVEAU : JSON-LD Schema.org
+    // ✅ JSON-LD Schema.org
     if (schema) {
       let scriptTag = document.getElementById('schema-org-json-ld');
       if (!scriptTag) {
