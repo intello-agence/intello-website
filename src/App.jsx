@@ -7,8 +7,7 @@ import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import './styles/animations.css';
 import Hero from './components/sections/Hero';
-// TechStack est léger mais critique pour le visuel juste après le scroll, on le garde en import direct
-// ou on le passe en lazy haute priorité si vraiment lourd. Gardons-le sync pour la stabilité visuelle (CLS).
+// TechStack est léger et visuellement important, on le garde en statique
 import TechStack from './components/sections/TechStack';
 
 // Lazy loads...
@@ -20,23 +19,25 @@ const Process = lazy(() => import('./components/sections/Process'));
 const CTA = lazy(() => import('./components/sections/CTA'));
 const Contact = lazy(() => import('./components/sections/Contact'));
 
-// --- COMPOSANT DE FOND OPTIMISÉ ---
+// --- COMPOSANT DE FOND OPTIMISÉ (VERSION FINAL BOSS) ---
 const TechBackground = () => {
   const containerRef = useRef(null);
   const spotlightRef = useRef(null);
-  // On utilise un state pour ne rendre le filtre SVG que si nécessaire
-  const [enableEffects, setEnableEffects] = useState(false);
+  
+  // OPTIMISATION : Initialisation immédiate (comme dans Hero.jsx)
+  // Évite le re-render inutile au montage sur Desktop
+  const [enableEffects, setEnableEffects] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.matchMedia("(min-width: 1024px)").matches;
+    }
+    return false;
+  });
 
   useEffect(() => {
-    // Détection simplifiée et performante
-    const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
-    
-    if (isDesktop) {
-      setEnableEffects(true);
-      
+    // On ne gère que l'event listener ici, pas l'état initial
+    if (enableEffects) {
       const handleMouseMove = (e) => {
         if (!spotlightRef.current) return;
-        // RequestAnimationFrame pour ne pas surcharger le main thread lors du mousemove
         requestAnimationFrame(() => {
             spotlightRef.current.style.setProperty('--x', `${e.clientX}px`);
             spotlightRef.current.style.setProperty('--y', `${e.clientY}px`);
@@ -45,14 +46,14 @@ const TechBackground = () => {
       window.addEventListener('mousemove', handleMouseMove);
       return () => window.removeEventListener('mousemove', handleMouseMove);
     }
-  }, []);
+  }, [enableEffects]);
 
   return (
     <div ref={containerRef} className="fixed inset-0 z-[-1] h-full w-full bg-[#050505]">
       {/* Grille - CSS pur, très léger */}
       <div className="absolute h-full w-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
       
-      {/* Spotlight Desktop - Rendu conditionnel strict */}
+      {/* Spotlight Desktop */}
       {enableEffects && (
         <div 
             ref={spotlightRef}
@@ -63,11 +64,10 @@ const TechBackground = () => {
         />
       )}
       
-      {/* Vignette - CSS pur */}
+      {/* Vignette */}
       <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-[#050505/80]"></div>
       
-      {/* Grain Desktop Only - Optimisation Critique LCP/GPU */}
-      {/* On ne rend même pas le SVG dans le DOM si on n'est pas en mode Desktop/Effects */}
+      {/* Grain Desktop Only - Le monstre du LCP sur mobile (désactivé ici) */}
       {enableEffects && (
           <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay pointer-events-none select-none" 
                style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}>
@@ -82,20 +82,16 @@ const IntelloAgency = () => {
   const scrollY = useScrollPosition();
   const { t, language, setLanguage } = useTranslation();
 
-  // --- INIT LENIS (SMOOTH SCROLL) OPTIMISÉ ---
-  // Chargement asynchrone du module : Le mobile ne téléchargera JAMAIS le code de Lenis
+  // --- INIT LENIS OPTIMISÉ ---
   useEffect(() => {
     const isDesktop = window.matchMedia("(min-width: 768px)").matches;
-    
     if (!isDesktop) return;
 
     let lenisInstance = null;
     let rafId = null;
 
-    // Import dynamique
     import('lenis').then((LenisModule) => {
         const Lenis = LenisModule.default;
-        
         lenisInstance = new Lenis({
             duration: 0.9,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -119,10 +115,8 @@ const IntelloAgency = () => {
     };
   }, []);
 
-  // Loader minimaliste
   if (!t) return (
     <div className="min-h-screen bg-[#050505] flex flex-col items-center justify-center text-white font-mono">
-       {/* Remplacement du spinner CSS par quelque chose de plus léger si possible, sinon ok */}
       <div className="w-8 h-8 border-2 border-t-transparent border-white rounded-full animate-spin mb-4"></div>
     </div>
   );
@@ -228,7 +222,6 @@ const IntelloAgency = () => {
           <Hero t={t} />
           <TechStack />
           
-          {/* On sépare un peu les Suspense pour éviter un "Waterfall" géant de requêtes réseau au chargement */}
           <div className="relative">
              <Suspense fallback={<div className="h-20 w-full"></div>}>
                 <Stats t={t} />
@@ -241,8 +234,8 @@ const IntelloAgency = () => {
                 <Projects t={t} />
                 <About t={t} />
                 <Process t={t} />
-                {/* 👇 C'EST ICI QUE TU METS LE WRAPPER OPTIMISÉ 👇 */}
-                {/* Ces éléments sont tout en bas de page. On diffère leur calcul de rendu CSS */}
+                
+                {/* Optimisation "content-auto" pour le bas de page */}
                 <div className="content-auto">
                    <CTA t={t} />
                    <Contact t={t} />

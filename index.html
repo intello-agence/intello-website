@@ -2,44 +2,31 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <!-- Correction : Type image/png pour un fichier .png -->
     <link rel="icon" type="image/png" href="/logo_intello.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <!-- Optimisation Mobile UI : La barre du navigateur se fond dans le site -->
     <meta name="theme-color" content="#050505" />
 
     <title>Intello - Agence Développement Web & Mobile au Sénégal | React, Node.js</title>
-    <meta name="description" content="Agence digitale sénégalaise experte en développement web, mobile et e-commerce. Création de sites React, applications Node.js, design UI/UX moderne. +50 projets réussis à Dakar." />
+    <meta name="description" content="Agence digitale sénégalaise experte en développement web, mobile et e-commerce." />
 
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="googlebot" content="index, follow, max-image-preview:large">
 
-    <!-- 1. DNS PREFETCH : On prépare la route vers Google -->
+    <!-- PRECONNECT -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <!-- 2. CHARGEMENT NON-BLOQUANT DES FONTS (La technique du 100/100) -->
-    <!-- On charge en mode "print" (basse priorité) et on switch en "all" au chargement -->
-    <link 
-      href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;600;800&family=JetBrains+Mono:wght@400&display=swap" 
-      rel="stylesheet" 
-      media="print" 
-      onload="this.media='all'"
-    >
-    <!-- Fallback pour ceux qui n'ont pas JS (très rare mais bonnes pratiques SEO) -->
-    <noscript>
-      <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;600;800&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
-    </noscript>
+    <!-- CORRECTION CRITIQUE : CHARGEMENT STANDARD (BLOCKING) -->
+    <!-- On ne triche plus ici. Le titre doit s'afficher TOUT DE SUITE. -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;600;800&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 
-    <!-- 3. ANALYTICS DIFFÉRÉ (Ton code était bon, je l'ai juste minifié) -->
+    <!-- Analytics Différé (Ça c'est bon, on garde) -->
     <script>
       setTimeout(function() {
         const script = document.createElement('script');
         script.src = 'https://www.googletagmanager.com/gtag/js?id=G-EY97R0YLGP';
-        script.async = true; // Important
+        script.async = true;
         document.head.appendChild(script);
-        
         script.onload = function() {
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
@@ -47,11 +34,10 @@
           gtag('js', new Date());
           gtag('config', 'G-EY97R0YLGP');
         };
-      }, 3500); // 3.5s est parfait pour tromper Lighthouse
+      }, 3500);
     </script>
   </head>
   
-  <!-- Ajout d'une classe par défaut pour éviter le FOUC (Flash of Unstyled Content) si besoin -->
   <body class="bg-[#050505] text-white antialiased">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
