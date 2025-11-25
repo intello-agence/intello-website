@@ -447,7 +447,7 @@ git push
 ```
 📞 Support
 
-Questions techniques : intellopjsn@gmail.com
+Questions techniques : contact@intello.dev
 CEO : Patrick Junior Samba Ntadi
 Tél : +221 77 553 28 04
 

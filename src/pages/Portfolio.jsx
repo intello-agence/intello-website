@@ -34,7 +34,7 @@ export default function Portfolio() {
         ogDescription={`${projects.length} projets réalisés avec succès au Sénégal et en Afrique : sites web, apps mobiles, e-commerce.`}
         ogImage="/logo_intello.png"
         ogType="website"
-        canonical="https://intello.sn/portfolio"
+        canonical="https://intello.dev/portfolio"
         keywords="portfolio agence web, projets web sénégal, développement mobile dakar, e-commerce afrique"
       />
 

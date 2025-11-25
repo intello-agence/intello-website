@@ -25,12 +25,12 @@ export default function ContactPage() {
       {/* SEO Meta Tags */}
       <SEO
         title={`Contact - Parlons de votre projet | Intello Agence Digitale`}
-        description="Contactez Intello pour discuter de votre projet web, mobile ou e-commerce. Réponse sous 24h. Email : intellopjsn@gmail.com | Tél : +221 77 553 28 04"
+        description="Contactez Intello pour discuter de votre projet web, mobile ou e-commerce. Réponse sous 24h. Email : contact@intello.dev | Tél : +221 77 553 28 04"
         ogTitle="Contact Intello - Agence Web & Mobile Sénégal"
         ogDescription="Démarrez votre projet digital avec Intello. Expertise React, Node.js, Mobile. Basés à Dakar, Sénégal."
         ogImage="/logo_intello.png"
         ogType="website"
-        canonical="https://intello.sn/contact"
+        canonical="https://intello.dev/contact"
         keywords="contact agence web dakar, devis site internet sénégal, développement web contact, agence digitale dakar"
       />
 
@@ -89,11 +89,11 @@ export default function ContactPage() {
                   <div>
                     <p className="text-gray-400 text-xs mb-1">Email</p>
                     <a 
-                      href="mailto:intellopjsn@gmail.com" 
+                      href="mailto:contact@intello.dev" 
                       className="text-white hover:text-blue-400 transition-colors font-medium"
-                      aria-label="Envoyer un email à intellopjsn@gmail.com"
+                      aria-label="Envoyer un email à contact@intello.dev"
                     >
-                      intellopjsn@gmail.com
+                      contact@intello.dev
                     </a>
                   </div>
                 </div>

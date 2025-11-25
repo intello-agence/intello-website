@@ -144,7 +144,7 @@ A11y : skip link, ARIA, focus visible, navigation clavier
 📞 Support
 
 Questions / Bugs :
-📧 intellopjsn@gmail.com
+📧 contact@intello.dev
 📱 +221 77 553 28 04
 
 CEO : Patrick Junior Samba Ntadi

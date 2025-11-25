@@ -37,7 +37,7 @@ const Contact = ({ t }) => {
                   </div>
                   <div>
                     <p className="text-sm text-gray-400 mb-1">{t.contact.info.email}</p>
-                    <a href="mailto:contact@intello.sn" className="text-white font-semibold hover:text-blue-400 transition-colors" aria-label={`Envoyer un email à ${t.contact.info.emailValue}`}>
+                    <a href="mailto:contact@intello.dev" className="text-white font-semibold hover:text-blue-400 transition-colors" aria-label={`Envoyer un email à ${t.contact.info.emailValue}`}>
                       {t.contact.info.emailValue}
                     </a>
                   </div>

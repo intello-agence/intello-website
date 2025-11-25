@@ -7,6 +7,7 @@ import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import './styles/animations.css';
 import Hero from './components/sections/Hero';
+import TechStack from './components/sections/TechStack';
 
 // Lazy loads...
 const Stats = lazy(() => import('./components/sections/Stats'));
@@ -201,7 +202,7 @@ const IntelloAgency = () => {
 
         <main id="main-content" className="relative z-10 flex flex-col gap-0">
           <Hero t={t} />
-          
+          <TechStack />
           <Suspense fallback={<div className="h-40 w-full flex items-center justify-center opacity-20 font-mono text-xs">LOADING_MODULES...</div>}>
             <div className="relative">
                <Stats t={t} />

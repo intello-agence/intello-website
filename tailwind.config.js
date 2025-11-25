@@ -93,7 +93,8 @@ export default {
         },
       },
       animation: {
-        marquee: 'marquee 25s linear infinite', // Vitesse lente et fluide
+        marquee: 'marquee 25s linear infinite', // Pour le Hero (rapide)
+        'marquee-slow': 'marquee 40s linear infinite', // ✅ NOUVEAU : Pour le TechStack (plus lent, plus lisible)
         slideUp: 'slideUp 0.6s ease-out forwards',
         fadeIn: 'fadeIn 0.6s ease-out forwards',
         gentleFloat: 'gentleFloat 3s ease-in-out infinite',

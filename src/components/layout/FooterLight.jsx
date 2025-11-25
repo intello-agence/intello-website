@@ -44,11 +44,11 @@ const FooterLight = () => {
             Contact
           </Link>
           <a 
-            href="mailto:intellopjsn@gmail.com"
+            href="mailto:contact@intello.dev"
             className="hover:text-blue-400 transition-colors"
-            aria-label="Envoyer un email à intellopjsn@gmail.com"
+            aria-label="Envoyer un email à contact@intello.dev"
           >
-            intellopjsn@gmail.com
+            contact@intello.dev
           </a>
         </div>
       </div>

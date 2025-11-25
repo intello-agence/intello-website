@@ -132,7 +132,7 @@ export default function ContactForm({ t }) {
         project_type: formData.projectType,
         budget: formData.budget,
         message: formData.message,
-        to_email: "intellopjsn@gmail.com"
+        to_email: "contact@intello.dev"
       };
 
       await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
