@@ -241,8 +241,12 @@ const IntelloAgency = () => {
                 <Projects t={t} />
                 <About t={t} />
                 <Process t={t} />
-                <CTA t={t} />
-                <Contact t={t} />
+                {/* 👇 C'EST ICI QUE TU METS LE WRAPPER OPTIMISÉ 👇 */}
+                {/* Ces éléments sont tout en bas de page. On diffère leur calcul de rendu CSS */}
+                <div className="content-auto">
+                   <CTA t={t} />
+                   <Contact t={t} />
+                </div>
              </Suspense>
           </div>
         </main>
