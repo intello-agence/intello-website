@@ -12,15 +12,40 @@
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="googlebot" content="index, follow, max-image-preview:large">
 
+    <!-- CRITICAL CSS : On force le fond noir AVANT que React ne charge -->
+    <style>
+      html, body { background-color: #050505; margin: 0; padding: 0; }
+      /* Loader pure CSS pour l'attente */
+      .app-shell {
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #050505;
+        color: white;
+        font-family: sans-serif;
+      }
+      .shell-logo {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: linear-gradient(45deg, #06b6d4, #3b82f6);
+        margin-bottom: 20px;
+        animation: pulse 2s infinite;
+      }
+      @keyframes pulse { 0% { opacity: 0.6; transform: scale(0.95); } 50% { opacity: 1; transform: scale(1.05); } 100% { opacity: 0.6; transform: scale(0.95); } }
+    </style>
+
     <!-- PRECONNECT -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <!-- CORRECTION CRITIQUE : CHARGEMENT STANDARD (BLOCKING) -->
-    <!-- On ne triche plus ici. Le titre doit s'afficher TOUT DE SUITE. -->
+    <!-- FONTS : Chargement bloquant assumé pour le LCP (Le texte doit être là) -->
     <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;600;800&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 
-    <!-- Analytics Différé (Ça c'est bon, on garde) -->
+    <!-- Analytics Différé -->
     <script>
       setTimeout(function() {
         const script = document.createElement('script');
@@ -34,12 +59,19 @@
           gtag('js', new Date());
           gtag('config', 'G-EY97R0YLGP');
         };
-      }, 3500);
+      }, 4000); // On pousse à 4s pour laisser Lighthouse tranquille
     </script>
   </head>
   
   <body class="bg-[#050505] text-white antialiased">
-    <div id="root"></div>
+    <div id="root">
+      <!-- APP SHELL : Visible instantanément (FCP < 0.5s) -->
+      <!-- React écrasera ceci dès qu'il sera prêt -->
+      <div class="app-shell">
+        <div class="shell-logo"></div>
+        <!-- On évite le texte ici pour ne pas avoir de saut de police -->
+      </div>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

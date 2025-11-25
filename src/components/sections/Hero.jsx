@@ -4,31 +4,18 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Code2, Terminal } from 'lucide-react';
 
 const Hero = ({ t }) => {
-  // CORRECTION CLS DESKTOP : On détecte la taille immédiatement.
-  // En Vite (CSR), window est disponible au premier rendu.
-  const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768);
+  // Detection immédiate
+  const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' ? window.innerWidth < 768 : true);
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
-    
-    // Listener optimisé pour le resize
-    let timeoutId;
-    const handleResize = () => {
-      clearTimeout(timeoutId);
-      // Debounce léger
-      timeoutId = setTimeout(() => {
-        setIsMobile(window.innerWidth < 768);
-      }, 100);
-    };
-    
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
     window.addEventListener('resize', handleResize, { passive: true });
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      clearTimeout(timeoutId);
-    };
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // Memoization des variantes pour Desktop uniquement
   const variants = useMemo(() => ({
     container: {
       hidden: { opacity: 0 },
@@ -47,121 +34,118 @@ const Hero = ({ t }) => {
     }
   }), []);
 
-  const Wrapper = isMobile ? 'div' : motion.div;
-  const TextWrapper = isMobile ? 'span' : motion.span;
-  const PWrapper = isMobile ? 'p' : motion.p;
-
-  const animProps = (isContainer = false) => {
-    if (isMobile) return {};
-    return isContainer 
-      ? { variants: variants.container, initial: "hidden", animate: "visible" }
-      : { variants: variants.item };
-  };
-
-  return (
-    <section 
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-20"
-      aria-label="Accueil Intello"
-    >
-      {/* DÉCOR TECHNIQUE : Rendu conditionnel strict */}
-      {!isMobile && isMounted && (
-        <div className="absolute inset-0 pointer-events-none select-none overflow-hidden">
-          <div className="absolute left-6 top-0 bottom-0 w-px bg-white/5"></div>
-          <div className="absolute right-6 top-0 bottom-0 w-px bg-white/5"></div>
-          <div className="absolute top-32 left-10 font-mono text-[10px] text-white/20 tracking-widest">SYS.VER.2025.1</div>
-          <div className="absolute bottom-10 right-10 font-mono text-[10px] text-white/20 tracking-widest flex items-center gap-2">
-            <div className="w-2 h-2 bg-green-500/50 rounded-full animate-pulse"></div>
-            <span>SYSTEM_READY</span>
+  // RENDU CONDITIONNEL PUR : Pas de ternaire à l'intérieur des balises
+  // Si Mobile : On rend du HTML pur sans Framer Motion (Gain LCP énorme)
+  if (isMobile) {
+    return (
+      <section className="relative min-h-screen flex flex-col items-center justify-center pt-20 overflow-hidden">
+        <div className="relative z-10 w-full max-w-6xl px-6 text-center">
+          
+          {/* Badge Static */}
+          <div className="flex justify-center mb-8">
+            <div className="px-4 py-1.5 rounded-full border border-white/10 bg-white/5 flex items-center gap-3">
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+              <span className="text-xs font-mono text-cyan-300 tracking-wider uppercase">
+                {t?.hero?.status || "Available"}
+              </span>
+            </div>
           </div>
+
+          {/* Titre Static - Blanc Pur pour peindre vite */}
+          <p className="font-mono text-sm text-white/40 mb-4 tracking-[0.2em] uppercase">
+            {t?.hero?.subtitle_prefix || "Architecting the Future"}
+          </p>
+
+          <h1 className="font-extrabold text-5xl tracking-tighter leading-[0.9] mb-6 text-white">
+            <span className="block">{t?.hero?.title1 || "CODE."}</span>
+            <span className="block text-white">{t?.hero?.title2 || "CRAFT."}</span>
+            <span className="block text-cyan-300">{t?.hero?.title3 || "SCALE."}</span>
+          </h1>
+
+          <p className="max-w-2xl mx-auto text-lg text-gray-400 font-light leading-relaxed mb-10">
+            {t?.hero?.subtitle}
+          </p>
+
+          {/* Boutons Static */}
+          <div className="flex flex-col gap-4 justify-center items-center">
+            <Link to="/contact" className="px-8 py-4 bg-white text-black rounded-lg font-bold w-full flex justify-center items-center gap-2">
+              <Terminal className="w-4 h-4" />
+              <span>{t?.hero?.cta1 || "Start"}</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+            <a href="#projets" className="px-8 py-4 border border-white/10 bg-white/5 text-white rounded-lg font-medium w-full flex items-center justify-center gap-2">
+              <Code2 className="w-4 h-4 text-gray-400" />
+              <span>{t?.hero?.cta2 || "Work"}</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // --- VERSION DESKTOP (Avec Animations) ---
+  return (
+    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-20">
+      {/* Décor Desktop */}
+      {isMounted && (
+        <div className="absolute inset-0 pointer-events-none select-none">
+           <div className="absolute left-6 top-0 bottom-0 w-px bg-white/5"></div>
+           <div className="absolute right-6 top-0 bottom-0 w-px bg-white/5"></div>
+           <div className="absolute top-32 left-10 font-mono text-[10px] text-white/20 tracking-widest">SYS.VER.2025.1</div>
         </div>
       )}
 
-      <div className="relative z-10 w-full max-w-6xl px-6 md:px-12 will-change-transform">
-        
-        {/* Badge */}
-        <Wrapper 
-          {...(!isMobile && {
-            initial: { opacity: 0, y: -10 },
-            animate: { opacity: 1, y: 0 },
-            transition: { delay: 0.1 }
-          })}
-          className="flex justify-center mb-8"
-        >
-          <div className="px-4 py-1.5 rounded-full border border-white/10 bg-white/5 md:backdrop-blur-sm flex items-center gap-3">
+      <motion.div 
+        initial="hidden"
+        animate="visible"
+        variants={variants.container}
+        className="relative z-10 w-full max-w-6xl px-12 text-center"
+      >
+        <motion.div variants={variants.item} className="flex justify-center mb-8">
+          <div className="px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm flex items-center gap-3">
             <span className="relative flex h-2 w-2">
-              {!isMobile && <span className="animate-ping absolute h-full w-full rounded-full bg-cyan-400 opacity-75"></span>}
+              <span className="animate-ping absolute h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
             </span>
             <span className="text-xs font-mono text-cyan-300 tracking-wider uppercase">
-              {t?.hero?.status || "Available for new projects"}
+              {t?.hero?.status || "Available"}
             </span>
           </div>
-        </Wrapper>
+        </motion.div>
 
-        {/* Titre & Contenu */}
-        <Wrapper {...animProps(true)} className="text-center">
-          <PWrapper 
-            {...animProps()} 
-            className="font-mono text-sm md:text-base text-white/40 mb-4 tracking-[0.2em] uppercase"
-          >
-            {t?.hero?.subtitle_prefix || "Architecting the Future"}
-          </PWrapper>
+        <motion.p variants={variants.item} className="font-mono text-base text-white/40 mb-4 tracking-[0.2em] uppercase">
+          {t?.hero?.subtitle_prefix}
+        </motion.p>
 
-          {/* CORRECTION LCP : SUPPRESSION DE contentVisibility QUI BLOQUAIT L'AFFICHAGE */}
-          <h1 className="font-extrabold text-5xl md:text-7xl lg:text-9xl tracking-tighter leading-[0.9] mb-6 text-white">
-            <TextWrapper {...animProps()} className="block">
-              {t?.hero?.title1 || "CODE."}
-            </TextWrapper>
-            <TextWrapper 
-              {...animProps()} 
-              className="block text-white md:text-transparent md:bg-clip-text md:bg-gradient-to-b md:from-white md:via-white md:to-white/40"
-            >
-              {t?.hero?.title2 || "CRAFT."}
-            </TextWrapper>
-            <TextWrapper 
-              {...animProps()} 
-              className="block text-cyan-300 md:text-transparent md:bg-clip-text md:bg-gradient-to-r md:from-cyan-200 md:to-blue-500"
-            >
-              {t?.hero?.title3 || "SCALE."}
-            </TextWrapper>
-          </h1>
+        <h1 className="font-extrabold text-7xl lg:text-9xl tracking-tighter leading-[0.9] mb-6 text-white">
+          <motion.span variants={variants.item} className="block">{t?.hero?.title1}</motion.span>
+          <motion.span variants={variants.item} className="block text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-white/40">
+            {t?.hero?.title2}
+          </motion.span>
+          <motion.span variants={variants.item} className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-200 to-blue-500">
+            {t?.hero?.title3}
+          </motion.span>
+        </h1>
 
-          <PWrapper 
-            {...animProps()} 
-            className="max-w-2xl mx-auto text-lg md:text-xl text-gray-400 font-light leading-relaxed mb-10"
-          >
-            {t?.hero?.subtitle}
-          </PWrapper>
+        <motion.p variants={variants.item} className="max-w-2xl mx-auto text-xl text-gray-400 font-light leading-relaxed mb-10">
+          {t?.hero?.subtitle}
+        </motion.p>
 
-          <Wrapper 
-            {...animProps()}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-          >
-            <Link
-              to="/contact"
-              className="group relative px-8 py-4 bg-white text-black rounded-lg font-bold overflow-hidden hover:scale-[1.02] transition-transform duration-200 w-full sm:w-auto flex justify-center items-center"
-            >
-              {!isMobile && <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-500 opacity-0 group-hover:opacity-10 transition-opacity duration-300" />}
-              <span className="relative flex items-center gap-2">
-                <Terminal className="w-4 h-4 flex-shrink-0" />
-                <span>{t?.hero?.cta1 || "Start a project"}</span>
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1 flex-shrink-0" />
-              </span>
+        <motion.div variants={variants.item} className="flex flex-row gap-4 justify-center items-center">
+            <Link to="/contact" className="group relative px-8 py-4 bg-white text-black rounded-lg font-bold overflow-hidden hover:scale-[1.02] transition-transform duration-200 flex items-center gap-2">
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-500 opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
+              <Terminal className="w-4 h-4" />
+              <span>{t?.hero?.cta1}</span>
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </Link>
-
-            <a 
-              href="#projets"
-              className="group px-8 py-4 border border-white/10 bg-white/5 text-white rounded-lg font-medium hover:bg-white/10 transition-colors md:backdrop-blur-sm flex items-center justify-center gap-2 w-full sm:w-auto"
-            >
-              <Code2 className="w-4 h-4 text-gray-400 group-hover:text-white transition-colors flex-shrink-0" />
-              <span>{t?.hero?.cta2 || "View Work"}</span>
+            <a href="#projets" className="px-8 py-4 border border-white/10 bg-white/5 text-white rounded-lg font-medium hover:bg-white/10 transition-colors backdrop-blur-sm flex items-center justify-center gap-2">
+              <Code2 className="w-4 h-4 text-gray-400 group-hover:text-white transition-colors" />
+              <span>{t?.hero?.cta2}</span>
             </a>
-          </Wrapper>
-        </Wrapper>
-      </div>
-      
-       {/* Marquee Desktop */}
-       {!isMobile && isMounted && (
+        </motion.div>
+      </motion.div>
+
+      {isMounted && (
         <div className="absolute bottom-0 w-full border-t border-white/5 bg-black/50 backdrop-blur-md py-3 overflow-hidden pointer-events-none">
           <div className="animate-marquee whitespace-nowrap flex gap-8 font-mono text-xs text-white/20">
             <span>REACT_VERSION: 19.0.0</span><span>•</span><span>NEXT_GEN_UI</span>
