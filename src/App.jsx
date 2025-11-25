@@ -1,5 +1,5 @@
 import React, { useState, useEffect, lazy, Suspense, useRef } from 'react';
-import Lenis from 'lenis'; 
+// RETIRÉ : import Lenis from 'lenis'; -> On va l'importer dynamiquement
 import { useTranslation } from './hooks/useTranslation';
 import { useScrollPosition } from './hooks/useScrollPosition';
 import SEO from './components/ui/SEO';
@@ -7,6 +7,8 @@ import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import './styles/animations.css';
 import Hero from './components/sections/Hero';
+// TechStack est léger mais critique pour le visuel juste après le scroll, on le garde en import direct
+// ou on le passe en lazy haute priorité si vraiment lourd. Gardons-le sync pour la stabilité visuelle (CLS).
 import TechStack from './components/sections/TechStack';
 
 // Lazy loads...
@@ -18,46 +20,59 @@ const Process = lazy(() => import('./components/sections/Process'));
 const CTA = lazy(() => import('./components/sections/CTA'));
 const Contact = lazy(() => import('./components/sections/Contact'));
 
-// --- COMPOSANT DE FOND "MATRIX / TECH" OPTIMISÉ ---
+// --- COMPOSANT DE FOND OPTIMISÉ ---
 const TechBackground = () => {
   const containerRef = useRef(null);
   const spotlightRef = useRef(null);
+  // On utilise un state pour ne rendre le filtre SVG que si nécessaire
+  const [enableEffects, setEnableEffects] = useState(false);
 
   useEffect(() => {
-    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.innerWidth < 1024;
-    if (isTouchDevice) return;
-
-    const handleMouseMove = (e) => {
-      if (!spotlightRef.current) return;
-      spotlightRef.current.style.setProperty('--x', `${e.clientX}px`);
-      spotlightRef.current.style.setProperty('--y', `${e.clientY}px`);
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    // Détection simplifiée et performante
+    const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
+    
+    if (isDesktop) {
+      setEnableEffects(true);
+      
+      const handleMouseMove = (e) => {
+        if (!spotlightRef.current) return;
+        // RequestAnimationFrame pour ne pas surcharger le main thread lors du mousemove
+        requestAnimationFrame(() => {
+            spotlightRef.current.style.setProperty('--x', `${e.clientX}px`);
+            spotlightRef.current.style.setProperty('--y', `${e.clientY}px`);
+        });
+      };
+      window.addEventListener('mousemove', handleMouseMove);
+      return () => window.removeEventListener('mousemove', handleMouseMove);
+    }
   }, []);
 
   return (
     <div ref={containerRef} className="fixed inset-0 z-[-1] h-full w-full bg-[#050505]">
-      {/* Grille */}
+      {/* Grille - CSS pur, très léger */}
       <div className="absolute h-full w-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
       
-      {/* Spotlight Desktop */}
-      <div 
-        ref={spotlightRef}
-        className="pointer-events-none absolute -inset-px transition-opacity duration-300 hidden lg:block"
-        style={{
-          background: `radial-gradient(600px circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.06), transparent 40%)`
-        }} 
-      />
+      {/* Spotlight Desktop - Rendu conditionnel strict */}
+      {enableEffects && (
+        <div 
+            ref={spotlightRef}
+            className="pointer-events-none absolute -inset-px transition-opacity duration-300"
+            style={{
+            background: `radial-gradient(600px circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.06), transparent 40%)`
+            }} 
+        />
+      )}
       
-      {/* Vignette */}
+      {/* Vignette - CSS pur */}
       <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-[#050505/80]"></div>
       
-      {/* Grain Desktop Only (Optimisation LCP) */}
-      <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay pointer-events-none select-none hidden md:block" 
-           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}>
-      </div>
+      {/* Grain Desktop Only - Optimisation Critique LCP/GPU */}
+      {/* On ne rend même pas le SVG dans le DOM si on n'est pas en mode Desktop/Effects */}
+      {enableEffects && (
+          <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay pointer-events-none select-none" 
+               style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}>
+          </div>
+      )}
     </div>
   );
 };
@@ -68,41 +83,50 @@ const IntelloAgency = () => {
   const { t, language, setLanguage } = useTranslation();
 
   // --- INIT LENIS (SMOOTH SCROLL) OPTIMISÉ ---
+  // Chargement asynchrone du module : Le mobile ne téléchargera JAMAIS le code de Lenis
   useEffect(() => {
-    const isMobile = window.innerWidth < 768;
-    if (isMobile) return;
+    const isDesktop = window.matchMedia("(min-width: 768px)").matches;
+    
+    if (!isDesktop) return;
 
-    const lenis = new Lenis({
-      duration: 0.9,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      direction: 'vertical',
-      gestureDirection: 'vertical',
-      smooth: true,
-      smoothTouch: false,
-      touchMultiplier: 2,
+    let lenisInstance = null;
+    let rafId = null;
+
+    // Import dynamique
+    import('lenis').then((LenisModule) => {
+        const Lenis = LenisModule.default;
+        
+        lenisInstance = new Lenis({
+            duration: 0.9,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            smoothTouch: false,
+            touchMultiplier: 2,
+        });
+
+        function raf(time) {
+            lenisInstance.raf(time);
+            rafId = requestAnimationFrame(raf);
+        }
+        rafId = requestAnimationFrame(raf);
     });
 
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    const rafId = requestAnimationFrame(raf);
-
     return () => {
-      lenis.destroy();
-      cancelAnimationFrame(rafId);
+        if (lenisInstance) lenisInstance.destroy();
+        if (rafId) cancelAnimationFrame(rafId);
     };
   }, []);
 
+  // Loader minimaliste
   if (!t) return (
     <div className="min-h-screen bg-[#050505] flex flex-col items-center justify-center text-white font-mono">
+       {/* Remplacement du spinner CSS par quelque chose de plus léger si possible, sinon ok */}
       <div className="w-8 h-8 border-2 border-t-transparent border-white rounded-full animate-spin mb-4"></div>
-      <p className="text-xs tracking-widest opacity-50 animate-pulse">INITIALIZING SYSTEM...</p>
     </div>
   );
 
-  // ✅ SCHEMA URLS MIS À JOUR (intello.dev)
   const schemaData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -180,7 +204,7 @@ const IntelloAgency = () => {
         ogDescription="Transformez vos idées en solutions digitales performantes. Développement web, mobile, e-commerce. Expertise React, Node.js, cloud. Basés à Dakar, Sénégal."
         ogImage="/logo_intello.png"
         ogType="website"
-        canonical="https://intello.dev" // ✅ URL Mise à jour
+        canonical="https://intello.dev"
         schema={schemaData}
       />
 
@@ -203,18 +227,24 @@ const IntelloAgency = () => {
         <main id="main-content" className="relative z-10 flex flex-col gap-0">
           <Hero t={t} />
           <TechStack />
-          <Suspense fallback={<div className="h-40 w-full flex items-center justify-center opacity-20 font-mono text-xs">LOADING_MODULES...</div>}>
-            <div className="relative">
-               <Stats t={t} />
-               <div className="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent my-12"></div>
-               <Services t={t} />
-               <Projects t={t} />
-               <About t={t} />
-               <Process t={t} />
-               <CTA t={t} />
-               <Contact t={t} />
-            </div>
-          </Suspense>
+          
+          {/* On sépare un peu les Suspense pour éviter un "Waterfall" géant de requêtes réseau au chargement */}
+          <div className="relative">
+             <Suspense fallback={<div className="h-20 w-full"></div>}>
+                <Stats t={t} />
+             </Suspense>
+
+             <div className="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent my-12"></div>
+             
+             <Suspense fallback={<div className="h-40 w-full flex items-center justify-center opacity-20 font-mono text-xs">LOADING_MODULES...</div>}>
+                <Services t={t} />
+                <Projects t={t} />
+                <About t={t} />
+                <Process t={t} />
+                <CTA t={t} />
+                <Contact t={t} />
+             </Suspense>
+          </div>
         </main>
 
         <Footer t={t} />

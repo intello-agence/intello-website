@@ -74,6 +74,68 @@ Historique des modifications du projet (format : Date - Type - Description)
 - Mise à jour `sitemap.xml` (Lastmod 2025-11-24).
 
 ---
+### 🎨 UI & Branding
+- **Section TechStack** : Ajout d'un bandeau de défilement infini (Marquee CSS pur) affichant la stack technique (React, Next.js, Supabase...).
+- **Rebranding Contact** : Remplacement global de l'email Gmail par `contact@intello.dev` (Redirection DNS ImprovMX configurée).
+- **Config CRM** : Déploiement du sous-domaine `app.intello.dev`.
+
+## [2025-11-25] — Migration intello.dev + Perf & Branding
+
+### 🚀 Domaine & SEO
+- Migration complète de `intello.sn` vers `https://intello.dev` :
+  - `SEO.jsx` : canonicals & OG images maintenant en `https://intello.dev/...`.
+  - `App.jsx` : JSON-LD Organization & ProfessionalService mis à jour avec `intello.dev` (url, logo, ids).
+  - `ProjectDetail.jsx` : `canonical` et `schema.url` des projets pointent vers `https://intello.dev/portfolio/...`.
+  - `public/sitemap.xml` : toutes les URLs basculées sur `https://intello.dev/` avec `lastmod=2025-11-24`.
+- Google Search Console :
+  - Propriété Domaine `intello.dev` validée via DNS (TXT).
+  - Sitemap `https://intello.dev/sitemap.xml` soumis.
+  - Indexation demandée pour `/` et `/portfolio`.
+
+### ⚡ Performance Web (Core Web Vitals)
+- Optimisation LCP/TBT sur la Home :
+  - `App.jsx` :
+    - Suppression du state `mouse` global pour le spotlight.
+    - `TechBackground` : gestion de la position souris via `useRef` + variables CSS (`--x`, `--y`) → 0 re-render React.
+    - Désactivation du grain SVG sur mobile (`hidden md:block`) → LCP mobile ~4.5s → ~3.0s.
+    - Lenis (smooth scroll) désactivé sur mobile (`window.innerWidth < 768`).
+  - `Hero.jsx` :
+    - Détection `isMobile` (lazy init) + debounce `resize`.
+    - Framer Motion désactivé sur mobile (balises natives `<div>/<p>/<span>`).
+    - `backdrop-blur` et gradients complexes réservés au desktop.
+- Fonts :
+  - Suppression des imports `@fontsource` dans `main.jsx`.
+  - Chargement des polices via `index.html` (Google Fonts + `display=swap`) pour un Critical Rendering Path plus rapide.
+- Analytics :
+  - Chargement différé de GA4 (injection du script après ~3.5s via `setTimeout`) pour ne plus impacter le TBT.
+- Résultats PageSpeed Insights :
+  - Mobile ≈ **88/100** (FCP ~2.6s, LCP ~3.0s, TBT ~150ms, CLS ≈ 0.001).
+  - Desktop ≈ **98/100** (FCP ~0.6s, LCP ~1.1s, TBT ~30ms).
+
+### 🎨 UI & Crédibilité
+- Ajout d’une section **TechStack** (bandeau défilant) sur la Home :
+  - Logos/labels technos : React, Next.js, TypeScript, Node.js, Tailwind, Supabase, Vercel, Framer Motion, PostgreSQL, Docker.
+  - Animation CSS pure (keyframes inline) + masques dégradés pour un effet premium sans surcharge JS.
+- Rebranding email :
+  - Remplacement global de `intellopjsn@gmail.com` par `contact@intello.dev` (fichiers JSX + JSON de contenu FR/EN).
+  - Vérification navigation privée + redéploiement Vercel.
+
+### 🧩 Infra & Outillage
+- Sous-domaine CRM configuré :
+  - `app.intello.dev` pointé vers `intello-app-cyan.vercel.app`.
+  - `robots.txt` du CRM : `Disallow: /` (instance non indexable).
+- Email pro :
+  - Redirection `*@intello.dev` → `intellopjsn@gmail.com` via ImprovMX.
+  - DNS Vercel : MX (`mx1.improvmx.com`, `mx2.improvmx.com`) + SPF TXT (`v=spf1 include:spf.improvmx.com ~all`).
+
+### 📍 SEO Local (Google My Business)
+- Création de la fiche **Google Business Profile** :
+  - Nom : `Intello - Agence Web & Mobile`.
+  - Type : `Service Business` / `Website Designer`.
+  - Zone de service : Dakar, Rufisque (Sénégal).
+  - Description (EN) orientée stack moderne et accompagnement complet.
+- Fiche déjà visible en recherche sur la requête "Intello - Agence Web & Mobile".
+
 
 ## 🔜 À venir (voir SESSION.md)
 - Migration domaine **intello.dev** (URLs/canonicals/OG)
