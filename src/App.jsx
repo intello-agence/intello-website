@@ -20,35 +20,35 @@ const CTA = lazy(() => import('./components/sections/CTA'));
 const Contact = lazy(() => import('./components/sections/Contact'));
 
 // --- COMPOSANT DE FOND OPTIMISÉ (VERSION FINAL BOSS) ---
-const TechBackground = () => {  
+// --- COMPOSANT DE FOND OPTIMISÉ & SÉCURISÉ ---
+const TechBackground = () => {
   const spotlightRef = useRef(null);
-
-  const [enableEffects, setEnableEffects] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return window.matchMedia("(min-width: 1024px)").matches;
-    }
-    return false;
-  });
+  const [enableEffects, setEnableEffects] = useState(false);
 
   useEffect(() => {
-    if (enableEffects) {
-      const handleMouseMove = (e) => {
-        if (!spotlightRef.current) return;
-        requestAnimationFrame(() => {
-          spotlightRef.current.style.setProperty('--x', `${e.clientX}px`);
-          spotlightRef.current.style.setProperty('--y', `${e.clientY}px`);
-        });
-      };
-      window.addEventListener('mousemove', handleMouseMove);
-      return () => window.removeEventListener('mousemove', handleMouseMove);
-    }
-  }, [enableEffects]);
+    // On ne fait rien côté SSR / environnements sans window
+    if (typeof window === 'undefined') return;
+
+    const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
+    if (!isDesktop) return;
+
+    setEnableEffects(true);
+
+    const handleMouseMove = (e) => {
+      const node = spotlightRef.current;
+      if (!node) return;
+      requestAnimationFrame(() => {
+        node.style.setProperty('--x', `${e.clientX}px`);
+        node.style.setProperty('--y', `${e.clientY}px`);
+      });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
   return (
-    <div
-      ref={containerRef}
-      className="fixed inset-0 z-[-1] pointer-events-none"
-    >
+    <div className="fixed inset-0 z-[-1] pointer-events-none">
       {/* Spotlight Desktop uniquement */}
       {enableEffects && (
         <div
@@ -75,7 +75,6 @@ const TechBackground = () => {
     </div>
   );
 };
-
 const IntelloAgency = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const scrollY = useScrollPosition();
