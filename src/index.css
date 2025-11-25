@@ -15,14 +15,30 @@
 
   body {
     font-family: 'Inter Tight', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+    /* 👇 On remet le fond carrelé ici 👇 */
     background-color: #050505;
+    background-image:
+      linear-gradient(to right, #80808012 1px, transparent 1px),
+      linear-gradient(to bottom, #80808012 1px, transparent 1px);
+    background-size: 24px 24px;
+
     color: #ffffff;
-    /* Lissage de police : Indispensable pour le design sombre */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    /* PERF: Privilégie la vitesse d'affichage pour le corps de texte */
     text-rendering: optimizeSpeed;
   }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter Tight', sans-serif;
+    letter-spacing: -0.02em;
+    text-rendering: optimizeLegibility;
+  }
+
+  code, pre, .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+
 
   /* Titres : On veut que ce soit beau, donc optimizeLegibility */
   h1, h2, h3, h4, h5, h6 {

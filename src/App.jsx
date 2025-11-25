@@ -20,12 +20,9 @@ const CTA = lazy(() => import('./components/sections/CTA'));
 const Contact = lazy(() => import('./components/sections/Contact'));
 
 // --- COMPOSANT DE FOND OPTIMISÉ (VERSION FINAL BOSS) ---
-const TechBackground = () => {
-  const containerRef = useRef(null);
+const TechBackground = () => {  
   const spotlightRef = useRef(null);
-  
-  // OPTIMISATION : Initialisation immédiate (comme dans Hero.jsx)
-  // Évite le re-render inutile au montage sur Desktop
+
   const [enableEffects, setEnableEffects] = useState(() => {
     if (typeof window !== 'undefined') {
       return window.matchMedia("(min-width: 1024px)").matches;
@@ -34,13 +31,12 @@ const TechBackground = () => {
   });
 
   useEffect(() => {
-    // On ne gère que l'event listener ici, pas l'état initial
     if (enableEffects) {
       const handleMouseMove = (e) => {
         if (!spotlightRef.current) return;
         requestAnimationFrame(() => {
-            spotlightRef.current.style.setProperty('--x', `${e.clientX}px`);
-            spotlightRef.current.style.setProperty('--y', `${e.clientY}px`);
+          spotlightRef.current.style.setProperty('--x', `${e.clientX}px`);
+          spotlightRef.current.style.setProperty('--y', `${e.clientY}px`);
         });
       };
       window.addEventListener('mousemove', handleMouseMove);
@@ -49,29 +45,32 @@ const TechBackground = () => {
   }, [enableEffects]);
 
   return (
-    <div ref={containerRef} className="fixed inset-0 z-[-1] h-full w-full bg-[#050505]">
-      {/* Grille - CSS pur, très léger */}
-      <div className="absolute h-full w-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-      
-      {/* Spotlight Desktop */}
+    <div
+      ref={containerRef}
+      className="fixed inset-0 z-[-1] pointer-events-none"
+    >
+      {/* Spotlight Desktop uniquement */}
       {enableEffects && (
-        <div 
-            ref={spotlightRef}
-            className="pointer-events-none absolute -inset-px transition-opacity duration-300"
-            style={{
+        <div
+          ref={spotlightRef}
+          className="absolute -inset-px transition-opacity duration-300"
+          style={{
             background: `radial-gradient(600px circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.06), transparent 40%)`
-            }} 
+          }}
         />
       )}
-      
+
       {/* Vignette */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-[#050505/80]"></div>
-      
-      {/* Grain Desktop Only - Le monstre du LCP sur mobile (désactivé ici) */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-[#050505]/80" />
+
+      {/* Grain Desktop uniquement */}
       {enableEffects && (
-          <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay pointer-events-none select-none" 
-               style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}>
-          </div>
+        <div
+          className="absolute inset-0 opacity-[0.03] mix-blend-overlay select-none"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
+          }}
+        />
       )}
     </div>
   );
