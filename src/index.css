@@ -1,8 +1,42 @@
+/* --- 0. FONTS SELF-HOSTED --- */
+@font-face {
+  font-family: 'Inter Tight';
+  src: url('/fonts/InterTight-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter Tight';
+  src: url('/fonts/InterTight-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter Tight';
+  src: url('/fonts/InterTight-ExtraBold.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* --- 1. TAILWIND --- */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* --- 1. Optimisation Fondamentale --- */
+/* --- 2. Optimisation Fondamentale --- */
 @layer base {
   html {
     /* Évite le rebond élastique sur iOS qui peut conflit avec Lenis */
@@ -16,7 +50,7 @@
   body {
     font-family: 'Inter Tight', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
-    /* 👇 On remet le fond carrelé ici 👇 */
+    /* Fond carrelé */
     background-color: #050505;
     background-image:
       linear-gradient(to right, #80808012 1px, transparent 1px),
@@ -29,17 +63,6 @@
     text-rendering: optimizeSpeed;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Inter Tight', sans-serif;
-    letter-spacing: -0.02em;
-    text-rendering: optimizeLegibility;
-  }
-
-  code, pre, .font-mono {
-    font-family: 'JetBrains Mono', monospace;
-  }
-
-
   /* Titres : On veut que ce soit beau, donc optimizeLegibility */
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Inter Tight', sans-serif;
@@ -47,12 +70,13 @@
     text-rendering: optimizeLegibility;
   }
 
+  /* Code : JetBrains Mono */
   code, pre, .font-mono {
     font-family: 'JetBrains Mono', monospace;
   }
 }
 
-/* --- 2. Classes Utilitaires de Performance (Secret Sauce) --- */
+/* --- 3. Classes Utilitaires de Performance --- */
 @layer utilities {
   /* Force le rendu sur le GPU (Hardware Acceleration) */
   /* À utiliser sur les divs qui s'animent (Hero, Cards) */
@@ -70,7 +94,7 @@
   }
 }
 
-/* --- 3. Accessibilité & Configuration --- */
+/* --- 4. Accessibilité & Configuration --- */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -93,7 +117,19 @@
 }
 
 /* Configuration Lenis (Standard) */
-html.lenis, html.lenis body { height: auto; }
-.lenis.lenis-smooth { scroll-behavior: auto !important; }
-.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
-.lenis.lenis-stopped { overflow: hidden; }
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
