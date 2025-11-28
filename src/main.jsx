@@ -6,11 +6,12 @@ import './index.css';
 import ScrollToTop from './components/common/ScrollToTop';
 import IntelloAgency from './App';
 
-// --- LAZY LOADING DES ROUTES SECONDAIRES ---
 const Portfolio = lazy(() => import('./pages/Portfolio'));
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
 const ServicesPage = lazy(() => import('./pages/ServicesPage'));
+const Blog = lazy(() => import('./pages/Blog'));
+const BlogPostReactVsWordPress = lazy(() => import('./pages/BlogPostReactVsWordPress'));
 
 const PageLoader = () => (
   <div className="min-h-screen w-full bg-[#050505] flex items-center justify-center">
@@ -28,6 +29,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/portfolio/:id" element={<ProjectDetail />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route
+            path="/blog/react-vs-wordpress-site-professionnel-senegal"
+            element={<BlogPostReactVsWordPress />}
+          />
           <Route path="/contact" element={<ContactPage />} />
         </Routes>
       </Suspense>

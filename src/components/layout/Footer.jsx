@@ -23,20 +23,25 @@ const Footer = ({ t }) => {
                 {col.title}
               </h4>
               <ul className="space-y-2 text-sm text-gray-400">
-                {col.links.map((link, j) => (
-                  <li key={j}>
-                    <a 
-                      href="#" 
-                      className="hover:text-white transition-colors"
-                      aria-label={`${link} - ${col.title}`}
-                    >
-                      {link}
-                    </a>
-                  </li>
-                ))}
+                {col.links.map((link, j) => {
+                  const isBlogLink = link.toLowerCase() === 'blog';
+                  const href = isBlogLink ? '/blog' : '#';
+
+                  return (
+                    <li key={j}>
+                      <a 
+                        href={href} 
+                        className="hover:text-white transition-colors"
+                        aria-label={`${link} - ${col.title}`}
+                      >
+                        {link}
+                      </a>
+                    </li>
+                  );
+                })}
               </ul>
             </nav>
-          ))}
+          ))}          
         </div>
         <div className="pt-8 border-t border-gray-800 text-center text-gray-400 text-sm">
           <p>{t.footer.copyright}</p>
