@@ -70,8 +70,20 @@ const BlogPostReactVsWordPress = () => {
           t={t}
         />
 
-        <main className="pt-24 pb-20 px-6">
+        <main className="pt-24 pb-20 px-6">          
+
           <article className="max-w-3xl mx-auto text-gray-300 leading-relaxed">
+            {/* Lien retour blog */}
+            <div className="mb-4">
+              <Link
+                to="/blog"
+                className="inline-flex items-center text-sm text-gray-400 hover:text-blue-400 transition-colors"
+              >
+                <span className="mr-1">←</span>
+                Retour au blog
+              </Link>
+            </div>
+
             {/* Meta */}
             <p className="text-sm text-gray-500 mb-4">
               Janvier 2025 • 8 min de lecture
