@@ -4,6 +4,45 @@ Historique des modifications du projet (format : Date - Type - Description)
 
 ---
 
+## [2025-11-28] — Sprint 3 : Blog + Article React vs WordPress
+
+### 🎯 Objectif
+Commencer à construire l’autorité d’Intello avec un blog “sniper SEO” en ciblant une requête stratégique : React vs WordPress pour les entreprises au Sénégal.
+
+### 📝 Pages ajoutées
+- **/blog** (`Blog.jsx`) :
+  - Liste des articles (pour l’instant 1 article).
+  - Carte article avec : titre, date, temps de lecture, extrait, lien “Lire l’article”.
+- **/blog/react-vs-wordpress-site-professionnel-senegal** (`BlogPostReactVsWordPress.jsx`) :
+  - Article complet orienté business :
+    - Problèmes classiques des sites WordPress mal gérés.
+    - Apports d’une stack moderne React / Next.js / Node.js.
+    - Cas d’usage locaux (e-commerce, plateformes métiers, SaaS).
+    - Quand WordPress reste un bon choix (honnêteté).
+    - Conclusion + invitation à échanger.
+
+### 🔗 Navigation & Liens internes
+- **Footer** :
+  - Le lien “Blog” dans la colonne “Entreprise” pointe maintenant vers `/blog`.
+- **Article** :
+  - Liens internes vers `/services` (offres) et `/contact`.
+  - Lien “← Retour au blog” en haut de la page article.
+
+### 🔍 SEO
+- **Blog.jsx** :
+  - `SEO` : title + description dédiés pour `/blog`.
+  - Schema.org `Blog`.
+- **BlogPostReactVsWordPress.jsx** :
+  - `SEO` : title + description optimisés pour “React vs WordPress site Sénégal”.
+  - Schema.org `BlogPosting` (auteur, dates, publisher, image, mainEntityOfPage).
+- **sitemap.xml** :
+  - Ajout de `/blog` et de l’article `/blog/react-vs-wordpress-site-professionnel-senegal`.
+
+### 🛠 Technique & UI
+- Routes mises à jour dans `main.jsx` (lazy loading des nouvelles pages).
+- Article stylé en Tailwind (titres, paragraphes, listes, liens) pour une lecture confortable sur mobile et desktop.
+- Aucun impact notable sur les perfs de la Home (blog chargé uniquement à la demande).
+
 ## [2025-11-27] — Sprint 1 : Home & Positionnement SEO
 
 ### 🎯 Objectif

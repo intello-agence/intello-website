@@ -22,6 +22,15 @@ const Blog = () => {
 
   const posts = [
     {
+      slug: 'combien-coute-site-web-moderne-senegal-2026',
+      title: 'Combien coûte un site web moderne au Sénégal en 2026 ?',
+      date: '2025-12-01',
+      displayDate: 'Décembre 2025',
+      readTime: '10 min',
+      excerpt:
+        'Vous entendez tout et son contraire sur le prix d’un site web au Sénégal ? Dans cet article, on pose des fourchettes claires selon le type de projet : vitrine, e-commerce, application métier…',
+    },
+    {
       slug: 'react-vs-wordpress-site-professionnel-senegal',
       title: 'React vs WordPress : quel choix pour votre site professionnel au Sénégal ?',
       date: '2025-01-01',
@@ -30,7 +39,7 @@ const Blog = () => {
       excerpt:
         'WordPress est partout… mais souvent mal utilisé. Pour un site professionnel rapide, sécurisé et durable au Sénégal, faut-il rester sur WordPress ou passer à React / Next.js ?',
     },
-  ];
+  ];  
 
   const schemaData = {
     "@context": "https://schema.org",

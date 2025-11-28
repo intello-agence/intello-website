@@ -12,6 +12,9 @@ const ContactPage = lazy(() => import('./pages/ContactPage'));
 const ServicesPage = lazy(() => import('./pages/ServicesPage'));
 const Blog = lazy(() => import('./pages/Blog'));
 const BlogPostReactVsWordPress = lazy(() => import('./pages/BlogPostReactVsWordPress'));
+const BlogPostCostModernSiteSenegal = lazy(
+  () => import('./pages/BlogPostCostModernSiteSenegal')
+);
 
 const PageLoader = () => (
   <div className="min-h-screen w-full bg-[#050505] flex items-center justify-center">
@@ -33,6 +36,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route
             path="/blog/react-vs-wordpress-site-professionnel-senegal"
             element={<BlogPostReactVsWordPress />}
+          />
+          <Route
+            path="/blog/combien-coute-site-web-moderne-senegal-2026"
+            element={<BlogPostCostModernSiteSenegal />}
           />
           <Route path="/contact" element={<ContactPage />} />
         </Routes>

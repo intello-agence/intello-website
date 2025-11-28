@@ -1,132 +1,134 @@
 # SESSION — Intello.dev
 
-**Dernière mise à jour** : 2025-XX-XX  
+**Dernière mise à jour** : 2025-11-28  
 **Auteur** : Patrick (avec assist IA)  
 
 ---
 
-## ✅ SPRINT 1 — TERMINÉ
+## ✅ SPRINT 1 — TERMINÉ (Home & Positionnement)
 
-### Objectif atteint
-✅ La page d'accueil dit clairement : "Agence web & mobile moderne, basée à Dakar, spécialisée React / Node / Next.js."
+Objectif : clarifier le positionnement “Agence web & mobile moderne à Dakar, spécialisée React / Node / Next.js”.
 
-### Réalisations
-- Hero subtitle FR/EN avec positionnement clair
-- Footer tagline SEO
-- TechStack avec phrase statique
-- Email `contact@intello.dev` cohérent partout
+Principaux points :
+- Hero subtitle FR/EN mis à jour (Dakar + stack moderne).
+- Footer tagline SEO explicite.
+- Section TechStack enrichie (phrase statique + traductions).
+- Email `contact@intello.dev` cohérent partout (FR/EN).
 
 ---
 
-## ✅ SPRINT 2 — TERMINÉ
+## ✅ SPRINT 2 — TERMINÉ (Page Services)
 
-### Objectif atteint
-✅ Page `/services` créée, claire pour Google et pour les clients non-tech.
+Objectif : sortir du “one page” et créer une vraie page `/services` claire pour les non-tech.
 
-### Réalisations
-| Tâche | Statut |
-|-------|--------|
-| Page ServicesPage.jsx | ✅ |
-| 4 blocs services (orientés business) | ✅ |
-| SEO (Title, Meta, Schema) | ✅ |
-| Traductions FR/EN complètes | ✅ |
-| Menu Header mis à jour | ✅ |
-| Sitemap.xml mis à jour | ✅ |
+Principaux points :
+- Nouvelle page `ServicesPage.jsx` avec 4 blocs :
+  - Sites web professionnels (vitrines / corporate).
+  - Sites e-commerce & paiement en ligne.
+  - Applications web / plateformes métiers.
+  - Applications mobiles (Android / iOS / PWA).
+- Contenu orienté bénéfices business + bullet points + CTA → `/contact?service=...`.
+- SEO dédié (title, meta, H1, schema Service).
+- Route `/services` (lazy load) + lien dans le Header + ajout au `sitemap.xml`.
+- Ajustements UI mobile (centrage optique du contenu + listes).
 
-### Détail
-- Chaque service présente bénéfices + bullet points + CTA
-- Navigation intelligente (ancres depuis n'importe quelle page)
-- Lazy loading maintenu (pas de régression perf)
+---
+
+## ✅ SPRINT 3 — TERMINÉ (Blog “Sniper SEO”)
+
+Objectif : démarrer le blog et publier un premier article stratégique pour se positionner face à WordPress sur le marché sénégalais.
+
+Réalisations :
+- **Page `/blog`** :
+  - Composant `Blog.jsx` listant les articles (titre, date, temps de lecture, extrait).
+  - SEO dédié + Schema.org `Blog`.
+- **Article `/blog/react-vs-wordpress-site-professionnel-senegal`** :
+  - Composant `BlogPostReactVsWordPress.jsx`.
+  - Contenu structuré :
+    1. Problèmes classiques des sites WordPress mal gérés.
+    2. Apports de React / Next.js (performance, UX, sécurité, long terme).
+    3. Cas locaux (e-commerce, plateformes métiers, dashboards, SaaS).
+    4. Quand WordPress reste une bonne option (honnêteté = confiance).
+    5. Comment choisir pour un projet au Sénégal + rôle d’Intello.
+  - UI lisible (titres, paragraphes, listes, liens).
+  - Lien “← Retour au blog” en haut de page.
+  - Liens internes vers `/services` et `/contact`.
+  - SEO : title/meta spécifiques + Schema.org `BlogPosting`.
+- **Footer** :
+  - Le lien “Blog” pointe maintenant vers `/blog`.
+- **Routing & Sitemap** :
+  - Routes ajoutées dans `main.jsx` (lazy).
+  - `public/sitemap.xml` enrichi avec `/blog` + URL de l’article.
 
 ---
 
 ## 📊 ÉTAT ACTUEL
 
-### 🔹 Technique & Domaine
-- Site déployé sur **https://intello.dev** (Vercel)
-- Routing SPA optimisé (Home static, autres pages lazy)
-- Pages principales : `/`, `/services`, `/portfolio`, `/contact`
+### Technique & Pages
+- Stack : React + Vite + React Router, déployé sur Vercel.
+- Pages principales : `/`, `/services`, `/portfolio`, `/portfolio/:id`, `/blog`, `/blog/...`, `/contact`.
+- SEO géré via `SEO.jsx` (title/meta/OG/Twitter/JSON-LD dynamiques).
 
-### 🔹 Performance (PageSpeed Insights)
-| Métrique | Mobile | Desktop |
-|----------|--------|---------|
-| Performance | ~88/100 | ~98/100 |
-| FCP | ~2.6s | ~0.6s |
-| LCP | ~3.0s | ~1.1s |
-| TBT | ~150ms | ~30ms |
+### Performance (référence)
+- Mobile ≈ 88/100 (PageSpeed).
+- Desktop ≈ 98/100 (PageSpeed).
+- Optimisations : LCP/TBT travaillés, GA4 différé, animations optimisées, fonts chargées côté HTML.
 
-### 🔹 SEO & Positionnement
-- **Home** : "Agence web & mobile à Dakar" ✅
-- **Services** : Page dédiée indexable avec 4 services clairs ✅
-- **GMB** : Fiche active "Intello - Agence Web & Mobile" ✅
-- **Search Console** : Sitemap soumis, indexation en cours ✅
+### Branding & Crédibilité
+- Domaine : `https://intello.dev`.
+- Email pro : `contact@intello.dev`.
+- Positionnement clair : agence web & mobile moderne à Dakar, spécialisée React / Node / Next.js.
+- Blog démarré avec un premier article orienté décisionnel.
 
----
-
-## 🎯 PROCHAINE ÉTAPE — SPRINT 3
-
-### Objectif
-> Construire l'**autorité** d'Intello via un blog "sniper SEO" avec des articles techniques ciblés sur des requêtes locales à faible concurrence.
-
-### Tâches
-
-#### 1. Mise en place du Blog
-- Créer `/blog` + composant `Blog.jsx` (liste d'articles)
-- Structure article : titre, date, résumé, lien "Lire"
-- Ajouter `/blog` dans le menu (ou Footer si discret au début)
-
-#### 2. Premier article stratégique
-**Titre** : `React vs WordPress : quel choix pour votre site professionnel au Sénégal ?`
-
-**Plan** :
-1. Problème classique WordPress mal géré (lenteur, bugs, sécurité)
-2. Ce qu'apporte React (performance, UX moderne, évolutivité)
-3. Cas d'usage locaux (e-commerce Dakar, dashboards internes, SaaS)
-4. Quand WordPress reste acceptable (honnêteté = confiance)
-5. CTA → `/contact` ou `/services`
-
-#### 3. SEO de l'article
-- **Title** : `React vs WordPress : quel choix pour votre site au Sénégal ?`
-- **H1** : Identique ou proche
-- **Mots-clés naturels** : Dakar, Sénégal, entreprise, PME, site e-commerce
-
-#### 4. Liens internes
-- Depuis Home → section "Blog" ou "Ressources" avec le 1er article
-- Dans l'article → liens vers `/services` et `/contact`
-
-#### 5. Docs
-- Mettre à jour `CHANGELOG.md` + `SESSION.md`
-
-### Critère de fin
-`/blog` existe, 1 article stratégique publié, accessible depuis la Home/Footer.
+### SEO & Présence
+- Search Console : propriété `intello.dev` configurée, sitemap soumis.
+- GMB : fiche “Intello - Agence Web & Mobile” active.
+- Contenu : Home + Services + Blog commencent à couvrir les requêtes :
+  - “agence web Dakar”, “création site web professionnel Sénégal”,
+  - “React vs WordPress Sénégal”, etc.
 
 ---
 
-## 🧭 SPRINTS SUIVANTS (Roadmap)
+## 🎯 PROCHAINE ÉTAPE — SPRINT 4 (SEO Local & Autorité)
 
-### SPRINT 4 — SEO Local & Autorité (vs Webgram)
-- Optimiser GMB (photos, posts)
-- Collecter 5–10 avis clients 5★
-- Backlinks locaux (.sn, hubs tech)
-- 2ᵉ article : `Combien coûte un site web moderne au Sénégal en 2025 ?`
+Objectif : ancrer Intello comme référence moderne à Dakar et préparer le dépassement de Webgram sur les requêtes locales.
+
+Tâches prévues :
+1. **Google My Business**
+   - Ajouter et optimiser les visuels (logo HD, captures projets).
+   - Rédiger une description FR adaptée.
+   - Publier 1–2 posts (nouveaux sites, cas clients…).
+
+2. **Avis Clients**
+   - Obtenir 5–10 avis 5★.
+   - Cibler clients actuels + anciens clients freelance.
+   - Leur suggérer des mots-clés naturels (“site web professionnel à Dakar”, “application web moderne”, “agence réactive”).
+
+3. **Backlinks & Présence locale**
+   - Référencement sur 1–2 annuaires pro locaux (.sn).
+   - Liens depuis partenaires / hubs (ex : Jokkolabs, écoles, communautés).
+
+4. **2ᵉ article de blog**
+   - Sujet : `Combien coûte un site web moderne au Sénégal en 2026 ?`
+   - Cible : requêtes type “combien coûte un site…”, très orientées business.
+
+5. **Suivi**
+   - Suivi mensuel GMB (requêtes, vues, clics).
+   - Search Console : requêtes non-marque qui commencent à apparaître.
+   - Vérifier qu’il n’y a pas de régression performance sur les nouvelles pages.
+
+Critère de fin :
+- 5+ avis GMB.
+- 2 articles de blog publiés.
+- Présence visible sur quelques requêtes “non marque” locales.
 
 ---
 
 ## ✅ RÈGLES POUR LA PROCHAINE SESSION
 
-- **Démarrage** : Relire `SESSION.md` + annoncer le sprint
-- **Style de travail** : Fichier par fichier, un changement = un bloc de code
-- **Vigilance** : Perfs (pas de JS inutile), SEO (texte naturel), A11y
-
----
-
-## 📁 FICHIERS CLÉS
-
-| Fichier | Rôle |
-|---------|------|
-| `src/locales/fr.json` / `en.json` | Traductions |
-| `src/pages/` | Pages (Home, Services, Portfolio, Contact) |
-| `src/components/sections/` | Sections Home |
-| `public/sitemap.xml` | Sitemap SEO |
-| `CHANGELOG.md` | Historique |
-| `SESSION.md` | État + roadmap |
+- Annoncer : **“On attaque Sprint 4”**.
+- On traite chaque axe (GMB, avis, backlinks, article 2) un par un.
+- Toujours garder :
+  - Un contenu naturel (pas de bourrage de mots-clés).
+  - Pas de surcharge JS (perf).
+  - Cohérence FR/EN quand nécessaire.
