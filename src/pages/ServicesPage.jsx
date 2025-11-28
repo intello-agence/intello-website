@@ -112,7 +112,7 @@ const ServicesPage = () => {
                     </div>
 
                     {/* Content */}
-                    <div className="w-full lg:w-2/3 space-y-6">
+                    <div className="w-full lg:w-2/3 flex flex-col items-center lg:items-start text-center lg:text-left space-y-6">
                       <h2 className="text-3xl md:text-4xl font-bold">
                         {serviceData.title}
                       </h2>
@@ -122,14 +122,16 @@ const ServicesPage = () => {
                       </p>
 
                       {/* Benefits List */}
-                      <ul className="space-y-3">
+                      {/* w-fit + mx-auto : La boîte s'adapte à la largeur du texte et se centre */}
+                      {/* lg:w-full + lg:mx-0 : Sur PC, on reprend toute la largeur et on aligne à gauche */}
+                      <ul className="space-y-3 w-full max-w-sm mx-auto lg:max-w-none lg:mx-0 text-left">
                         {serviceData.benefits.map((benefit, i) => (
                           <li key={i} className="flex items-start gap-3">
                             <span className="mt-1.5 w-2 h-2 rounded-full bg-blue-500 flex-shrink-0" />
                             <span className="text-gray-400">{benefit}</span>
                           </li>
                         ))}
-                      </ul>
+                      </ul>                      
 
                       {/* CTA */}
                       <Link
@@ -139,7 +141,7 @@ const ServicesPage = () => {
                         {t.servicesPage.cta}
                         <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                       </Link>
-                    </div>
+                    </div>                   
                   </article>
                 );
               })}
