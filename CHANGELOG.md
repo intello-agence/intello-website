@@ -4,6 +4,67 @@ Historique des modifications du projet (format : Date - Type - Description)
 
 ---
 
+## [2025-11-27] — Sprint 1 : Home & Positionnement SEO
+
+### 🎯 Objectif
+Clarifier le positionnement d'Intello pour Google et les visiteurs : "Agence web & mobile moderne, basée à Dakar, spécialisée React / Node / Next.js".
+
+### 🔤 Contenu & Traductions
+- **Hero subtitle** (FR/EN) : Reformulé pour inclure explicitement "Dakar, Sénégal" + stack technique (React, Next.js, Node.js).
+- **Footer tagline** (FR/EN) : Nouvelle phrase SEO discrète → "Agence web & mobile à Dakar — spécialisée React, Node.js, Next.js."
+- **TechStack** : Ajout des clés `techstack.title` et `techstack.description` dans `fr.json` / `en.json`.
+
+### 🛠 Composants
+- **TechStack.jsx** : 
+  - Intégration du hook `useTranslation` pour le titre dynamique.
+  - Ajout d'une phrase statique SEO sous le bandeau animé.
+  - Guard `if (!t) return null` pour éviter les erreurs de chargement.
+
+### ✅ Vérifications
+- Email `contact@intello.dev` présent dans les deux locales.
+- Positionnement cohérent FR ↔ EN.
+
+## [2025-11-28] — Sprint 2 : Page Services dédiée
+
+### 🎯 Objectif
+Sortir du mode "One page" et créer une vraie page `/services` lisible par Google et claire pour les non-tech (DG, commerçants, PME).
+
+### 📄 Nouvelle page
+- **ServicesPage.jsx** : Page dédiée avec 4 blocs principaux :
+  - Création de sites web professionnels (vitrines, corporate)
+  - Sites e-commerce & paiement en ligne
+  - Applications web / plateformes métiers
+  - Applications mobiles (Android / iOS / PWA)
+- Chaque service présente :
+  - Bénéfices business orientés clients
+  - 4 bullet points "Ce que vous obtenez"
+  - CTA vers `/contact?service=xxx`
+
+### 🔤 Contenu & Traductions
+- **servicesPage** : Nouvelles clés ajoutées dans `fr.json` / `en.json`
+  - Meta title/description SEO
+  - Titres, descriptions et bénéfices pour chaque service
+  - CTA "bottom of page"
+
+### 🛠 Composants & Routing
+- **main.jsx** : Route `/services` ajoutée (lazy loading)
+- **Header.jsx** : 
+  - Lien "Services" ajouté dans le menu desktop + mobile
+  - Logique de navigation améliorée (détection page Home vs autres pages)
+  - Ancres fonctionnelles depuis n'importe quelle page
+
+### 🔍 SEO
+- **Title** : `Services — Création de sites web & applications à Dakar | Intello`
+- **Meta description** : Optimisée pour `création site web dakar`, `e-commerce sénégal`, etc.
+- **Schema.org** : Service schema ajouté
+- **sitemap.xml** : Entrée `/services` ajoutée (priority 0.9)
+
+### ✅ Tests validés
+- Navigation desktop/mobile
+- Switch FR/EN
+- CTAs avec params `?service=xxx`
+- Pas de régression de performance
+
 ## [2025-11-22] — Documentation & Suivi
 ### Ajouté
 - `CHANGELOG.md` : historique complet des modifications

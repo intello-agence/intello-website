@@ -9,7 +9,7 @@
     "title1": "Transformez",
     "title2": "Vos Idées",
     "title3": "En Réalité",
-    "subtitle": "Agence de création de solutions numériques innovantes et développement sur-mesure",
+    "subtitle": "Agence web & mobile moderne, basée à Dakar, Sénégal, spécialisée en développement sur-mesure (React, Next.js, Node.js…).",
     "cta1": "Démarrer un projet",
     "cta2": "Voir nos réalisations"
   },
@@ -31,6 +31,67 @@
       "label": "Satisfaction Client"
     }
   },
+  "techstack": {
+    "title": "Technologies Maîtrisées",
+    "description": "Nous utilisons des technologies modernes (React, Next.js, Node.js, TypeScript, Tailwind, Supabase…) pour garantir performance, scalabilité et maintenabilité de vos projets."
+  },
+  "servicesPage": {
+    "meta": {
+      "title": "Services — Création de sites web & applications à Dakar | Intello",
+      "description": "Création de sites web modernes, e-commerce et applications web & mobiles à Dakar, Sénégal. Solutions sur-mesure pour PME, startups et institutions."
+    },
+    "title": "Nos",
+    "titleHighlight": "Services",
+    "subtitle": "Des solutions digitales complètes pour propulser votre entreprise. De la conception à la mise en ligne, nous vous accompagnons à chaque étape.",
+    "cta": "Demander un devis",
+    "services": {
+      "websites": {
+        "title": "Création de sites web professionnels",
+        "description": "Nous concevons des sites vitrines et corporate modernes qui reflètent l'image de votre entreprise. Design soigné, navigation intuitive et optimisation pour les moteurs de recherche.",
+        "benefits": [
+          "Design sur-mesure adapté à votre identité visuelle",
+          "Site responsive (mobile, tablette, desktop)",
+          "Optimisation SEO pour être visible sur Google",
+          "Chargement rapide et performances optimales"
+        ]
+      },
+      "ecommerce": {
+        "title": "Sites e-commerce & paiement en ligne",
+        "description": "Vendez vos produits en ligne avec une boutique performante et sécurisée. Intégration des solutions de paiement locales (Wave, Orange Money) et internationales.",
+        "benefits": [
+          "Catalogue produits facile à gérer",
+          "Paiement sécurisé (Wave, Orange Money, cartes bancaires)",
+          "Gestion des stocks et commandes",
+          "Tableau de bord pour suivre vos ventes"
+        ]
+      },
+      "webapps": {
+        "title": "Applications web & plateformes métiers",
+        "description": "Digitalisez vos processus avec des applications web sur-mesure. CRM, gestion de stocks, tableaux de bord, portails clients... Nous développons l'outil dont vous avez besoin.",
+        "benefits": [
+          "Solution 100% adaptée à vos processus",
+          "Accessible depuis n'importe quel navigateur",
+          "Données sécurisées et sauvegardées",
+          "Formation et accompagnement inclus"
+        ]
+      },
+      "mobile": {
+        "title": "Applications mobiles (Android / iOS / PWA)",
+        "description": "Touchez vos clients sur leur smartphone avec une application mobile performante. Nous développons des apps natives ou des Progressive Web Apps selon vos besoins et budget.",
+        "benefits": [
+          "Application disponible sur Android et iOS",
+          "Notifications push pour engager vos utilisateurs",
+          "Mode hors-ligne disponible (PWA)",
+          "Publication sur les stores (Google Play, App Store)"
+        ]
+      }
+  },
+  "bottomCta": {
+    "title": "Un projet en tête ?",
+    "subtitle": "Discutons de votre vision et trouvons ensemble la meilleure solution pour votre entreprise.",
+    "button": "Parlons de votre projet"
+  }
+},
   "services": {
     "title": "Nos",
     "titleHighlight": "Services",
@@ -143,7 +204,7 @@
     "button": "Démarrer maintenant"
   },
   "footer": {
-    "tagline": "Votre partenaire pour l'innovation digitale",
+    "tagline": "Agence web & mobile à Dakar — spécialisée React, Node.js, Next.js.",
     "services": {
       "title": "Services",
       "links": ["Développement", "Design", "Consulting", "Support"]

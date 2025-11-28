@@ -9,7 +9,7 @@
     "title1": "Transform",
     "title2": "Your Ideas",
     "title3": "Into Reality",
-    "subtitle": "Digital innovation agency and custom development solutions",
+    "subtitle": "Modern web & mobile agency based in Dakar, Senegal — specializing in custom development (React, Next.js, Node.js…).",
     "cta1": "Start a project",
     "cta2": "View our work"
   },
@@ -31,6 +31,67 @@
       "label": "Client Satisfaction"
     }
   },
+  "techstack": {
+    "title": "Technologies We Master",
+    "description": "We use modern technologies (React, Next.js, Node.js, TypeScript, Tailwind, Supabase…) to ensure performance, scalability, and maintainability for your projects."
+  },
+  "servicesPage": {
+    "meta": {
+      "title": "Services — Website & App Development in Dakar | Intello",
+      "description": "Modern website creation, e-commerce and web & mobile applications in Dakar, Senegal. Custom solutions for SMEs, startups and institutions."
+    },
+    "title": "Our",
+    "titleHighlight": "Services",
+    "subtitle": "Complete digital solutions to propel your business forward. From design to launch, we support you at every step.",
+    "cta": "Request a quote",
+    "services": {
+      "websites": {
+        "title": "Professional website creation",
+        "description": "We design modern showcase and corporate websites that reflect your company's image. Careful design, intuitive navigation and search engine optimization.",
+        "benefits": [
+          "Custom design tailored to your brand identity",
+          "Responsive site (mobile, tablet, desktop)",
+          "SEO optimization to be visible on Google",
+          "Fast loading and optimal performance"
+        ]
+      },
+      "ecommerce": {
+        "title": "E-commerce sites & online payment",
+        "description": "Sell your products online with a powerful and secure store. Integration of local payment solutions (Wave, Orange Money) and international ones.",
+        "benefits": [
+          "Easy-to-manage product catalog",
+          "Secure payment (Wave, Orange Money, credit cards)",
+          "Stock and order management",
+          "Dashboard to track your sales"
+        ]
+      },
+      "webapps": {
+        "title": "Web applications & business platforms",
+        "description": "Digitize your processes with custom web applications. CRM, inventory management, dashboards, client portals... We develop the tool you need.",
+        "benefits": [
+          "100% tailored solution to your processes",
+          "Accessible from any browser",
+          "Secure and backed-up data",
+          "Training and support included"
+        ]
+      },
+      "mobile": {
+        "title": "Mobile applications (Android / iOS / PWA)",
+        "description": "Reach your customers on their smartphones with a powerful mobile application. We develop native apps or Progressive Web Apps according to your needs and budget.",
+        "benefits": [
+          "Application available on Android and iOS",
+          "Push notifications to engage your users",
+          "Offline mode available (PWA)",
+          "Publishing on stores (Google Play, App Store)"
+        ]
+      }
+    },
+  "bottomCta": {
+    "title": "Have a project in mind?",
+    "subtitle": "Let's discuss your vision and find the best solution for your business together.",
+    "button": "Let's talk about your project"
+  }
+},
   "services": {
     "title": "Our",
     "titleHighlight": "Services",
@@ -143,7 +204,7 @@
     "button": "Get started now"
   },
   "footer": {
-    "tagline": "Your partner for digital innovation",
+    "tagline": "Web & mobile agency in Dakar — React, Node.js, Next.js specialists.",
     "services": {
       "title": "Services",
       "links": ["Development", "Design", "Consulting", "Support"]

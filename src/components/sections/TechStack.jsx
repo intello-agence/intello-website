@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from '../../hooks/useTranslation';
 
 const technologies = [
   { name: 'React', color: 'hover:text-[#61DAFB]' },
@@ -13,18 +14,20 @@ const technologies = [
   { name: 'Docker', color: 'hover:text-[#2496ED]' },
 ];
 
-// On duplique 3 fois pour être sûr de remplir tous les écrans
 const items = [...technologies, ...technologies, ...technologies];
 
 const TechStack = () => {
+  const { t } = useTranslation();
+
+  if (!t) return null;
+
   return (
     <>
-      {/* Style injecté localement pour être sûr à 100% que l'anim existe */}
       <style>
         {`
           @keyframes scroll {
             0% { transform: translateX(0); }
-            100% { transform: translateX(-33.33%); } /* On déplace d'un tiers car on a triplé la liste */
+            100% { transform: translateX(-33.33%); }
           }
           .animate-scroll {
             animation: scroll 40s linear infinite;
@@ -36,18 +39,18 @@ const TechStack = () => {
       </style>
 
       <section className="w-full py-10 border-y border-white/5 bg-black/20 backdrop-blur-sm overflow-hidden">
+        {/* Titre */}
         <div className="max-w-7xl mx-auto px-6 mb-6 text-center md:text-left">
           <p className="text-xs font-mono text-gray-500 uppercase tracking-[0.2em]">
-            Technologies Maîtrisées
+            {t.techstack.title}
           </p>
         </div>
 
+        {/* Bandeau animé */}
         <div className="relative w-full overflow-hidden">
-          {/* Masques */}
           <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#050505] to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#050505] to-transparent z-10 pointer-events-none" />
 
-          {/* Conteneur animé */}
           <div className="flex w-max animate-scroll">
             {items.map((tech, index) => (
               <div
@@ -58,6 +61,13 @@ const TechStack = () => {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* Phrase statique SEO */}
+        <div className="max-w-7xl mx-auto px-6 mt-6 text-center md:text-left">
+          <p className="text-sm text-gray-400 leading-relaxed">
+            {t.techstack.description}
+          </p>
         </div>
       </section>
     </>

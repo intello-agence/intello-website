@@ -1,10 +1,13 @@
-// src/components/layout/Header.jsx
 import React, { useEffect, useRef } from 'react';
 import { Menu, X, Globe } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Header = ({ scrollY, isMenuOpen, setIsMenuOpen, language, setLanguage, t }) => {
   const menuRef = useRef(null);
+  const location = useLocation();
+
+  // Check if we're on the home page
+  const isHomePage = location.pathname === '/';
 
   useEffect(() => {
     if (!isMenuOpen) return;
@@ -48,27 +51,67 @@ const Header = ({ scrollY, isMenuOpen, setIsMenuOpen, language, setLanguage, t }
     }
   }, [isMenuOpen]);
 
+  // Navigation items with their routes/anchors
+  const getNavItems = () => {
+    return [
+      { key: 'services', label: t.nav.services, href: '/services', isPage: true },
+      { key: 'projects', label: t.nav.projects, href: '/portfolio', isPage: true },
+      { key: 'about', label: t.nav.about, href: isHomePage ? '#à propos' : '/#à propos', isPage: false },
+      { key: 'contact', label: t.nav.contact, href: '/contact', isPage: true },
+    ];
+  };
+
+  const navItems = getNavItems();
+
+  const renderNavLink = (item, onClick = null) => {
+    const baseClasses = "hover:text-blue-400 transition-colors duration-150 relative group";
+    const underlineSpan = <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-400 group-hover:w-full transition-all duration-200" />;
+
+    if (item.isPage) {
+      return (
+        <Link 
+          key={item.key} 
+          to={item.href} 
+          onClick={onClick}
+          className={baseClasses}
+        >
+          {item.label}
+          {underlineSpan}
+        </Link>
+      );
+    }
+
+    return (
+      <a 
+        key={item.key} 
+        href={item.href} 
+        onClick={onClick}
+        className={baseClasses}
+      >
+        {item.label}
+        {underlineSpan}
+      </a>
+    );
+  };
+
   return (
     <>
       <nav className="fixed top-0 w-full z-40 transition-all duration-300" style={{ backgroundColor: scrollY > 50 ? 'rgba(0,0,0,0.9)' : 'transparent', backdropFilter: scrollY > 50 ? 'blur(10px)' : 'none' }}>
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <Link to="/" className="flex items-center gap-3 group">
+          <Link to="/" className="flex items-center gap-4 group">
             <img 
               src="/logo_intello.png" 
               alt="Logo Intello" 
-              className="w-12 h-12 rounded-full border-2 border-blue-500 object-cover bg-white group-hover:scale-105 transition-transform" 
+              className="w-14 h-14 md:w-16 md:h-16 rounded-full border-2 border-blue-500 object-cover bg-white group-hover:scale-105 transition-transform shadow-lg" 
             />
             <div className="hidden sm:block">
-              <div className="text-lg font-extrabold text-white leading-tight">Intello</div>
+              <div className="text-xl font-extrabold text-white leading-tight tracking-wide">Intello</div>
             </div>
           </Link>
           
+          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8 text-sm">
-            {Object.entries(t.nav).map(([key, item]) => (
-              key === 'projects'
-                ? <Link key={key} to="/portfolio" className="hover:text-blue-400 transition-colors duration-150 relative group">{item}<span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-400 group-hover:w-full transition-all duration-200" /></Link>
-                : <a key={key} href={`#${item.toLowerCase()}`} className="hover:text-blue-400 transition-colors duration-150 relative group">{item}<span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-400 group-hover:w-full transition-all duration-200" /></a>
-            ))}
+            {navItems.map(item => renderNavLink(item))}
             
             <button 
               onClick={() => setLanguage(language === 'fr' ? 'en' : 'fr')} 
@@ -92,6 +135,7 @@ const Header = ({ scrollY, isMenuOpen, setIsMenuOpen, language, setLanguage, t }
         </div>
       </nav>
 
+      {/* Mobile Navigation */}
       {isMenuOpen && (
         <div 
           ref={menuRef}
@@ -101,11 +145,8 @@ const Header = ({ scrollY, isMenuOpen, setIsMenuOpen, language, setLanguage, t }
           aria-label="Menu de navigation"
         >
           <nav className="flex flex-col items-center space-y-6 text-2xl">
-            {Object.entries(t.nav).map(([key, item]) => (
-              key === 'projects'
-                ? <Link key={key} to="/portfolio" onClick={() => setIsMenuOpen(false)} className="hover:text-blue-400 transition-colors">{item}</Link>
-                : <a key={key} href={`#${item.toLowerCase()}`} onClick={() => setIsMenuOpen(false)} className="hover:text-blue-400 transition-colors">{item}</a>
-            ))}
+            {navItems.map(item => renderNavLink(item, () => setIsMenuOpen(false)))}
+            
             <button 
               onClick={() => setLanguage(language === 'fr' ? 'en' : 'fr')} 
               className="px-6 py-3 border border-gray-700 rounded-full"
